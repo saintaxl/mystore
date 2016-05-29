@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd "
+       default-lazy-init="true">
+
+	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath">
+			<value>view</value>
+		</property>
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">UTF-8</prop>
+                <prop key="output.encoding">UTF-8</prop>
+                <prop key="contentType">text/html;charset=UTF-8</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+        <property name="cache" value="false"></property>
+        <property name="order" value="10" />
+        <property name="suffix" value=".vm"/>
+        <property name="prefix" value="" />
+        <property name="layoutUrl" value="layout/default.vm" />
+        <property name="exposeSpringMacroHelpers" value="true" />
+        <property name="dateToolAttribute" value="dateTool"/>
+        <property name="requestContextAttribute" value="rc"/> 
+        <property name="numberToolAttribute" value="numberTool"/>
+        <property name="toolboxConfigLocation" value="WEB-INF/velocity-tools.xml" />
+        <property name="contentType" value="text/html;charset=UTF-8"></property>
+    </bean>
+
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView">
+			<value>/exception/error</value>
+		</property>
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.sql.SQLException">/exception/dberror</prop>
+				<prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">/exception/uploadSizeExceeded</prop>
+			</props>
+		</property>
+	</bean>
+
+
+</beans>

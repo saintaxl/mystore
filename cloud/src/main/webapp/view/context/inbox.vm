@@ -1,0 +1,72 @@
+<!-- PAGE MAIN CONTENT -->
+<div class="row">
+		<!-- MESSENGER -->
+		<div class="col-md-12">
+		<div class="box border blue" id="messenger">
+			<div class="box-title">
+				<h4><i class="fa fa-bell"></i>Notifications</h4>
+				<div class="tools">
+					<a href="#box-config" data-toggle="modal" class="config">
+						<i class="fa fa-cog"></i>
+					</a>
+					<a href="javascript:;" class="reload">
+						<i class="fa fa-refresh"></i>
+					</a>
+					<a href="javascript:;" class="collapse">
+						<i class="fa fa-chevron-up"></i>
+					</a>
+					<a href="javascript:;" class="remove">
+						<i class="fa fa-times"></i>
+					</a>
+				</div>
+			</div>
+			<div class="box-body">
+				<h4>HubSpot Messaging (Alerts for the 21st century)</h4>
+				<ul>
+					<li>Show transactional messages in your app.</li>
+					<li>Wrap AJAX requests with progress, success and error messages.</li>
+					<li>Add action links to your messages.</li>
+					<li>Works in everything modern, and IE7 and above.</li>
+					<li>5 Themes and custom screen location.</li>
+					<li>Try out combinations below <i class="fa fa-hand-o-right"></i></li>
+				</ul>
+					
+				<div class="text-center">
+					<div class="divide-20"></div>
+					<button class="btn btn-primary" id="normal"><i class="fa fa-info"></i> Normal</button>
+					<button class="btn btn-warning" id="interactive"><i class="fa fa-comments-o"></i> Interactive</button>
+					<button class="btn btn-success" id="timer"><i class="fa fa-clock-o"></i> With timer</button>
+					<button class="btn btn-danger" id="prompts"><i class="fa fa-bell-o"></i> Prompts</button>
+				</div>
+				<div class="divide-20"></div>
+			</div>
+			<div id="themes" class="toolbox bottom center clearfix">
+				<div class="pull-left">
+					<span class="title">Select theme:</span>
+					<span class="btn-group" data-toggle="buttons">
+						<label class="btn btn-default active"><span class="tick"></span><input type="radio" name="theme" value="flat" checked="checked">Flat</label>
+						<label class="btn btn-default"><span class="tick"></span><input type="radio" name="theme" value="future">Future</label>
+						<label class="btn btn-default"><span class="tick"></span><input type="radio" name="theme" value="block">Block</label>
+						<label class="btn btn-default"><span class="tick"></span><input type="radio" name="theme" value="air">Air</label>
+						<label class="btn btn-default"><span class="tick"></span><input type="radio" name="theme" value="ice">Ice</label>
+					</span>
+				</div>
+				<div class="pull-right">
+					<span class="title">Select position:</span>
+					<span class="btn-group" data-toggle="buttons">
+						<label class="btn btn-default"><span class="tick"></span><input type="radio" name="position" value="messenger-on-top messenger-on-left">Top Left</label>
+						<label class="btn btn-default"><span class="tick"></span><input type="radio" name="position" value="messenger-on-top">Top</label>
+						<label class="btn btn-default active"><span class="tick"></span><input type="radio" name="position" value="messenger-on-top messenger-on-right" checked="checked">Top Right</label>
+						<label class="btn btn-default"><span class="tick"></span><input type="radio" name="position" value="messenger-on-bottom messenger-on-left">Bottom Left</label>
+						<label class="btn btn-default"><span class="tick"></span><input type="radio" name="position" value="messenger-on-bottom">Bottom</label>
+						<label class="btn btn-default"><span class="tick"></span><input type="radio" name="position" value="messenger-on-bottom messenger-on-right">Bottom Right</label>
+					</span>
+				</div>
+			</div>
+		</div>
+		</div>
+		<!-- /MESSENGER -->
+</div>
+<div class="separator"></div>
+<!-- /PAGE MAIN CONTENT -->
+

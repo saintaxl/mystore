@@ -1,0 +1,6 @@
+<!-- PAGE -->
+<section id="page">
+#parse("/main/left.vm")
+#parse("/main/right.vm")
+</section>
+<!--/PAGE -->

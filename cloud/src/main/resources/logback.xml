@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="2 seconds" debug="false">
+
+	<appender name="log.console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread]
+				%logger - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="log.file.mystore" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>/opt/app/mystore.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/opt/app/mystore.log.%d{yyyy-MM-dd}.log.gz
+			</fileNamePattern>
+			<maxHistory>90</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.mycloud.store" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="log.console" />
+		<appender-ref ref="log.file.mystore" />
+	</logger>
+
+	<logger name="org.slf4j">
+		<level value="ERROR" />
+		<appender-ref ref="log.console" />
+	</logger>
+
+	<logger name="ch.qos.logback">
+		<level value="ERROR" />
+		<appender-ref ref="log.console" />
+	</logger>
+
+	<logger name="org.springframework" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="log.console" />
+	</logger>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="log.console" />
+	</root>
+</configuration>
