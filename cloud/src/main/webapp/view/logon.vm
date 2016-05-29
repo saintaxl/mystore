@@ -62,7 +62,7 @@
 									<input name="password" type="password" class="form-control" id="password" required >
 								  </div>
 								  <div class="form-actions">
-									<label style="min-height: 20px;margin-top: 10px;margin-bottom: 10px;padding-left: 20px;vertical-align: middle;">
+									<label class="checkbox">
 									<input type="checkbox" class="uniform" id="rememberme" name="remember-me">记住我</label>
 									<input type="hidden" name="$_csrf.parameterName" value="$_csrf.token"/>
 									<button type="submit" class="btn btn-danger">登录</button>
@@ -211,6 +211,7 @@
 			jQuery('.visible').removeClass('visible animated fadeInUp');
 			jQuery('#'+id).addClass('visible animated fadeInUp');
 		}
+    	$("select, input[type='checkbox']").uniform();
 	</script>
 	#if($!errorMessage)
 	#set($errorcode = $!errorMessage.errorCode)

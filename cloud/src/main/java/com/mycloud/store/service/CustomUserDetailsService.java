@@ -31,10 +31,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 			throws UsernameNotFoundException {
 		User user = userService.findUserByEmail(username);
 		if(user == null){
-			throw new UsernameNotFoundException("UserName "+username+" not found");
+			throw new BusinessException(ErrorCode.ACCOUNT_NOT_FOUND,username);
 		}
 		if(!user.getState().equals(State.ACTIVE.getState())){
-			throw new BusinessException(ErrorCode.ACCOUNT_STATUS_NOT_NORMAL);
+			throw new BusinessException(ErrorCode.ACCOUNT_STATUS_NOT_NORMAL, username);
 		}
 		
 		return new CustomUserDetails(user);

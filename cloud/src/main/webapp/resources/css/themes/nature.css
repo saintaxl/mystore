@@ -68,7 +68,7 @@
   color: #FFFFFF;
 }
 .navbar .nav.navbar-nav.pull-right {
-  min-width: 300px;
+  min-width: 150px;  /* shawn edit org 300px */
 }
 .navbar .nav > li > a:hover,
 .navbar .nav > li > a:focus,
