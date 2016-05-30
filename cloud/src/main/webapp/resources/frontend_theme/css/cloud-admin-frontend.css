@@ -6054,6 +6054,15 @@ ul.list-inline {
   border-bottom: 1px solid #555555;
   padding: 10px 0;
 }
+.contact {
+  font-size: 38px;
+  line-height: 50px;
+  text-align: center;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #f4f4f4;
+  padding: 10px 0;
+}
 .bigintro-light {
   font-size: 38px;
   line-height: 50px;

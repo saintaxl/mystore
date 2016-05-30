@@ -34,9 +34,9 @@
 				  <a href="#portfolio" class="list-group-item">Portfolio</a>
 				  <a href="#parallax-1" class="list-group-item">Demo</a>
 				  <a href="#features" class="list-group-item">Features</a>
-				  <a href="#about" class="list-group-item">About</a>
-				  <a href="#contact" class="list-group-item">Contact</a>
-				  <a href="${rc.contextPath}/logon.htm" class="list-group-item external">Login</a>
+				  <a href="#about" class="list-group-item">关于我们</a>
+				  <a href="#contact" class="list-group-item">联系我们</a>
+				  <a href="${rc.contextPath}/logon.htm" class="list-group-item external">登录</a>
 				</div>
 
 					<!-- HERO -->
@@ -47,21 +47,21 @@
 							<li><a href="#features">Features</a></li>
 						</ul>
 						<ul class="heronav right hidden-xs">
-							<li><a href="#about">About</a></li>
-							<li><a href="#contact">Contact</a></li>
-							<li><a href="${rc.contextPath}/logon.htm" class="external">Login</a></li>
+							<li><a href="#about">关于我们</a></li>
+							<li><a href="#contact">联系我们</a></li>
+							<li><a href="${rc.contextPath}/logon.htm" class="external">登录</a></li>
 						</ul>
 						<h1>
 							<img src="resources/frontend_theme/img/logo/logo.png" height="50" alt="logo name">
 						</h1>
-						<h1 class="page-title">Beautiful responsive frontend theme</h1>
+						<h1 class="page-title">打造最便捷的一站式存储服务</h1>
 						<h4 class="page-sub-title">In the end, it's not going to matter how many breath you took, 
 						<br>
 							but how many moments took your breath away.
 						</h4>
 						<div class="showcase">
-							<a class="btn btn-warning btn-lg hidden-xs" href="#portfolio">Learn More &nbsp;&nbsp;<i class="fa fa-play"></i></a>
-							<a class="btn btn-warning btn-sm visible-xs" href="#portfolio">Learn More &nbsp;&nbsp;<i class="fa fa-play"></i></a>
+							<a class="btn btn-warning btn-lg hidden-xs" href="#portfolio">了解更多 &nbsp;&nbsp;<i class="fa fa-play"></i></a>
+							<a class="btn btn-warning btn-sm visible-xs" href="#portfolio">了解更多 &nbsp;&nbsp;<i class="fa fa-play"></i></a>
 						</div>
 					</div>
 				<!--/HERO -->
@@ -84,9 +84,9 @@
 								<li><a href="#portfolio">Portfolio</a></li>
 								<li><a href="#parallax-1">Demo</a></li>
 								<li><a href="#features">Features</a></li>
-								<li><a href="#about">About</a></li>
-								<li><a href="#contact">Contact</a></li>
-								<li><a href="${rc.contextPath}/logon.htm" class="external">Login</a></li>
+								<li><a href="#about">关于我们</a></li>
+								<li><a href="#contact">联系方式</a></li>
+								<li><a href="${rc.contextPath}/logon.htm" class="external">登录</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -235,7 +235,7 @@
 		<section id="parallax-1" data-type="background" data-speed="10" class="pages text-center">
 			<div class="parallax-overlay text-center">
 				<h2 class="text-center">
-					<span class="bigintro-light">Product Demo</span>
+					<span class="bigintro-light">产品展示</span>
 				</h2>
 				<iframe class="hidden-xs" src="http://player.vimeo.com/video/72393668" width="700" height="393" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 				
@@ -251,7 +251,7 @@
 				<div class="row">
 					<div class="col-md-12">
 							<h2 class="text-center">
-							<span class="bigintro">Features</span>
+							<span class="bigintro">新功能</span>
 							</h2>
 					</div>
 				</div>
@@ -306,7 +306,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h3 class="centered big call-to-action">
-						Try out our 30-day trial package
+						申请试用30天
 						</h3>
 					</div>
 				</div>
@@ -314,14 +314,14 @@
 				<div class="row">
 					<form class="form-inline centered" role="form">
 						<div class="form-group">
-							<label class="sr-only" for="exampleInputEmail2">Email address</label>
-							<input type="email" class="form-control input-lg" id="exampleInputEmail2" placeholder="Enter your email address">
+							<label class="sr-only" for="exampleInputEmail2">邮箱地址</label>
+							<input type="email" class="form-control input-lg" id="exampleInputEmail2" placeholder="输入邮箱地址">
 						</div>
 					</form>
 				</div>
 				<br/>
 				<div class="row">
-					<button type="submit" class="btn btn-warning btn-lg">Get started for free</button>
+					<button type="submit" class="btn btn-warning btn-lg">免费试用</button>
 				</div>
 				<div class="divide20"></div>
 			</section>
@@ -335,7 +335,7 @@
 				<div class="row">
 					<div class="col-md-12">
 							<h2 class="text-center">
-							<span class="bigintro">About Us</span>
+							<span class="bigintro">关于我们</span>
 							</h2>
 					</div>
 				</div>
@@ -354,7 +354,7 @@
 		<section id="parallax-2" data-type="background" data-speed="10" class="pages textcenter">
 			<div class="parallax-overlay">
 				<h2 class="text-center">
-					<span class="bigintro-light">Testimonials</span>
+					<span class="bigintro-light">客户评价</span>
 				</h2>
 				 <div id="myCarousel" class="carousel slide">
 				  <!-- Indicators -->
@@ -440,7 +440,7 @@
 				<div class="row">
 					<div class="col-md-12">
 							<h2 class="text-center">
-							<span class="bigintro">The Team</span>
+							<span class="bigintro">我们的团队</span>
 							</h2>
 					</div>
 				</div>
@@ -522,29 +522,23 @@
 										<div class="row">
 							<div class="col-md-12">
 									<h2 class="text-center">
-									<span class="bigintro-light">Contact Us</span>
+									<span class="bigintro-light">联系我们</span>
 									</h2>
 							</div>
 						</div>
 						<div class="divide20"></div>
 						<div class="row">
-							<div class="col-md-6 col-md-offset-3 form-input">
-								<input id="company" type="text" placeholder="Company" value="" name="company"/>
+							<div class="contact">
+								<label>电话:021-65112245</label>
 							</div>
-							<div class="col-md-6 col-md-offset-3 form-input">
-								<input id="title" type="text" placeholder="Title" value="" name="title"/>
+							<div class="contact">
+								<label>传真:021-65377431</label>
 							</div>
-							<div class="col-md-6 col-md-offset-3 form-input">
-								<input id="name" type="text" placeholder="Name" value="" name="name"/>
+							<div class="contact">
+								<label>QQ:</label>
 							</div>
-							<div class="col-md-6 col-md-offset-3 form-input">
-								<input id="email" type="email" placeholder="Email" value="" name="email"/>
-							</div>
-							<div class="col-md-6 col-md-offset-3 form-input">
-								<textarea id="message"  placeholder="Message" name="message"></textarea>
-							</div>
-							<div class="col-md-6 col-md-offset-3 form-submit">
-								<button id="submit" class="btn btn-warning btn-lg" type="submit">SEND</button>
+							<div class="contact">
+								<label>旺旺:</label>
 							</div>
 						</div>
 						<div class="divide60"></div>
@@ -559,30 +553,30 @@
 			<div class="container">
 				<div id="column-footer" class="row-fluid">
 					<div class="col-sm-4">
-						<h3>Learn More</h3>
+						<h3>了解更多</h3>
 						<ul>
-							<li><a href="#">How it works</a></li>
-							<li><a href="#">Safety measures</a></li>
-							<li><a href="#">Testimonials</a></li>
-							<li><a href="#">The Blog</a></li>
+							<li><a href="#">我们是如何运营</a></li>
+							<li><a href="#">安全措施</a></li>
+							<li><a href="#">客户评价</a></li>
+							<li><a href="#">博客</a></li>
 						</ul>
 					</div>
 					<div class="col-sm-4">
-						<h3>Help & Support</h3>
+						<h3>帮助与支持</h3>
 						<ul>
-							<li><a href="#">Frequently Asked Questions</a></li>
-							<li><a href="#">Creative Requirements</a></li>
-							<li><a href="#">Glossary of Terms</a></li>
-							<li><a href="#">The Safety</a></li>
+							<li><a href="#">常见问题</a></li>
+							<li><a href="#">建议</a></li>
+							<li><a href="#">条款说明</a></li>
+							<li><a href="#">安全保障</a></li>
 						</ul>
 					</div>
 					<div class="col-sm-4">
-						<h3>About Us</h3>
+						<h3>关于我们</h3>
 						<ul>
-							<li><a href="#">Press</a></li>
-							<li><a href="#">Our Team</a></li>
-							<li><a href="#">Careers</a></li>
-							<li><a href="#">Our Partners</a></li>
+							<li><a href="#">新闻</a></li>
+							<li><a href="#">我们的团队</a></li>
+							<li><a href="#">求职信息</a></li>
+							<li><a href="#">合作伙伴</a></li>
 						</ul>
 					</div>
 				</div>
