@@ -5,6 +5,7 @@ package com.mycloud.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,6 +20,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.mycloud.enums.State;
@@ -55,12 +57,23 @@ public class User extends AbstractEntity implements Serializable {
     
     @Column(name="STATE", nullable=false)
     private String state = State.ACTIVE.getState();
+    
 	
 	@OneToMany(fetch=FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
 	@JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") }, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private Set<Role> roles = new HashSet<Role>();
 	
+	@OneToOne(optional = true, mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+	private UserValidate validate ;
 	
+	public UserValidate getValidate() {
+		return validate;
+	}
+
+	public void setValidate(UserValidate validate) {
+		this.validate = validate;
+	}
+
 	public String getName() {
 		return name;
 	}

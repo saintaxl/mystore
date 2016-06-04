@@ -31,33 +31,33 @@
 				</div>
 				<div class="divide60"></div>
 				<div id="mobile-menu" class="list-group collapse text-center">
-				  <a href="#portfolio" class="list-group-item">Portfolio</a>
-				  <a href="#parallax-1" class="list-group-item">Demo</a>
-				  <a href="#features" class="list-group-item">Features</a>
+				  <a href="#portfolio" class="list-group-item">仓储制度</a>
+				  <a href="#features" class="list-group-item">收费标准</a>
 				  <a href="#about" class="list-group-item">关于我们</a>
 				  <a href="#contact" class="list-group-item">联系我们</a>
+				  <a href="#attention" class="list-group-item">注意事项</a>
 				  <a href="${rc.contextPath}/logon.htm" class="list-group-item external">登录</a>
 				</div>
 
 					<!-- HERO -->
 					<div class="container-transparent text-center">
 						<ul class="heronav left hidden-xs">
-							<li><a href="#portfolio">Portfolio</a></li>
-							<li><a href="#parallax-1">Demo</a></li>
-							<li><a href="#features">Features</a></li>
+							<li><a href="#portfolio">仓储制度</a></li>
+							<li><a href="#features">收费标准</a></li>
+							<li><a href="#about">关于我们</a></li>
 						</ul>
 						<ul class="heronav right hidden-xs">
-							<li><a href="#about">关于我们</a></li>
 							<li><a href="#contact">联系我们</a></li>
+							<li><a href="#attention">注意事项</a></li>
 							<li><a href="${rc.contextPath}/logon.htm" class="external">登录</a></li>
 						</ul>
 						<h1>
 							<img src="resources/frontend_theme/img/logo/logo.png" height="50" alt="logo name">
 						</h1>
 						<h1 class="page-title">打造最便捷的一站式存储服务</h1>
-						<h4 class="page-sub-title">In the end, it's not going to matter how many breath you took, 
+						<h4 class="page-sub-title">免费的存储服务,强大的后台管理平台
 						<br>
-							but how many moments took your breath away.
+							节约客户的时间成本,帮助客户拓展市场需求.
 						</h4>
 						<div class="showcase">
 							<a class="btn btn-warning btn-lg hidden-xs" href="#portfolio">了解更多 &nbsp;&nbsp;<i class="fa fa-play"></i></a>
@@ -81,11 +81,11 @@
 					<div class="col-sm-9 col-md-8">
 						<nav id="fixed-top-navigation">
 							<ul class="list-inline pull-right">
-								<li><a href="#portfolio">Portfolio</a></li>
-								<li><a href="#parallax-1">Demo</a></li>
-								<li><a href="#features">Features</a></li>
+								<li><a href="#portfolio">仓储制度</a></li>
+								<li><a href="#features">收费标准</a></li>
 								<li><a href="#about">关于我们</a></li>
-								<li><a href="#contact">联系方式</a></li>
+								<li><a href="#contact">联系我们</a></li>
+								<li><a href="#attention">注意事项</a></li>
 								<li><a href="${rc.contextPath}/logon.htm" class="external">登录</a></li>
 							</ul>
 						</nav>
@@ -101,148 +101,33 @@
 					<div class="row">
 						<div class="col-md-12">
 								<h2 class="text-center">
-								<span class="bigintro">Portfolio</span>
+								<span class="bigintro">仓储制度</span>
 								</h2>
 						</div>
 					</div>
 					<div class="divide60"></div>
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3">
-							<div id="filters" class="text-center btn-group">
-								  <div  class="hidden-xs">
-									  <a class="btn btn-lg btn-primary active" data-filter="*" href="#">All</a>
-									  <a class="btn btn-lg btn-warning" data-filter=".design" href="#">Design</a>
-									  <a class="btn btn-lg btn-success" data-filter=".videos" href="#">Videos</a>
-									  <a class="btn btn-lg btn-danger" data-filter=".banners" href="#">Banners</a>
-								  </div>
-								  <div class="visible-xs">
-									   <select id="e1" class="form-control">
-											<option value="*">All</option>
-											<option value=".design">Designs</option>
-											<option value=".videos">Videos</option>
-											<option value=".banners">Banners</option>
-										</select>
-								  </div>
-							</div>
-						</div>
-					</div>
-					<div class="divide40"></div>
+					
 					<div class="container">
 						<div id="filter-items" class="row">
-							<div class="col xs-12 col-sm-4 design item">
-								<div class="filter-content">
-									<img src="resources/img/gallery/1.png" alt="" class="img-responsive" />
-									<div class="image-content">
-										<h4>Image Title</h4>
-										<p class="hidden-xs hidden-sm">
-											For faster mobile-friendly development, use these utility.
-										</p>
-										<a href="resources/img/gallery/1.png" class="btn btn-sm btn-warning colorbox-button">Know More</a>
-									</div>
-								</div>
-							</div>
-							<div class="col xs-12 col-sm-4 videos item">
-								<div class="filter-content">
-									<img src="resources/img/gallery/2.jpg" alt="" class="img-responsive" />
-									<div class="image-content">
-										<h4>Image Title</h4>
-										<p class="hidden-xs hidden-sm">
-											For faster mobile-friendly development, use these utility.
-										</p>
-										<a href="resources/img/gallery/2.jpg" class="btn btn-sm btn-warning colorbox-button">Know More</a>
-									</div>
-								</div>
-							</div>
-							<div class="col xs-12 col-sm-4 banners item">
-								<div class="filter-content">
-									<img src="resources/img/gallery/3.png" alt="" class="img-responsive" />
-									<div class="image-content">
-										<h4>Image Title</h4>
-										<p class="hidden-xs hidden-sm">
-											For faster mobile-friendly development, use these utility.
-										</p>
-										<a href="resources/img/gallery/3.png" class="btn btn-sm btn-warning colorbox-button">Know More</a>
-									</div>
-								</div>
-							</div>
-							<div class="col xs-12 col-sm-4 videos item">
-								<div class="filter-content">
-									<img src="resources/img/gallery/4.png" alt="" class="img-responsive" />
-									<div class="image-content">
-										<h4>Image Title</h4>
-										<p class="hidden-xs hidden-sm">
-											For faster mobile-friendly development, use these utility.
-										</p>
-										<a href="resources/img/gallery/4.png" class="btn btn-sm btn-warning colorbox-button">Know More</a>
-									</div>
-								</div>
-							</div>
-							<div class="col xs-12 col-sm-4 design item">
-								<div class="filter-content">
-									<img src="resources/img/gallery/5.png" alt="" class="img-responsive" />
-									<div class="image-content">
-										<h4>Image Title</h4>
-										<p class="hidden-xs hidden-sm">
-											For faster mobile-friendly development, use these utility.
-										</p>
-										<a href="resources/img/gallery/5.png" class="btn btn-sm btn-warning colorbox-button">Know More</a>
-									</div>
-								</div>
-							</div>
-							<div class="col xs-12 col-sm-4 banners item">
-								<div class="filter-content">
-									<img src="resources/img/gallery/8.png" alt="" class="img-responsive" />
-									<div class="image-content">
-										<h4>Image Title</h4>
-										<p class="hidden-xs hidden-sm">
-											For faster mobile-friendly development, use these utility.
-										</p>
-										<a href="resources/img/gallery/8.png" class="btn btn-sm btn-warning colorbox-button">Know More</a>
-									</div>
-								</div>
-							</div>
-							<div class="col xs-12 col-sm-4 banners item">
-								<div class="filter-content">
-									<img src="resources/img/gallery/7.jpg" alt="" class="img-responsive" />
-									<div class="image-content">
-										<h4>Image Title</h4>
-										<p class="hidden-xs hidden-sm">
-											For faster mobile-friendly development, use these utility.
-										</p>
-										<a href="resources/img/gallery/7.jpg" class="btn btn-sm btn-warning colorbox-button">Know More</a>
-									</div>
-								</div>
-							</div>
-							<div class="col xs-12 col-sm-4 videos item">
-								<div class="filter-content">
-									<img src="resources/img/gallery/2.jpg" alt="" class="img-responsive" />
-									<div class="image-content">
-										<h4>Image Title</h4>
-										<p class="hidden-xs hidden-sm">
-											For faster mobile-friendly development, use these utility.
-										</p>
-										<a href="resources/img/gallery/2.jpg" class="btn btn-sm btn-warning colorbox-button">Know More</a>
-									</div>
-								</div>
-							</div>
+							<h3>
+								<ul>
+									<li>快递发放过程中如有损坏、丢失按标准快递公司赔偿规则处理。(贵重物品建议买快递保险)</li>
+									<li>快递发放：发送快递包裹过程中发错快递，由本公司按货物成本价格赔偿。</li>
+									<li>在存储过程中货物如有损坏由本公司按货物成本赔偿,其他按保险条例。赔偿范围不包括自然原因和不可抗拒因素。</li>
+									<li>节约客户的时间成本,帮助客户拓展市场需求.</li>
+								</ul>
+			   			    </h3>
 						</div>
 					</div>
 					<div class="divide60"></div>
 		</section>
 		<!--/PORTFOLIO UNIT  -->
 		
-		<!-- PARALLAX DIALOGUE UNIT-->
-		<section id="parallax-1" data-type="background" data-speed="10" class="pages text-center">
-			<div class="parallax-overlay text-center">
-				<h2 class="text-center">
-					<span class="bigintro-light">产品展示</span>
-				</h2>
-				<iframe class="hidden-xs" src="http://player.vimeo.com/video/72393668" width="700" height="393" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-				
-				<iframe class="visible-xs" src="http://player.vimeo.com/video/72393668" width="100%" height="auto" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-			</div>
+		<section class="color-warning pattern text-center">
+			<section class="container">
+				<div class="divide20"></div>
+			</section>
 		</section>
-		<!--/PARALLAX DIALOGUE UNIT-->
 		
 		<!-- FEATURES UNIT -->
 		<section id="features" class="color-light">
@@ -251,47 +136,25 @@
 				<div class="row">
 					<div class="col-md-12">
 							<h2 class="text-center">
-							<span class="bigintro">新功能</span>
+							<span class="bigintro">收费标准</span>
 							</h2>
 					</div>
 				</div>
-				<div class="divide60"></div>
+				<div class="divide40"></div>
 				<div class="row">
-					<div class="col-md-3 col-sm-6">
-						<div class="feature">
-							<i class="extralarge fa fa-bar-chart-o"></i>
-							<br/><br/>
-							<h3>Analytics</h3>
+					<div style="font-weight: bold;text-align: center;">
 							<br/>
-							<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6">
-						<div class="feature">
-							<i class="extralarge fa fa-video-camera"></i>
-							<br/><br/>
-							<h3>Media</h3>
+							<p>每立方每天3.5元,每发一个快递减一元,结算周期为25天。 </p>
 							<br/>
-							<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. </p>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6">
-						<div class="feature">
-							<i class="extralarge fa fa-bullhorn"></i>
-							<br/><br/>
-							<h3>Notifications</h3>
+							<p>增加或减少仓库按实际使用立方计算. </p>
 							<br/>
-							<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6">
-						<div class="feature">
-							<i class="extralarge fa fa-picture-o"></i>
-							<br/><br/>
-							<h3>Design</h3>
+							<p>保险费按货物价值千分之三收取.</p>
 							<br/>
-							<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
-						</div>
+							<p>按月为单位,客户按照自己的库存量进行购买</p>
+							<br/>
+							<p>条码费按每立方10个条码,超出部分按每个1元结算.</p>
+							<br/>
+							<p>押金按实际租用体积计算.</p>
 					</div>
 				</div>
 				<div class="divide60"></div>
@@ -495,58 +358,67 @@
 			</div>
 		</section>
 		<!--/TEAM UNIT  -->
-							
-		<!-- SOCIAL BAR -->
-		<section class="color-danger social text-center">
+		
+		<section class="color-warning pattern text-center">
 			<section class="container">
+				<div class="divide20"></div>
+			</section>
+		</section>
+							
+		<!-- CONTACT-US -->
+		<section id="contact" class="color-light text-center">
+			<div class="container">
+				<div class="divide40"></div>
 				<div class="row">
 					<div class="col-md-12">
-						<h3>Be up to date, follow us</h3>
-							<i class="fa fa-twitter-square fa-2x darkred rm20 bm10"></i>
-							<i class="fa fa-facebook-square fa-2x darkred rm20 bm10"></i>
-							<i class="fa fa-linkedin-square fa-2x darkred rm20 bm10"></i>			
-							<i class="fa fa-youtube-square fa-2x darkred rm20 bm10"></i>
-							<i class="fa fa-google-plus-square fa-2x darkred rm20 bm10"></i>
+							<h2 class="text-center">
+							<span class="bigintro">联系我们</span>
+							</h2>
+					</div>
+				</div>
+				<div class="divide60"></div>
+				<div class="row">
+					<div class="text-center">
+						<div class="team">
+							<label>电话:021-65112245</label>
+						</div>
+						<div class="team">
+							<label>传真:021-65377431</label>
+						</div>
+						<div class="team">
+							<label>QQ:</label>
+						</div>
+						<div class="team">
+							<label>旺旺:</label>
+						</div>
+					</div>
+				</div>
+				<div class="divide60"></div>
+			</div>
+		</section>
+		<!--/CONTACT-US -->
+		
+		<!-- SOCIAL BAR -->
+		<section id="attention" class="color-danger social text-center">
+			<section class="container">
+			<div class="row">
+					<div class="col-md-12">
+							<h2 class="text-center">
+							<span class="attention">注意事项</span>
+							</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<h3>每个箱子存放物品的重量不要超过25公斤,确保您所有的箱子都密封封存,如果收货时发现有严重损坏和散落货物,本公司将有权拒收。</h3>
+					    <h3>工作时间:9:00~17:00,当日17点以后的发货单将隔天发放。</h3>
+					    <h3>如遇到下错单,或撤单请及时联系客服。快件如果已被快递公司收取,将不退还快递费.</h3>
+					    <h3>本仓库不接受易燃、易爆、易渗漏、易挥发、易潮解物品;有害有毒、有辐射、化学性、突变性危险物品；易腐烂、易霉变、易变质及超限制等特殊物品；活体家禽、动物、及植物;国家相关法规明令禁止的物品、毒品、枪支弹药等违法违纪类物品.</h3>
 					</div>
 				</div>
 			</section>
 		</section>
 		<!--/SOCIAL BAR -->
-		
-		<!-- CONTACT-US -->
-		<section id="parallax-3" data-type="background" data-speed="10" class="pages text-center">
-			<div class="parallax-overlay">
-				<section id="contact">
-					<section class="container">
-						<div class="divide40"></div>
-										<div class="row">
-							<div class="col-md-12">
-									<h2 class="text-center">
-									<span class="bigintro-light">联系我们</span>
-									</h2>
-							</div>
-						</div>
-						<div class="divide20"></div>
-						<div class="row">
-							<div class="contact">
-								<label>电话:021-65112245</label>
-							</div>
-							<div class="contact">
-								<label>传真:021-65377431</label>
-							</div>
-							<div class="contact">
-								<label>QQ:</label>
-							</div>
-							<div class="contact">
-								<label>旺旺:</label>
-							</div>
-						</div>
-						<div class="divide60"></div>
-					</section>
-				</section>
-			</div>
-		</section>
-		<!--/CONTACT-US -->
 		
 		<!-- FOOTER -->
 		<section id="footer" class="color-light pattern">

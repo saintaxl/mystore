@@ -32,5 +32,17 @@
         STATE varchar(255) not null,
         USERNAME varchar(80) not null,
         primary key (ID)
-    );
+  );
+  
+  create table USER_VALIDATE (
+        ID int not null,
+        CREATE_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        LOCK_VERSION BIGINT NOT NULL DEFAULT 1,
+        UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+        REGISTER_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+        VALIDATA_CODE varchar(255) not null,
+        USER_ID int,
+        primary key (ID)
+  );
+  
     

@@ -20,8 +20,13 @@
 			<list>
 				<value>classpath*:/META-INF/database.properties</value>
 				<value>classpath*:/META-INF/security.properties</value>
+				<value>classpath*:/META-INF/mail.properties</value>
 			</list>
 		</property>
+	</bean>
+	
+	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="resourceLoaderPath" value="view" />
 	</bean>
 
 	<context:component-scan base-package="com.mycloud.store">

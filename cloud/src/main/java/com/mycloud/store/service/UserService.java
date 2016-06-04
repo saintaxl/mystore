@@ -27,7 +27,6 @@ public class UserService {
 	
 	
 	public void registerUser(User user){
-		
 		User existing = findUserByEmail(user.getEmail());
 		if(existing!=null){
 			throw new BusinessException(ErrorCode.ACCOUNT_EMAIL_EXISTING, user.getEmail());

@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:security="http://www.springframework.org/schema/security" xmlns:tx="http://www.springframework.org/schema/tx" 
-    xmlns:jee="http://www.springframework.org/schema/jee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" 
-    xmlns:jpa="http://www.springframework.org/schema/data/jpa" 
+xmlns:jee="http://www.springframework.org/schema/jee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" 
+xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:aop="http://www.springframework.org/schema/aop" 
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
               http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.1.xsd
               http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
               http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd 
               http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd 
               http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd 
+              http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
                ">
 
 
-<!-- 	<bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="order" value="1" />
-		<property name="ignoreUnresolvablePlaceholders" value="true" />
-		<property name="locations">
-			<list>
-				<value>classpath*:/META-INF/database.properties</value>
-			</list>
-		</property>
-	</bean> -->
-	<jpa:repositories base-package="com.mycloud.repository" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager" /> 
+	<!-- <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> <property name="order" value="1" /> <property name="ignoreUnresolvablePlaceholders" value="true" /> <property name="locations"> <list> <value>classpath*:/META-INF/database.properties</value> </list> </property> </bean> -->
+	<jpa:repositories base-package="com.mycloud.repository" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager" />
 
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -32,12 +25,13 @@
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.order_updates">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">none</prop>
+			<!-- 	<prop key="connection.autocommit">false</prop> -->
 			</props>
 		</property>
 	</bean>
-	
+
 	<tx:annotation-driven />
-	
+
 	<bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 		<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
 	</bean>
@@ -59,6 +53,21 @@
 		<property name="timeBetweenEvictionRunsMillis" value="3600000" />
 		<property name="minEvictableIdleTimeMillis" value="3600000" />
 	</bean>
+
+	<aop:config>
+		<aop:pointcut id="serviceOperation" expression="execution(* *..service*..*(..))" />
+		<aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice" />
+	</aop:config>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="delete*" rollback-for="Exception" />
+			<tx:method name="save*" rollback-for="Exception" />
+			<tx:method name="update*" rollback-for="Exception" />
+			<tx:method name="*" read-only="true" rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+
 
 
 </beans>
