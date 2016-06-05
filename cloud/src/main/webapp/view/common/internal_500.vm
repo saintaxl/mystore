@@ -6,13 +6,18 @@
 	</div>
 	<div class="col-md-4 col-md-offset-4 not-found text-center">
 	   <div class="content">
-		  <h3>Oops! Something went wrong</h3>
+		  <h3>糟糕! 发生一些不可预知的错误</h3>
+		  <div style="display:none;">
+		  #if($!errorMessage)
+			$errorMessage.message
+    	  #end
+    	  </div> 
 		  <p>
-			Don't worry! We're working on it.
+			不用担心，我们会尽快处理.
 		  </p>
 		  <div class="btn-group">
 			<a href="#" class="btn btn-danger" onClick="javascript:history.back(-1);"><i class="fa fa-chevron-left"></i> Go Back</a>
-			<a href="index.html" class="btn btn-default">Dashboard</a>
+			<a href="${rc.contextPath}/dashboard.htm" class="btn btn-default">仪表盘</a>
 		  </div>
 	   </div>
 	</div>

@@ -99,7 +99,7 @@ public class RegisterController extends BaseController {
 
 		//return "redirect:homepage.htm";
 		model.addAttribute("mail", user.getEmail());
-		return "sendRegisterMail";
+		return "/email/sendRegisterMail";
 	}
 	
 	@RequestMapping(value = "/validateMail.htm", method = { RequestMethod.GET })
@@ -109,7 +109,7 @@ public class RegisterController extends BaseController {
         }
         User user = userService.findUserByEmail(email);
         if(user == null){
-        	throw new BusinessException(ErrorCode.ACCOUNT_NOT_FOUND);
+        	throw new BusinessException(ErrorCode.ACCOUNT_NOT_FOUND,email);
         }
         Date registerDate = user.getValidate().getRegisterDate();
         if(registerDate.getTime() <= System.currentTimeMillis()){
@@ -128,7 +128,7 @@ public class RegisterController extends BaseController {
         userService.update(user);
         
         model.addAttribute("mail", user.getEmail());
-		return "validateMail";
+		return "/email/validateMail";
 	}
 	
 	@RequestMapping(value = "/resendMail.htm", method = { RequestMethod.GET })
@@ -138,7 +138,7 @@ public class RegisterController extends BaseController {
         }
         User user = userService.findUserByEmail(email);
         if(user == null){
-        	throw new BusinessException(ErrorCode.ACCOUNT_NOT_FOUND);
+        	throw new BusinessException(ErrorCode.ACCOUNT_NOT_FOUND,email);
         }
         Date after30 = DateUtils.addMinutes(new Date(), 30);
         UserValidate validate = user.getValidate();
@@ -160,12 +160,80 @@ public class RegisterController extends BaseController {
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 		map.put("validatelink", validatelink);
 		
-		emailService.sendWithTemplate("云立方注册用户邮箱验证", email, "/email/email_verify.vm", map);
+		emailService.sendWithTemplate("云立方-注册用户邮箱验证", email, "/email/email_verify.vm", map);
 
 		model.addAttribute("mail", user.getEmail());
-		return "sendRegisterMail";
+		return "/email/sendRegisterMail";
      
 	}
+	
+	@RequestMapping(value = "/forgotPassword.htm", method = { RequestMethod.POST })
+	public String forgotPassword(@RequestParam(value = "forgotemail", required = true) String email, Model model){
+		if(StringUtils.isEmpty(email)){
+        	response.setHeader("errorPage", "logon");
+			response.setHeader("fromPage", "forgot");
+        	throw new BusinessException(ErrorCode.EMAIL_IS_EMPTY);
+        }
+        User user = userService.findUserByEmail(email);
+        if(user == null){
+        	response.setHeader("errorPage", "logon");
+			response.setHeader("fromPage", "forgot");
+        	throw new BusinessException(ErrorCode.ACCOUNT_NOT_FOUND,email);
+        }
+        UserValidate validate = user.getValidate();
+        String validataCode = validate.getValidataCode();
+		
+        String key = user.getEmail()+"$"+validataCode;
+        String digitalSignature = DigestUtils.md5Hex(key);
+
+        String path = request.getContextPath();
+        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+        String resetlink =  basePath+"resetPassword.htm?sid="+digitalSignature+"&email="+user.getEmail();
+		Map<String, Object> map = new LinkedHashMap<String, Object>();
+		map.put("resetlink", resetlink);
+		
+		emailService.sendWithTemplate("云立方-用户登录密码重置邮件", email, "/email/forgot_password.vm", map);
+
+		model.addAttribute("mail", user.getEmail());
+		return "/email/sendForgotMail";
+	}
+	
+	@RequestMapping(value = "/resetPassword.htm", method = { RequestMethod.GET })
+	public String resetPassword(@RequestParam(value = "email", required = true) String email,@RequestParam(value = "sid", required = true) String sid, Model model){
+		if(StringUtils.isEmpty(email)){
+        	throw new BusinessException(ErrorCode.EMAIL_IS_EMPTY);
+        }
+        User user = userService.findUserByEmail(email);
+        if(user == null){
+        	throw new BusinessException(ErrorCode.ACCOUNT_NOT_FOUND,email);
+        }
+        String key = user.getEmail()+"$"+user.getValidate().getValidataCode();
+        String digitalSignature = DigestUtils.md5Hex(key);
+        if(!digitalSignature.equals(sid)) {
+        	throw new BusinessException(ErrorCode.VALIDATE_MAIL_TIMEOUT);
+        }
+
+		model.addAttribute("email", user.getEmail());
+		return "/email/resetPassword";
+	}
+	
+	
+	@RequestMapping(value = "/resetLogonPassword.htm", method = { RequestMethod.POST })
+	public String resetLogonPassword(@RequestParam(value = "email", required = true) String email,@RequestParam(value = "newpassword", required = true) String password, Model model){
+		if(StringUtils.isEmpty(email)){
+        	throw new BusinessException(ErrorCode.EMAIL_IS_EMPTY);
+        }
+        User user = userService.findUserByEmail(email);
+        if(user == null){
+        	throw new BusinessException(ErrorCode.ACCOUNT_NOT_FOUND,email);
+        }
+        String hashedPassword = passwordEncoder.encode(password);
+        user.setPassword(hashedPassword);
+        userService.update(user);
+        
+		return "/email/successResetPassword";
+	}
+	
 	
 	
 	

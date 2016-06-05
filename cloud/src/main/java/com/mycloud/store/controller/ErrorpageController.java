@@ -15,16 +15,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ErrorpageController {
 	
+	@RequestMapping("error_400.htm")
+	public String showBadRequest(Model model){
+		return "/common/error_400";
+	}
+	
 	@RequestMapping("error_403.htm")
-	//@ExceptionHandler(PiranhaException.class)
 	public String showForbiddenError(Model model){
 		return "/common/error_403";
 	}
 	
 	@RequestMapping("error_404.htm")
-	//@ExceptionHandler(PiranhaException.class)
 	public String showBussinessError(Model model){
 		return "/common/error_404";
+	}
+	
+	@RequestMapping("error_405.htm")
+	public String showMethodNotFound(Model model){
+		return "/common/error_405";
 	}
 	
 	@RequestMapping("error_500.htm")

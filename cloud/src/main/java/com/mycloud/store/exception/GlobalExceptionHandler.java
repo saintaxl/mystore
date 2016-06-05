@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,7 +55,7 @@ public class GlobalExceptionHandler extends AbstractExceptionHandler {
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(BusinessException.class)
     @ResponseBody
-    public ModelAndView handleBusinessException(HttpServletRequest request,HttpServletResponse response,BusinessException ex) {
+    public ModelAndView handleBusinessException(HttpServletRequest request,HttpServletResponse response, BusinessException ex) {
         logger.error("BusException handler executed");
         String errorCode = ex.getErrorCode();
         String message = handleErrorCode(errorCode, ex.getArgs());

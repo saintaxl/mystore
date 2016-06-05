@@ -62,13 +62,23 @@
 	</filter-mapping>
 	
 	<error-page>
-		<error-code>404</error-code>
-		<location>/error_404.htm</location>
+		<error-code>400</error-code>
+		<location>/error_400.htm</location>
 	</error-page>
 	
 	<error-page>
 		<error-code>403</error-code>
 		<location>/error_403.htm</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error_404.htm</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>405</error-code>
+		<location>/error_405.htm</location>
 	</error-page>
 	
 	<error-page>

@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-	<title>云立方 | 错误页面</title>
+	<title>云立方 | 访问拒绝</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -29,18 +29,18 @@
 			<div class="row">
 				<div class="col-md-12 not-found text-center">
 				   <div class="error">
-					  404
+					  405
 				   </div>
 				</div>
 				<div class="col-md-4 col-md-offset-4 not-found text-center">
 				   <div class="content">
-					  <h1>操作失败 </h1>
+					  <h1>请求失败 </h1>
 					  <p>
 						 #if($!errorMessage)
 							<h3>$errorMessage.message</h3>
     					 #end 
 						 <br />
-						请检查输入是否有误, <a href="${rc.contextPath}/index.htm">返回首页</a> 或输入其他页面地址.
+						访问被拒绝, <a href="${rc.contextPath}/index.htm">返回首页</a> 或输入其他页面地址.
 					  </p>
 				   </div>
 				</div>

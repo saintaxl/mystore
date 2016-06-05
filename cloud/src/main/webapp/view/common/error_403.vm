@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-	<title>Cloud Admin | Error 403</title>
+	<title>云立方 | 没有权限</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -34,10 +34,10 @@
 				</div>
 				<div class="col-md-4 col-md-offset-4 not-found text-center">
 				   <div class="content">
-					  <h3>没有权限访问此网页</h3>
+					  <h1>此页面需要登录后访问</h1>
 					  <p>
-						 对不起,您所访问的页面没有权限请登录<br />
-						请检查输入是否有误, <a href="logon.htm">登录</a> 或输入其他页面地址.
+						 对不起,您没有权限访问当前页面,请登录<br />
+						请检查输入是否有误, <a href="${rc.contextPath}/logon.htm">登录</a> 或输入其他页面地址.
 					  </p>
 				   </div>
 				</div>
@@ -45,28 +45,6 @@
 		</div>
 	</section>
 	<!--/PAGE -->
-	<!-- JAVASCRIPTS -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<!-- JQUERY -->
-	<script src="resources/js/jquery/jquery-2.0.3.min.js"></script>
-	<!-- JQUERY UI-->
-	<script src="resources/js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
-	<!-- BOOTSTRAP -->
-	<script src="resources/bootstrap-dist/js/bootstrap.min.js"></script>
 	
-		
-	<!-- DATE RANGE PICKER -->
-	<script src="resources/js/bootstrap-daterangepicker/moment.min.js"></script>
-	
-	<script src="resources/js/bootstrap-daterangepicker/daterangepicker.min.js"></script>
-	<!-- SLIMSCROLL -->
-	<script type="text/javascript" src="resources/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js"></script>
-	<script type="text/javascript" src="resources/js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js"></script>
-	<!-- COOKIE -->
-	<script type="text/javascript" src="resources/js/jQuery-Cookie/jquery.cookie.min.js"></script>
-	<!-- CUSTOM SCRIPT -->
-	<script src="resources/js/script.js"></script>
-	
-	<!-- /JAVASCRIPTS -->
 </body>
 </html>

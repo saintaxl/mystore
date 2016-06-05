@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="UTF-8">
-	<title>用户邮箱验证</title>
+	<title>云立方 | 用户注册</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -51,9 +51,10 @@
 									</div>
 									<div class="box-body big">
 										<div class="jumbotron">
-										  <h2>你好 $mail</h2>
-										  <p>您的邮箱已通过验证,请点击登录.</p>
-										  <p><a class="btn btn-primary btn-lg" role="button" href="${rc.contextPath}/logon.htm">登录</a></p>
+										  <h2>感谢您使用云立方</h2>
+										  <p>验证邮件已发送至 $mail 请在30分钟之内激活!</p>
+										  <p><a class="btn btn-primary btn-lg" role="button" href="${rc.contextPath}/resendMail.htm?email=$mail">再次发送邮件</a>
+										  <a class="btn btn-danger btn-lg" role="button" href="${rc.contextPath}/logon.htm">登录</a></p>
 										</div>
 									</div>
 									

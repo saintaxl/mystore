@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="UTF-8">
-	<title>Cloud Admin | Login</title>
+	<title>云立方 | 用户登录</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -149,13 +149,18 @@
 							<div class="login-box-plain">
 								<h2 class="bigintro">重置密码</h2>
 								<div class="divide-40"></div>
-								<form role="form">
+								<div id="errorDialogForgot" class="alert alert-block alert-info fade in">
+									<a class="close" data-dismiss="alert" href="#" aria-hidden="true" >×</a>
+									<div id="errorContentForgot"></div>
+								</div>
+								<form role="form" id="forgotForm" method="POST" action="${rc.contextPath}/forgotPassword.htm">
 								  <div class="form-group">
-									<label for="exampleInputEmail1">输入你的邮箱地址</label>
+									<label for="exampleInputEmail1" name="forgotpasswordmail">输入你的邮箱地址</label>
 									<i class="fa fa-envelope"></i>
-									<input type="email" class="form-control" id="exampleInputEmail1" >
+									<input type="email" class="form-control" id="exampleInputEmail1" name="forgotemail" placeholder="示例:abc@mail.com" required >
 								  </div>
 								  <div class="form-actions">
+								    <input type="hidden" name="$_csrf.parameterName" value="$_csrf.token"/>
 									<button type="submit" class="btn btn-info">发送重置密码邮件</button>
 								  </div>
 								</form>
@@ -220,6 +225,7 @@
 	<script type="text/javascript">
 	$("#errorDialogLogon").hide();
 	$("#errorDialogRegister").hide();
+	$("#errorDialogForgot").hide();
 	
 	var msg = '$errmsg';
 	var fromPage = '$fromPage';
@@ -230,13 +236,16 @@
 	}else if(fromPage == 'register'){
 		$("#errorDialogRegister").show();
 		$("#errorContentRegister").html(msg);	
+	}else if(fromPage == 'forgot'){
+	    $("#errorDialogForgot").show();
+		$("#errorContentForgot").html(msg);
 	}
-	
     </script>
     #else
     <script type="text/javascript">
 	$("#errorDialogLogon").hide();
 	$("#errorDialogRegister").hide();
+	$("#errorDialogForgot").hide();
     </script>
     #end
 	<!-- /JAVASCRIPTS -->
