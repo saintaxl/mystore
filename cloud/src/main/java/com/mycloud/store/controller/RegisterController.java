@@ -54,7 +54,7 @@ public class RegisterController extends BaseController {
 	private PasswordEncoder passwordEncoder;
 
 	@RequestMapping(value = "/register.htm", method = { RequestMethod.GET, RequestMethod.POST })
-	public String registerUser(@RequestParam(value = "fullname", required = true) String name,
+	public String registerUser(@RequestParam(value = "customername", required = true) String customername,
 	        @RequestParam(value = "logonname", required = true) String username, @RequestParam(value = "email", required = true) String email,
 	        @RequestParam(value = "mobile", required = true) String mobile, @RequestParam(value = "newpassword", required = true) String password,Model model) {
 		
@@ -63,7 +63,7 @@ public class RegisterController extends BaseController {
 		user.setMobile(mobile);
 		
 		String hashedPassword = passwordEncoder.encode(password);
-		user.setName(name);
+		user.setCustomerName(customername);
 		user.setUsername(username);
 		user.setPassword(hashedPassword);
 		user.setState(State.INACTIVE.getState());
@@ -83,7 +83,7 @@ public class RegisterController extends BaseController {
 		}
 		
 		
-		SimpleDateFormat dateformat=new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat dateformat=new SimpleDateFormat("yyyyMMddHHmm");
 		String formatdate = dateformat.format(user.getValidate().getRegisterDate());
 		
         String key = user.getEmail()+"$"+formatdate+"$"+validataCode;
@@ -115,7 +115,7 @@ public class RegisterController extends BaseController {
         if(registerDate.getTime() <= System.currentTimeMillis()){
         	throw new BusinessException(ErrorCode.VALIDATE_MAIL_TIMEOUT);
         }
-        SimpleDateFormat dateformat=new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat dateformat=new SimpleDateFormat("yyyyMMddHHmm");
 		String formatdate = dateformat.format(registerDate.getTime());
         
         String key = user.getEmail()+"$"+formatdate+"$"+user.getValidate().getValidataCode();
@@ -148,7 +148,7 @@ public class RegisterController extends BaseController {
         
         String validataCode = validate.getValidataCode();
         
-        SimpleDateFormat dateformat=new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat dateformat=new SimpleDateFormat("yyyyMMddHHmm");
 		String formatdate = dateformat.format(user.getValidate().getRegisterDate());
 		
         String key = user.getEmail()+"$"+formatdate+"$"+validataCode;

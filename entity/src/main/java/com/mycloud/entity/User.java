@@ -40,8 +40,8 @@ public class User extends AbstractEntity implements Serializable {
 	@Column(name="ID")
 	private Integer id;
     
-    @Column(name="NAME",nullable=false , length=80)
-    private String name;
+    @Column(name="CUSTOMER_NAME",nullable=false , length=80)
+    private String customerName;
 
     @Column(name="USERNAME",nullable=false , length=80)
 	private String username;
@@ -74,12 +74,12 @@ public class User extends AbstractEntity implements Serializable {
 		this.validate = validate;
 	}
 
-	public String getName() {
-		return name;
+	public String getCustomerName() {
+		return customerName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
 	public Integer getId() {

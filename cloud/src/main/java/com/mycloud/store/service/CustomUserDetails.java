@@ -29,7 +29,7 @@ public class CustomUserDetails extends User implements UserDetails {
 	public CustomUserDetails(User user) {
 		if(user != null){
 			this.setId(user.getId());
-			this.setName(user.getName());
+			this.setCustomerName(user.getCustomerName());
 			this.setUsername(user.getUsername());
 			this.setEmail(user.getEmail());
 			this.setPassword(user.getPassword());

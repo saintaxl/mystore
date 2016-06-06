@@ -31,6 +31,7 @@
         PASSWORD varchar(255) not null,
         STATE varchar(255) not null,
         USERNAME varchar(80) not null,
+        CUSTOMER_NAME varchar(80) not null,
         primary key (ID)
   );
   

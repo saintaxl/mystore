@@ -106,22 +106,25 @@
 						</div>
 					</div>
 					<div class="divide60"></div>
-					<div class="container">
-						<div id="filter-items" class="row">
-							<h3>
-								<ul>
-									<li>发快递--损坏，丢失按快递规章制度赔偿</li>
-									<li>（我们先期赔付与您，  贵重物品建议买快递保险）。</li>
-									<li>发快递--包错货,发错货由本公司按照货物成本价格赔偿。</li>
-									<li>在本仓库储存时货物损坏由本公司按照货物成本价赔偿.</li>
-									<li>其他按照保险条例.</li>
-									<li>赔偿范围不包括自然原因和不可抗力因素.</li>
-								</ul>
-			   			    </h3>
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<div class="text-center">
+								<h3>
+									<ul>
+										<li>发快递--损坏，丢失按快递规章制度赔偿</li>
+										<li>（我们先期赔付与您，  贵重物品建议买快递保险）。</li>
+										<li>发快递--包错货,发错货由本公司按照货物成本价格赔偿。</li>
+										<li>在本仓库储存时货物损坏由本公司按照货物成本价赔偿。</li>
+										<li>其他按照保险条例。</li>
+										<li>赔偿范围不包括自然原因和不可抗力因素。</li>
+									 </ul>
+								 </h3>
+							</div>
 						</div>
 					</div>
 					<div class="divide60"></div>
 		</section>
+		
 		<!--/PORTFOLIO UNIT  -->
 		
 		<section class="color-warning pattern text-center">
@@ -143,21 +146,22 @@
 				</div>
 				<div class="divide40"></div>
 				<div class="row">
-					<div style="font-weight: bold;text-align: center;">
-							<br/>
-							<p>每立方每天4元，每发一个快递减一元，25天结算一次。 </p>
-							<br/>
-							<p>（加减仓储每天按实际立方结算）. </p>
-							<br/>
-							<p>保险费按货值千分之三收取.</p>
-							<br/>
-							<p>（按月为单位，客户按照自己的存货量自行选择购买）</p>
-							<br/>
-							<p>条码费-每立方10个条码，超过按1元1个每月.</p>
-							<br/>
-							<p>押金-按预计租用体积算.</p>
+						<div class="col-md-8 col-md-offset-2">
+							<div class="text-center">
+								<h3>
+									<ul>
+										<li>每立方每天4元，每发一个快递减一元，25天结算一次。</li>
+										<li>（加减仓储每天按实际立方结算）.</li>
+										<li>保险费按货值千分之三收取.</li>
+										<li>（按月为单位，客户按照自己的存货量自行选择购买）</li>
+										<li>条码费-每立方10个条码，超过按1元1个每月。</li>
+										<li>押金-按预计租用体积算。</li>
+									 </ul>
+								 </h3>
+							</div>
+						</div>
 					</div>
-				</div>
+				
 				<div class="divide60"></div>
 			</div>
 		</section>
@@ -206,7 +210,9 @@
 				<div class="divide20"></div>
 				<div class="row">
 					<div class="col-md-12 about">
+					    <h2>
 						<p>因市场竞争激烈,本公司联合各大物流,快递公司量身定做面向电商 微商 零售批发,个体经营者一站式免费仓储服务,替商家分拣 包装 贴单 称重 扫描发货一系列服务,省却您后顾之忧,更能为您在如此激烈的竞争中拔得头筹 脱颖而出,敬请联系. </p>
+						</h2>
 					</div>
 				</div>
 			</div>
@@ -379,20 +385,18 @@
 				</div>
 				<div class="divide60"></div>
 				<div class="row">
-					<div class="text-center">
-						<div class="team">
-							<label>电话:021-65112245</label>
+						<div class="col-md-6 col-md-offset-3">
+							<div class="text-center">
+								<h3>
+									<ul>
+										<li><i class="fa fa-phone">:021-65112245</i></li>
+										<li><i class="fa fa-fax">:021-65377431</i></li>
+										<li><i class="fa fa-qq">:1359540472</i></li>
+										<li><i>旺旺:lonewolf82</i></li>
+									 </ul>
+								 </h3>
+							</div>
 						</div>
-						<div class="team">
-							<label>传真:021-65377431</label>
-						</div>
-						<div class="team">
-							<label>QQ:1359540472</label>
-						</div>
-						<div class="team">
-							<label>旺旺:lonewolf82</label>
-						</div>
-					</div>
 				</div>
 				<div class="divide60"></div>
 			</div>
@@ -411,13 +415,19 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<h3>每个箱子存放物品的重量不要超过25公斤，这是大多数人可以承受且不会受伤的合适重量。</h3>
-					    <h3>确保您所有的箱子都用胶带密封好。如到货后发现有损坏严重的和掉落物品的本公司有权利拒收。</h3>
-					    <h3>每天工作时间是9：00-17：00，下午5点以后下的单隔天在包.</h3>
-					    <h3>如下错单，撤单请及时联系客服，如快递已收走将不退还快递费.</h3>
-					    <h3>本仓库不接受易燃、易爆、易渗漏、易挥发、易潮解物品；有毒有害、有辐射、化学性、突变.</h3>
-					    <h3>性危险品；易腐烂、易霉变、易变质及超限等特殊物品；活体动物，包括植物等物品；国家相关法.</h3>
-					    <h3>律明令禁止的毒品、枪支弹药等违禁违纪类物品.</h3>
+						<div class="text-center">
+						   	 <h3>
+								<ul>
+									<li>每个箱子存放物品的重量不要超过25公斤，这是大多数人可以承受且不会受伤的合适重量。</li>
+									<li>确保您所有的箱子都用胶带密封好。如到货后发现有损坏严重的和掉落物品的本公司有权利拒收。</li>
+									<li>每天工作时间是9：00-17：00，下午5点以后下的单隔天在包.</li>
+									<li>如下错单，撤单请及时联系客服，如快递已收走将不退还快递费.</li>
+									<li>本仓库不接受易燃、易爆、易渗漏、易挥发、易潮解物品；有毒有害、有辐射、化学性、突变.</li>
+									<li>性危险品；易腐烂、易霉变、易变质及超限等特殊物品；活体动物，包括植物等物品；国家相关法.</li>
+									<li>律明令禁止的毒品、枪支弹药等违禁违纪类物品.</li>
+							    </ul>
+							 </h3>
+						</div>
 					</div>
 				</div>
 			</section>

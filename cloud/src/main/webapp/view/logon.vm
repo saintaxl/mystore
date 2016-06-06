@@ -95,14 +95,14 @@
 								</div>
 								<form role="form" id="registerForm" method="POST" action="${rc.contextPath}/register.htm" >
 								  <div class="form-group">
-									<label for="exampleInputName">姓名</label>
+									<label for="exampleInputName">客户名称</label>
 									<i class="fa fa-font"></i>
-									<input type="text" class="form-control" id="name" name="fullname" placeholder="请输入用户姓名" required>
+									<input type="text" class="form-control" id="name" name="customername" placeholder="请输入公司名称或用户姓名" required>
 								  </div>
 								  <div class="form-group">
 									<label for="exampleInputUsername">用户名</label>
 									<i class="fa fa-user"></i>
-									<input type="text" class="form-control" id="username" name="logonname" placeholder="请输入登录用户名" required >
+									<input type="text" class="form-control" id="username" name="logonname" placeholder="请输入用户名" required >
 								  </div>
 								  <div class="form-group">
 									<label for="exampleInputEmail1">邮箱</label>
