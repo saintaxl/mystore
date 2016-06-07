@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mycloud.entity.Customer;
 import com.mycloud.entity.Role;
 import com.mycloud.entity.User;
 import com.mycloud.entity.UserValidate;
@@ -33,6 +34,7 @@ import com.mycloud.enums.State;
 import com.mycloud.exception.BusinessException;
 import com.mycloud.store.exception.ErrorCode;
 import com.mycloud.store.service.CustomUserDetails;
+import com.mycloud.store.service.CustomerService;
 import com.mycloud.store.service.EmailService;
 import com.mycloud.store.service.UserService;
 
@@ -46,6 +48,10 @@ public class RegisterController extends BaseController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private CustomerService customerService;
+
 	
 	@Autowired
 	private EmailService emailService;
@@ -63,8 +69,10 @@ public class RegisterController extends BaseController {
 		user.setMobile(mobile);
 		
 		String hashedPassword = passwordEncoder.encode(password);
-		user.setCustomerName(customername);
+		
 		user.setUsername(username);
+		Customer customer = customerService.addCustomer(customername);
+		user.setCustomer(customer);
 		user.setPassword(hashedPassword);
 		user.setState(State.INACTIVE.getState());
 		String validataCode = UUID.randomUUID().toString();

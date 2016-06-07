@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mycloud.entity.Customer;
 import com.mycloud.entity.Role;
 import com.mycloud.store.service.CustomUserDetails;
 import com.mycloud.store.sso.RoleInfo;
@@ -43,7 +44,8 @@ public class HomeController extends BaseController{
 			if(principal!=null){
 				CustomUserDetails userDetails = (CustomUserDetails)principal;
 				UserInfo userinfo = new UserInfo();
-				userinfo.setCustomerName(userDetails.getCustomerName());
+				Customer customer = userDetails.getCustomer();
+				userinfo.setCustomerName(customer.getCustomerName());
 				userinfo.setEmail(userDetails.getEmail());
 				userinfo.setMobile(userDetails.getMobile());
 				Set<Role> roles = userDetails.getRoles();

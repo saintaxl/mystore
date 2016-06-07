@@ -16,8 +16,6 @@
 	<link rel="stylesheet" type="text/css" href="resources/frontend_theme/js/colorbox/colorbox.min.css" />
 	<!-- CAROUSEL -->
     <link href="resources/frontend_theme/css/carousel.css" rel="stylesheet">
-	<!-- FONTS -->
-	<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<!-- PAGE -->

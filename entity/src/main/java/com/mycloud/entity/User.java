@@ -40,8 +40,9 @@ public class User extends AbstractEntity implements Serializable {
 	@Column(name="ID")
 	private Integer id;
     
-    @Column(name="CUSTOMER_NAME",nullable=false , length=80)
-    private String customerName;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUSTOMER_ID", nullable = false)
+    private Customer customer;
 
     @Column(name="USERNAME",nullable=false , length=80)
 	private String username;
@@ -59,7 +60,7 @@ public class User extends AbstractEntity implements Serializable {
     private String state = State.ACTIVE.getState();
     
 	
-	@OneToMany(fetch=FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+	@OneToMany(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
 	@JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") }, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private Set<Role> roles = new HashSet<Role>();
 	
@@ -74,12 +75,12 @@ public class User extends AbstractEntity implements Serializable {
 		this.validate = validate;
 	}
 
-	public String getCustomerName() {
-		return customerName;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public Integer getId() {

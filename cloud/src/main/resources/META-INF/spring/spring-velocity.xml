@@ -31,7 +31,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 
 	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="defaultErrorView">
-			<value>/exception/error</value>
+			<value>/common/error_500</value>
 		</property>
 		<property name="exceptionMappings">
 			<props>

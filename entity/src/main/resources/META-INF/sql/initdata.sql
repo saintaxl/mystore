@@ -7,7 +7,7 @@
   );
   
   create table ROLE (
-        ID int not null ,
+        ID int NOT NULL AUTO_INCREMENT  ,
         CREATE_DATE TIMESTAMP not NULL DEFAULT CURRENT_TIMESTAMP,
         LOCK_VERSION BIGINT not null DEFAULT 1 ,
         UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
@@ -21,8 +21,18 @@
         primary key (USER_ID, ROLE_ID)
   );
   
+  create table CUSTOMER (
+        ID int NOT NULL AUTO_INCREMENT ,
+        CREATE_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        LOCK_VERSION BIGINT not null DEFAULT 1 ,
+        UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+        CUSTOMER_NO varchar(255) not null,
+        CUSTOMER_NAME varchar(255) not null,
+        primary key (ID)
+  );
+  
   create table USERS (
-        ID int not null,
+        ID int NOT NULL AUTO_INCREMENT ,
         CREATE_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         LOCK_VERSION BIGINT not null DEFAULT 1 ,
         UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
@@ -32,11 +42,12 @@
         STATE varchar(255) not null,
         USERNAME varchar(80) not null,
         CUSTOMER_NAME varchar(80) not null,
+        CUSTOMER_ID int not null,
         primary key (ID)
   );
   
   create table USER_VALIDATE (
-        ID int not null,
+        ID int NOT NULL AUTO_INCREMENT ,
         CREATE_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         LOCK_VERSION BIGINT NOT NULL DEFAULT 1,
         UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
