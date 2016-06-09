@@ -26,7 +26,7 @@
 				<span class="arrow"></span>
 				</a>
 				<ul class="sub">
-					<li><a id="firstmenu" class="" href="#"><span class="sub-menu-text">创建发货单</span></a></li>
+					<li><a id="createDelivery" class="" href="#"><span class="sub-menu-text">创建发货单</span></a></li>
 					<li><a id="secondmenu" class="" href="#"><span class="sub-menu-text">查询发货单</span></a></li>
 					<li><a id="internal404" class="" href="#"><span class="sub-menu-text">Buttons & Icons</span></a></li>
 					<li><a id="internal500" class="" href="#"><span class="sub-menu-text">Sliders & Progress</span></a></li>

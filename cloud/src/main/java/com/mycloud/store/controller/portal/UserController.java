@@ -1,4 +1,4 @@
-package com.mycloud.store.controller;
+package com.mycloud.store.controller.portal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 
 import com.mycloud.entity.User;
+import com.mycloud.store.controller.BaseController;
 import com.mycloud.store.service.CustomUserDetails;
 import com.mycloud.store.service.UserService;
 

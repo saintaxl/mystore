@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mycloud.store.controller;
+package com.mycloud.store.controller.portal;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,6 +32,7 @@ import com.mycloud.entity.User;
 import com.mycloud.entity.UserValidate;
 import com.mycloud.enums.State;
 import com.mycloud.exception.BusinessException;
+import com.mycloud.store.controller.BaseController;
 import com.mycloud.store.exception.ErrorCode;
 import com.mycloud.store.service.CustomUserDetails;
 import com.mycloud.store.service.CustomerService;

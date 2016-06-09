@@ -23,10 +23,20 @@ public class UserInfo implements Serializable{
 	
 	private String state;
 	
+	private String customerNo; 
+	
 	private Set<RoleInfo> roleinfo;
 	
 	private Date logonTime;
 	
+	public String getCustomerNo() {
+		return customerNo;
+	}
+
+	public void setCustomerNo(String customerNo) {
+		this.customerNo = customerNo;
+	}
+
 	public Date getLogonTime() {
 		return logonTime;
 	}

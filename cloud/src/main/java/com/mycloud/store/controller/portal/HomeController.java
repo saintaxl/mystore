@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mycloud.store.controller;
+package com.mycloud.store.controller.portal;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycloud.entity.Customer;
 import com.mycloud.entity.Role;
+import com.mycloud.store.controller.BaseController;
 import com.mycloud.store.service.CustomUserDetails;
 import com.mycloud.store.sso.RoleInfo;
 import com.mycloud.store.sso.UserInfo;
@@ -46,6 +47,7 @@ public class HomeController extends BaseController{
 				UserInfo userinfo = new UserInfo();
 				Customer customer = userDetails.getCustomer();
 				userinfo.setCustomerName(customer.getCustomerName());
+				userinfo.setCustomerNo(customer.getCustomerNo());
 				userinfo.setEmail(userDetails.getEmail());
 				userinfo.setMobile(userDetails.getMobile());
 				Set<Role> roles = userDetails.getRoles();
@@ -63,7 +65,7 @@ public class HomeController extends BaseController{
 			}
 		}
 		
-		return "default";
+		return "homepage";
 	}
 	
 	

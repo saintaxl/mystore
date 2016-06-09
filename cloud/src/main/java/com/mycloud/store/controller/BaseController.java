@@ -20,6 +20,13 @@ public class BaseController {
 	
 	@Autowired  
 	protected  HttpServletResponse response;
+	
+	protected void setPageheader(String sidebarName,String submenu,String title,String description,Model model){
+		model.addAttribute("homepage", "/dashboard.htm");
+		model.addAttribute("submenu", submenu);
+		model.addAttribute("title", title);
+		model.addAttribute("description", description);
+	}
 
 	
 }

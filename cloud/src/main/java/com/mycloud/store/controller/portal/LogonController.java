@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mycloud.store.controller;
+package com.mycloud.store.controller.portal;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycloud.exception.BusinessException;
+import com.mycloud.store.controller.BaseController;
 import com.mycloud.store.exception.ErrorCode;
 
 /**

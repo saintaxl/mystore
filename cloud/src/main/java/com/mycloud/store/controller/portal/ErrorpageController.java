@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mycloud.store.controller;
+package com.mycloud.store.controller.portal;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

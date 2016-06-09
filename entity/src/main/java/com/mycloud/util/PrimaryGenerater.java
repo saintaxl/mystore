@@ -6,6 +6,8 @@ package com.mycloud.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * @author Shawn
  *
@@ -28,8 +30,10 @@ public class PrimaryGenerater {
 
 	public synchronized String generaterNextNumber() {
 		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHSSMM");
-		return formatter.format(date);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		String format = formatter.format(date);
+		String substring = StringUtils.substring(format, 0, 14);
+		return substring;
 	}
 	
 	public static void main(String[] args) {

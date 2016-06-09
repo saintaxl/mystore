@@ -4,12 +4,15 @@
 package com.mycloud.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -33,6 +36,20 @@ public class Customer extends AbstractEntity implements Serializable{
 	@Column(name="CUSTOMER_NAME",nullable=false , length=80)
 	private String customerName;
 	
+	@Column(name="ACRONYM",nullable=false , length=255)
+	private String acronym;
+	
+	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<Delivery> deliverys;
+	
+	public List<Delivery> getDeliverys() {
+		return deliverys;
+	}
+
+	public void setDeliverys(List<Delivery> deliverys) {
+		this.deliverys = deliverys;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -56,6 +73,16 @@ public class Customer extends AbstractEntity implements Serializable{
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
+
+	public String getAcronym() {
+		return acronym;
+	}
+
+	public void setAcronym(String acronym) {
+		this.acronym = acronym;
+	}
+	
+	
 	
 	
 
