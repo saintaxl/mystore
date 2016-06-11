@@ -98,6 +98,7 @@
         CUSTOMER_ID int not null,
         QUANTITY_ID int not null,
         LOGISTICS_ID int not null,
+        CATEGORY_ID int not null,
         BAR_CODE varchar(255) null,
         COLOR varchar(255) null,
         NOTE varchar(255) null,

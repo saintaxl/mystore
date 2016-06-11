@@ -64,9 +64,21 @@ public class Delivery extends AbstractEntity implements Serializable {
     @Column(name="NOTE")
     private String note;
     
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="CATEGORY_ID")
+    private Category category;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LOGISTICS_ID", nullable = false)
     private Logistics logistics;
+    
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	public Integer getId() {
 		return id;
