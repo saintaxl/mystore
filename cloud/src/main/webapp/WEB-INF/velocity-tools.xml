@@ -1,3 +1,8 @@
 <toolbox>
 	<xhtml>true</xhtml>
+	<tool>
+		<key>pinyinUtils</key>
+		<scope>application</scope>
+		<class>com.mycloud.store.utils.Pinyin</class>
+	</tool>
 </toolbox>

@@ -39,7 +39,7 @@ public class Logistics extends AbstractEntity implements Serializable {
 	private String logisticsNo;
 	
 	@Column(name="NOTE")
-    private Integer note;
+    private String note;
 	
     @Temporal(TemporalType.TIMESTAMP)
 	@Column(name="ARRIVAL_DATE",insertable=true, updatable = false, columnDefinition="TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ")
@@ -56,11 +56,11 @@ public class Logistics extends AbstractEntity implements Serializable {
 		this.arrivalDate = arrivalDate;
 	}
 
-	public Integer getNote() {
+	public String getNote() {
 		return note;
 	}
 
-	public void setNote(Integer note) {
+	public void setNote(String note) {
 		this.note = note;
 	}
 

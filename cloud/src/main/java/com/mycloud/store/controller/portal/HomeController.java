@@ -50,6 +50,7 @@ public class HomeController extends BaseController{
 				userinfo.setCustomerNo(customer.getCustomerNo());
 				userinfo.setEmail(userDetails.getEmail());
 				userinfo.setMobile(userDetails.getMobile());
+				userinfo.setCustomerAcronym(customer.getAcronym());
 				Set<Role> roles = userDetails.getRoles();
 				Set<RoleInfo> roleinfos = new HashSet<RoleInfo>();
 				for (Role role : roles) {

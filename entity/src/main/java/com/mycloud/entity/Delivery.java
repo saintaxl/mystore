@@ -56,10 +56,10 @@ public class Delivery extends AbstractEntity implements Serializable {
     private Integer number;
     
     @Column(name="VOLUME")
-    private Integer volume;
+    private Double volume;
     
     @Column(name="WEIGHT")
-    private Integer weight;
+    private Double weight;
     
     @Column(name="NOTE")
     private String note;
@@ -144,19 +144,19 @@ public class Delivery extends AbstractEntity implements Serializable {
 		this.number = number;
 	}
 
-	public Integer getVolume() {
+	public Double getVolume() {
 		return volume;
 	}
 
-	public void setVolume(Integer volume) {
+	public void setVolume(Double volume) {
 		this.volume = volume;
 	}
 
-	public Integer getWeight() {
+	public Double getWeight() {
 		return weight;
 	}
 
-	public void setWeight(Integer weight) {
+	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
 

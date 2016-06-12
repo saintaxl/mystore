@@ -1,0 +1,4 @@
+#macro( showFirstLetter $value)
+	$!pinyinUtils.String2Alpha($value)
+#end
+

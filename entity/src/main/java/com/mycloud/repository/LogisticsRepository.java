@@ -17,6 +17,8 @@ import com.mycloud.entity.Logistics;
 public interface LogisticsRepository extends BaseRepository<Logistics, Serializable> {
 
 
-
+	Logistics findByCompanyName(String companyName);
+	
+	Logistics findByLogisticsNo(String logisticsNo);
 	
 }

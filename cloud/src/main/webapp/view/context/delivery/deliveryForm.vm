@@ -2,7 +2,7 @@
 <div class="row">
   	<div class="col-md-12">
     <!-- BOX -->
-    <form role="form">
+    <form role="form" id="deliverForm" name="deliverForm" method="POST" action="#" >
     <div class="box border blue">
 		      <div class="box-title">
 			        <h4><i class="fa fa-table"></i>发货单</h4>
@@ -21,9 +21,11 @@
 					              <div class="text-left">
 					                <div class="col-sm-3 control-label">
 					                <label>客户名称:$!uservo.customerName</label>
+					                <input type="hidden" name="customerName" value="$!uservo.customerName"/>
 					                </div>
 					                <div class="col-sm-3 control-label">
 					                <label>发货单号:$!deliveryNo</label>
+					                <input type="hidden" name="deliveryNo" value="$!deliveryNo"/>
 					                </div>
 					                <div class="col-sm-3 control-label">
 					                <label>日期:$!today</label>
@@ -38,7 +40,7 @@
 						                <th style="width: 6%;">序号</th>
 						                <th style="width: 12%;">条码</th>
 						                <th style="width: 12%;">货品名</th>
-						                <th style="width: 8%;">品种</th>
+						                <th style="width: 8%;">类别</th>
 						                <th style="width: 8%;">颜色</th>
 						                <th style="width: 8%;">数量</th>
 						                <th style="width: 8%;">单位</th>
@@ -50,28 +52,29 @@
 						            </thead>
 						            <tbody role="alert" aria-live="polite" aria-relevant="all">
 						              <tr class="gradeA odd" id="1">
-						                <td style="vertical-align: middle;" id="seq1" name="seq1">1</td>
-						                <td style="vertical-align: middle;" id="barCode1" name="barCode1" ></td>
-						                <td style="vertical-align: middle;"><input type="text" class="form-control" name="productName1" id="productName1" required></td>
+						                <td style="vertical-align: middle;" id="seq1" name="seq">1</td>
+						                <td style="vertical-align: middle;" id="barCode1" name="barCode" ></td><input type="hidden" name="barCodeInput" id="barCodeInput1" />
+						                <td style="vertical-align: middle;"><input type="text" class="form-control" name="productName" id="productName1" required></td>
 						                <td style="vertical-align: middle;">
-							                <select class="form-control" name="category1" id="category1" >
+							                <select class="form-control" name="category" id="category1" onchange="showFirstLetter(this);" required >
+							                	<option value="">选择类别</option>
 								                #foreach($category in $categorys)
-													<option value="$!category.name" id="$!category.id" title="$!category.name" >$!category.name</option>
+													<option value="$!category.id" id="$!category.id" title="$!category.name" >$!category.name</option>
 												#end
 											</select>
 						                </td>
-						                <td style="vertical-align: middle;"><input type="text" class="form-control" name="color1" id="color1" ></td>
-						                <td style="vertical-align: middle;"><input type="text" class="form-control" name="number1" id="number1"  required></td>
+						                <td style="vertical-align: middle;"><input type="text" class="form-control" name="color" id="color1" ></td>
+						                <td style="vertical-align: middle;"><input type="number" class="form-control" name="number" id="number1" onchange="totalNumber();" min="0" required></td>
 						                <td style="vertical-align: middle;">
-						                  	<select class="form-control" id="quantity1" name="quantity1">
+						                  	<select class="form-control" id="quantity1" name="quantity">
 								                #foreach($quantity in $quantitys)
-													<option value="$!quantity.name" id="$!quantity.id" title="$!quantity.name" >$!quantity.name</option>
+													<option value="$!quantity.id" id="$!quantity.id" title="$!quantity.name" >$!quantity.name</option>
 												#end
 											</select>
 										</td>
-						                <td style="vertical-align: middle;"><input type="text" class="form-control" name="volume1" id="volume1"></td>
-						                <td style="vertical-align: middle;"><input type="text" class="form-control" name="weight1" id="weight1"></td>
-						                <td style="vertical-align: middle;"><input type="text" class="form-control" name="note1" id="note1"></td>
+						                <td style="vertical-align: middle;"><input type="number" class="form-control" name="volume" id="volume1" min="0" step="0.01" onchange="totalVolume();" ></td>
+						                <td style="vertical-align: middle;"><input type="number" class="form-control" name="weight" id="weight1" min="0" step="0.01" onchange="totalWeight();" ></td>
+						                <td style="vertical-align: middle;"><input type="text" class="form-control" name="note" id="note1"></td>
 						                <td style="vertical-align: middle;"><button class="btn btn-danger" id="deleteTRBtn1" type="button" onclick="deleteTD(this);" ><i class="fa fa-trash-o"></i> 删除</button>
 						                </td>
 						              </tr>
@@ -88,15 +91,15 @@
 										              <div class="form-group">
 										                    <label class="col-sm-5 control-label">物流公司:</label>
 										                    <div class="col-sm-9">
-										                    		<select id="logisticsCompanyName" name="logisticsCompanyName" class="form-control input-sm">
-																	   <option>选择物流公司</option>
-																	   <option>佳吉物流</option>
-																	   <option>德邦物流</option>
-																	   <option>天地华宇</option>
-																	   <option>其他</option>
+										                    		<select id="logisticsCompanyName" name="logisticsCompanyName" class="form-control input-sm" required>
+																	   <option value="">选择物流公司</option>
+																	   <option value="佳吉物流">佳吉物流</option>
+																	   <option value="德邦物流">德邦物流</option>
+																	   <option value="天地华宇">天地华宇</option>
+																	   <option value="其他">其他</option>
 																	</select>
 																	<div class="divide-10"></div>
-											                    	<input type="text" class="form-control input-sm" id="logisticsCompanyNameText" name="logisticsCompanyNameText" placeholder="请输入物流公司名称" required>
+											                    	<input type="text" class="form-control input-sm" id="logisticsCompanyNameText" name="logisticsCompanyNameText" placeholder="请输入物流公司名称" >
 										                    </div>
 											           </div>
 													   <div class="divide-10"></div>
@@ -109,7 +112,7 @@
 											           <div class="form-group">
 										                   <label class="col-sm-5 control-label">预计日期:</label>
 										                   <div class="col-sm-9">
-																<input class="form-control input-sm datepicker" type="text" name="regular" required>
+																<input class="form-control input-sm datepicker" type="text" name="logisticsDate" required>
 										                   </div>
 											           </div>		
 										                 
@@ -121,11 +124,19 @@
   								  <div class="row">
 						            <div class="col-sm-12">
 						              <div class="pull-left">
-						                <div class="dataTables_info" id="datatable1_info"><h4><b>总体积:19 总重量:10 总数量:20</b></h4></div></div>
+						                <div class="dataTables_info" id="datatable1_info" style="display:inline">
+						                	<h4>
+						                		<label class="control-label">总体积:<span id="totalVolume">0</span> 立方</label>
+						                		<label class="control-label">总重量:<span id="totalWeight">0</span></label>
+												<label class="control-label">总数量:<span id="totalNumber">0</span></label>
+											</h4>
+						                </div>
+						              </div>
 						              <div class="pull-right">
 						                <button type="button" class="btn btn-primary" id="addTR">
 						                  <i class="fa fa-plus"> 增加</i></button>
-						                <button type="button" class="btn btn-success">
+						                <input type="hidden" name="$_csrf.parameterName" value="$_csrf.token"/>
+						                <button type="submit" class="btn btn-success" id="deliverySubbtn">
 						                  <i class="fa fa-floppy-o"> 保存</i></button>
 						              </div>
 						              <div class="clearfix"></div>
@@ -166,51 +177,129 @@
 				trLen++;
 				
     			str = "<tr class='gradeA odd' id='"+tr_id+"'>" +
-    			"<td style='vertical-align: middle;' id='seq"+tr_id+"' name='seq"+tr_id+"'>"+trLen+"</td>" +
-    			"<td style='vertical-align: middle;' id='barCode"+tr_id+"' name='barCode"+tr_id+"'></td>" +
-    			"<td style='vertical-align: middle;'><input type='text' class='form-control' name='productName"+tr_id+"' id='productName"+tr_id+"' required></td>" +
+    			"<td style='vertical-align: middle;' id='seq"+tr_id+"' name='seq'>"+trLen+"</td>" +
+    			"<td style='vertical-align: middle;' id='barCode"+tr_id+"' name='barCode'></td><input type='hidden' name='barCodeInput' id='barCodeInput"+tr_id+"' />" +
+    			"<td style='vertical-align: middle;'><input type='text' class='form-control' name='productName' id='productName"+tr_id+"' required></td>" +
     			"<td style='vertical-align: middle;'>" +
-				    "<select class='form-control' name='category"+tr_id+"' id='category"+tr_id+"' >" +
+				    "<select class='form-control' name='category' id='category"+tr_id+"' onchange='showFirstLetter(this);' required >" +
+				            "<option value=''>选择类别</option>" +
 							#foreach($category in $categorys)
-							"<option value='$!category.name' id='$!category.id' title='$!category.name' >$!category.name</option>" +
+							"<option value='$!category.id' id='$!category.id' title='$!category.name' >$!category.name</option>" +
 							#end
 					"</select>" +
 				"</td>" +
-    			"<td style='vertical-align: middle;'><input type='text' class='form-control' name='color"+tr_id+"' id='color"+tr_id+"' ></td>" +
-    			"<td style='vertical-align: middle;'><input type='text' class='form-control' name='number"+tr_id+"' id='number"+tr_id+"' required></td>" +
+    			"<td style='vertical-align: middle;'><input type='text' class='form-control' name='color' id='color"+tr_id+"' ></td>" +
+    			"<td style='vertical-align: middle;'><input type='number' class='form-control' name='number' id='number"+tr_id+"' min='0' onchange='totalNumber();' required></td>" +
     			"<td style='vertical-align: middle;'>" +
-				    "<select class='form-control' id='quantity"+tr_id+"' name='quantity"+tr_id+"'>" +
+				    "<select class='form-control' id='quantity"+tr_id+"' name='quantity'>" +
 						    #foreach($quantity in $quantitys)
-							"<option value='$!quantity.name' id='$!quantity.id' title='$!quantity.name' >$!quantity.name</option>" +
+							"<option value='$!quantity.id' id='$!quantity.id' title='$!quantity.name' >$!quantity.name</option>" +
 							#end
 					"</select>" +
 				"</td>" +
-				"<td style='vertical-align: middle;'><input type='text' class='form-control' name='volume"+tr_id+"' id='volume"+tr_id+"'></td>" + 
-				"<td style='vertical-align: middle;'><input type='text' class='form-control' name='weight"+tr_id+"' id='weight"+tr_id+"'></td>" +
-				"<td style='vertical-align: middle;'><input type='text' class='form-control' name='note"+tr_id+"' id='note"+tr_id+"'></td>" +
+				"<td style='vertical-align: middle;'><input type='number' class='form-control' name='volume' id='volume"+tr_id+"' min='0' step='0.01' onchange='totalVolume();' ></td>" + 
+				"<td style='vertical-align: middle;'><input type='number' class='form-control' name='weight' id='weight"+tr_id+"'min='0' step='0.01' onchange='totalWeight();' ></td>" +
+				"<td style='vertical-align: middle;'><input type='text' class='form-control' name='note' id='note"+tr_id+"'></td>" +
 				"<td style='vertical-align: middle;'><button class='btn btn-danger' id='deleteTRBtn"+tr_id+"' type='button' onclick='deleteTD(this);' ><i class='fa fa-trash-o'></i> 删除</button>" +
     			
     			"</tr>";
-				$("#deliverFormTable tbody").append(str);  
+				$("#deliverFormTable tbody").append(str);
+				
 			});
-			
-			
 			
 			$("#logisticsCompanyNameText").hide();
 			$('#logisticsCompanyName').change(function(){ 
 				if($(this).children('option:selected').val() == '其他'){
 					$("#logisticsCompanyNameText").show();
+					$('#logisticsCompanyNameText').prop('required',true);
 				}else{
 					$("#logisticsCompanyNameText").hide();
+					$('#logisticsCompanyNameText').prop('required',false);
 				}
 				
-			}); 
+			});
 			
 			
-			
-			
+			$('#deliverForm').submit(function(e) {
+				var valid = $("#deliverForm")[0].checkValidity();
+				if(valid){
+				    e.preventDefault();
+					$.post("submitDelivery.htm",$("#deliverForm").serialize(), function(data) {
+					 	$("#sub_content").html(data);
+					});
+				}
+			});
 			
 		});
+		
+		function showFirstLetter(select){
+		    var simplified = $(select).children('option:selected').text();
+		    if(simplified == '选择类别'){
+		     	return;
+		    }
+		    
+		    var csrf_token = $('meta[name="_csrf_token"]').attr('content');
+		    var tr_id = $(select).parent().parent().attr("id");
+		    $.ajaxSetup({
+			    headers: { "X-CSRF-TOKEN" : csrf_token },
+			});
+			
+			var data = {
+	           simplified: simplified
+	        };
+			
+			$.ajax({
+			  type: "POST",
+              url: "showBarcodeAcronym",
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+			  data: JSON.stringify(data),
+			  success: function (data) {
+                 $("#barCode"+tr_id).html(data.acronym);
+                 $("#barCodeInput"+tr_id).val(data.acronym);
+              },
+              error: function (err) {
+                 
+              }
+			});
+		    
+		};
+		
+		function totalNumber(){
+			var sum=0; 
+		    $("input[id^='number']").each(function(){
+		       var value = $(this).val();
+		       if($.isNumeric(value) == false){
+		       		value = 0;
+		       }
+		       sum+=parseInt(value);
+		    }); 
+		    $("#totalNumber").html(sum); 
+		}
+		
+		function totalVolume(){
+			var sum=0; 
+		    $("input[id^='volume']").each(function(){
+		       var value = $(this).val();
+		       if($.isNumeric(value) == false){
+		       		value = 0;
+		       }
+		       sum+=parseFloat(value);
+		    }); 
+		    $("#totalVolume").html(parseFloat(sum).toFixed(2)); 
+		}
+		
+		function totalWeight(){
+			var sum=0; 
+		    $("input[id^='weight']").each(function(){
+		       var value = $(this).val();
+		       if($.isNumeric(value) == false){
+		       		value = 0;
+		       }
+		       sum+=parseFloat(value);
+		    }); 
+		    $("#totalWeight").html(parseFloat(sum).toFixed(2)); 
+		}
 		
 		function deleteTD(tdobj) {
 			var tr = $(tdobj).parent().parent();  
@@ -219,5 +308,5 @@
     		for (i = 0; i < length; i++) {
     			$("#deliverFormTable>tbody>tr ").eq(i).children("td").eq(0).html(i+1);
             }
-		}
+		};
 	</script>

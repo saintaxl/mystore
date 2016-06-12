@@ -5,7 +5,9 @@
 
 	<context:component-scan base-package="com.mycloud.store" use-default-filters="false">
 		<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation" />
+		<context:include-filter expression="org.springframework.web.bind.annotation.RestController" type="annotation" />
 	</context:component-scan>
+	
 	<mvc:default-servlet-handler />
 
 	<mvc:annotation-driven>
@@ -19,7 +21,7 @@
 		<constructor-arg index="0" name="defaultCharset" value="UTF-8"></constructor-arg>
 		<property name="supportedMediaTypes">
 			<list>
-				<value>text/plain;charset=UTF-8</value>
+				<value>text/html;charset=UTF-8</value>
 			</list>
 		</property>
 	</bean>

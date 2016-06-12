@@ -25,10 +25,20 @@ public class UserInfo implements Serializable{
 	
 	private String customerNo; 
 	
+	private String customerAcronym;
+	
 	private Set<RoleInfo> roleinfo;
 	
 	private Date logonTime;
 	
+	public String getCustomerAcronym() {
+		return customerAcronym;
+	}
+
+	public void setCustomerAcronym(String customerAcronym) {
+		this.customerAcronym = customerAcronym;
+	}
+
 	public String getCustomerNo() {
 		return customerNo;
 	}
