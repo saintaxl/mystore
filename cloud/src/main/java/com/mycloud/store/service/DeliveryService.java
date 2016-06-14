@@ -44,15 +44,15 @@ public class DeliveryService {
 		Logistics logistics = logisticsService.addLogistics(arrivalDate, companyName, logisticsNo);
 		
 		for (int i = 0; i < productName.size(); i++) {
-			String barCodeStr = CollectionUtils.isNotEmpty(barCode) ? barCode.get(i) : "" ;
+			String barCodeStr = CollectionUtils.isNotEmpty(barCode) && barCode.get(i)!=null ? barCode.get(i) : "" ;
 			Integer categoryId = category.get(i);
 			Integer quantityId = quantity.get(i);
-			String colorStr = CollectionUtils.isNotEmpty(color) ? color.get(i) : "" ;
-			String noteStr = CollectionUtils.isNotEmpty(note) ? note.get(i) : "" ;
-			Integer numberParm = CollectionUtils.isNotEmpty(number) ? number.get(i) : 0;
-			String productNameStr = CollectionUtils.isNotEmpty(productName) ? productName.get(i) : "" ;
-			Double volumeParm = CollectionUtils.isNotEmpty(volume) ? volume.get(i) : 0;
-			Double weightParm = CollectionUtils.isNotEmpty(weight) ? weight.get(i) : 0;
+			String colorStr = CollectionUtils.isNotEmpty(color) && color.get(i)!=null ? color.get(i) : "" ;
+			String noteStr = CollectionUtils.isNotEmpty(note) && note.get(i)!=null ? note.get(i) : "" ;
+			Integer numberParm = CollectionUtils.isNotEmpty(number) && number.get(i)!=null ? number.get(i) : 0;
+			String productNameStr = CollectionUtils.isNotEmpty(productName) && productName.get(i)!=null ? productName.get(i) : "" ;
+			Double volumeParm = CollectionUtils.isNotEmpty(volume) && volume.get(i)!=null ? volume.get(i) : 0;
+			Double weightParm = CollectionUtils.isNotEmpty(weight) && weight.get(i)!=null ? weight.get(i) : 0;
 			addDelivery(barCodeStr, categoryId, quantityId, colorStr, customer, deliveryNo, noteStr, numberParm, productNameStr, volumeParm, weightParm, logistics);
         }
 		

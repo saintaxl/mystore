@@ -12,7 +12,7 @@
 				$errorMessage.message
     		 #end 
 			 <br />
-			   请检查输入是否有误, 返回<a href="${rc.contextPath}/dashboard.htm">仪表盘</a>.
+			   请检查输入是否有误, 返回<a href="${rc.contextPath}/homepage.htm" target="_parent">首页</a>.
 		  </p>
 		  <form action="#">
 			 <div class="input-group">

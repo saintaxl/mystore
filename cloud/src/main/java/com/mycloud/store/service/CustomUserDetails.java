@@ -25,12 +25,17 @@ import com.mycloud.entity.User;
 public class CustomUserDetails extends User implements UserDetails {
 
 	private static final long serialVersionUID = 5032413811106994728L;
+	
+	private String username;
+	
+	private String showUserName;
 
 	public CustomUserDetails(User user) {
 		if(user != null){
 			this.setId(user.getId());
 			this.setCustomer(user.getCustomer());
-			this.setUsername(user.getUsername());
+			this.setUsername(user.getEmail());
+			this.setShowUserName(user.getUsername());
 			this.setEmail(user.getEmail());
 			this.setPassword(user.getPassword());
 			this.setRoles(user.getRoles());
@@ -68,6 +73,25 @@ public class CustomUserDetails extends User implements UserDetails {
 		authorities.add(new SimpleGrantedAuthority(role.getRole()));
 		return authorities;
 	}
+	
+
+	public String getShowUserName() {
+		return showUserName;
+	}
+
+	public void setShowUserName(String showUserName) {
+		this.showUserName = showUserName;
+	}
+
+	@Override
+    public void setUsername(String username) {
+	    this.username = username;
+    }
+
+	@Override
+    public String getUsername() {
+	    return this.username;
+    }
 
 	@Override
 	public boolean isAccountNonExpired() {

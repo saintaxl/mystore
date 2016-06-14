@@ -60,7 +60,7 @@ public class HomeController extends BaseController{
                 }
 				userinfo.setRoleinfo(roleinfos);
 				userinfo.setState(userDetails.getState());
-				userinfo.setUsername(userDetails.getUsername());
+				userinfo.setUsername(userDetails.getShowUserName());
 				userinfo.setLogonTime(new Date());
 				request.getSession().setAttribute("uservo", userinfo);
 			}
