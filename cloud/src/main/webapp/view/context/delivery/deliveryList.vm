@@ -1,0 +1,215 @@
+<div class="row">
+    <!-- MESSENGER -->
+    <div class="col-md-12">
+        <div class="box border blue" id="messenger">
+            <div class="box-title">
+                <h4>
+                    <i class="fa fa-search"></i>查询发货单</h4>
+                <div class="tools">
+                    <a href="#box-config" data-toggle="modal" class="config">
+                        <i class="fa fa-cog"></i>
+                    </a>
+                    <a href="javascript:;" class="reload">
+                        <i class="fa fa-refresh"></i>
+                    </a>
+                    <a href="javascript:;" class="collapse">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a href="javascript:;" class="remove">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="box-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">发货单号:</label>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" placeholder="输入发货单号"></div>
+                        </div>
+                        <label class="col-sm-1 control-label">货品名:</label>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm"></div>
+                        </div>
+                        <label class="col-sm-1 control-label">发货单日期:</label>
+                        <div class="col-sm-2">
+	                        <div class="input-group">
+	                                	<input class="form-control input-sm datepicker" type="text" name="from" id="from" placeholder="开始日期">
+	                        </div>
+                        </div>
+                        <label class="col-sm-1 control-label">到:</label>
+                        <div class="col-sm-2">
+	                        <div class="input-group">
+	                                	<input class="form-control input-sm datepicker" type="text" name="to" id="to" placeholder="结束日期">
+	                        </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    	<label class="col-sm-1 control-label">物流公司:</label>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm"></div>
+                        </div>
+                        <label class="col-sm-1 control-label">物流单号:</label>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm"></div>
+                        </div>
+                        <label class="col-sm-1 control-label">类别:</label>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <select class="form-control" name="category" id="category1" onchange="showFirstLetter(this);" required >
+					                #foreach($category in $categorys)
+										<option value="$!category.id" id="$!category.id" title="$!category.name" >$!category.name</option>
+									#end
+								</select>
+							</div>
+                        </div>
+                        <label class="col-sm-1 control-label">条码:</label>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search">查询</i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <!-- BOX -->
+    <div class="box border green">
+      <div class="box-title">
+        <h4>
+          <i class="fa fa-table"></i>Copy, Print, CSV, Excel, PDF</h4>
+        <div class="tools hidden-xs">
+          <a href="#box-config" data-toggle="modal" class="config">
+            <i class="fa fa-cog"></i>
+          </a>
+          <a href="javascript:;" class="reload">
+            <i class="fa fa-refresh"></i>
+          </a>
+          <a href="javascript:;" class="collapse">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a href="javascript:;" class="remove">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="box-body">
+        <div id="datatable_wrapper" class="dataTables_wrapper form-inline" role="grid">
+          <table id="datatable" cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered table-hover dataTable" aria-describedby="datatable_info">
+            <thead>
+              <tr role="row">
+                <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" style="width: 7%;">序号</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 7%;">条码</th>
+                <th class="hidden-xs sorting" role="columnheader" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 7%;">发货单号</th>
+                <th class="hidden-xs sorting" role="columnheader" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 7%;">货品名</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 7%;">类别</th>
+                <th class="hidden-xs sorting" role="columnheader" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 7%;">颜色</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 7%;">数量</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 7%;">单位</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 7%;">体积</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 7%;">重量</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 7%;">物流公司</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 7%;">物流单号</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 7%;">预计日期</th>
+              </tr>
+            </thead>
+            <tbody role="alert" aria-live="polite" aria-relevant="all">
+              <tr class="gradeA odd">
+                <td class="">Gecko</td>
+                <td class="">Firefox 1.0</td>
+                <td class="">Win 98+ / OSX.2+</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">A</td>
+              </tr>
+              <tr class="gradeA even">
+                <td class="">Gecko</td>
+                <td class="">Firefox 1.0</td>
+                <td class="">Win 98+ / OSX.2+</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">1.7</td>
+                <td class="">A</td>
+              </tr>
+            </tbody>
+          </table>
+          
+        </div>
+      </div>
+    </div>
+    <!-- /BOX --></div>
+</div>
+
+
+<script>
+jQuery(document).ready(function() {
+	$("#from").datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 2,
+      onClose: function( selectedDate ) {
+        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+      }
+    });
+    
+    $("#to").datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 2,
+      onClose: function( selectedDate ) {
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+    
+    
+	$('#datatable').dataTable({
+		"sPaginationType": "bs_full",
+		sDom: "<'row'<'dataTables_header clearfix'<'col-md-4'l><'col-md-8'Tf>r>>t<'row'<'dataTables_footer clearfix'<'col-md-6'i><'col-md-6'p>>>",
+        oTableTools: {
+            aButtons: ["copy", "print", "xls", "pdf"],
+            sSwfPath: "resources/js/datatables/extras/TableTools/media/swf/copy_csv_xls_pdf.swf"
+        }
+	});
+	
+	$('.datatable').each(function(){
+		var datatable = $(this);
+		// SEARCH - Add the placeholder for Search and Turn this into in-line form control
+		var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+		search_input.attr('placeholder', 'Search');
+		search_input.addClass('form-control input-sm');
+		// LENGTH - Inline-Form control
+		var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+		length_sel.addClass('form-control input-sm');
+	});
+    
+});
+
+</script>
+

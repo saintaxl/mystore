@@ -13,8 +13,9 @@ var sidebar = function () {
 		});
 	});
 	
-	$('#secondmenu').click(function() {
-		$.get("try.htm", function(data) {
+	$('#searchDelibery').click(function() {
+		$.get("searchDelivery.htm", function(data) {
+			setPageheader('发货单管理','查询发货单','查询发货单','发货单查询');
 			$("#sub_content").html(data);
 		});
 	});

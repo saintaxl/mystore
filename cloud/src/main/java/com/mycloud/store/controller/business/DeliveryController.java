@@ -94,7 +94,9 @@ public class DeliveryController extends BaseController{
 	
 	@RequestMapping("/searchDelivery.htm")
 	public String searchDelivery(Model model) {
-		model.addAttribute("rants", "hello,world");
+		List<Category> categorys = categoryRepository.findAll();
+		model.addAttribute("categorys", categorys);
+		
 		return "/context/delivery/deliveryList";
 	}
 

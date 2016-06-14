@@ -28,6 +28,11 @@
 	<link rel="stylesheet" type="text/css" href="resources/js/jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" />
 	<!-- DATE RANGE PICKER -->
 	<link rel="stylesheet" type="text/css" href="resources/js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+	
+	<!-- DATA TABLES -->
+	<link rel="stylesheet" type="text/css" href="resources/js/datatables/media/css/jquery.dataTables.min.css" />
+	<link rel="stylesheet" type="text/css" href="resources/js/datatables/media/assets/css/datatables.min.css" />
+	<link rel="stylesheet" type="text/css" href="resources/js/datatables/extras/TableTools/media/css/TableTools.min.css" />
 </head>
 <body>
 
@@ -98,6 +103,13 @@
 	<script type="text/javascript" src="resources/js/gritter/js/jquery.gritter.min.js"></script>
 	<script type="text/javascript" src="resources/js/sidebar.js"></script>
 	<script type="text/javascript" src="resources/js/header.js"></script>
+	
+	<!-- DATA TABLES -->
+	<script type="text/javascript" src="resources/js/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="resources/js/datatables/media/assets/js/datatables.min.js"></script>
+	<script type="text/javascript" src="resources/js/datatables/extras/TableTools/media/js/TableTools.min.js"></script>
+	<script type="text/javascript" src="resources/js/datatables/extras/TableTools/media/js/ZeroClipboard.min.js"></script>
+	
 	<!-- CUSTOM SCRIPT -->
 	<script src="resources/js/script.js"></script>
 	<script>
