@@ -1,15 +1,21 @@
 package com.mycloud.store.service;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mycloud.entity.Customer;
 import com.mycloud.entity.Role;
 import com.mycloud.entity.User;
+import com.mycloud.entity.UserValidate;
 import com.mycloud.enums.RoleEnum;
+import com.mycloud.enums.State;
 import com.mycloud.exception.BusinessException;
 import com.mycloud.repository.RolesRepository;
 import com.mycloud.repository.UserRepository;
@@ -25,8 +31,36 @@ public class UserService {
 	@Autowired
 	private RolesRepository rolesRepository;
 	
+	@Autowired
+	private CustomerService customerService;
 	
-	public void registerUser(User user){
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	public User registerUserAndCustomer(String customername,String email,String mobile,String password, String username,String validataCode){
+		User user = new User();
+		user.setEmail(email);
+		user.setMobile(mobile);
+		
+		String hashedPassword = passwordEncoder.encode(password);
+		
+		user.setUsername(username);
+		Customer customer = customerService.addCustomer(customername);
+		user.setCustomer(customer);
+		user.setPassword(hashedPassword);
+		user.setState(State.INACTIVE.getState());
+		Date after30 = DateUtils.addMinutes(new Date(), 30);
+		UserValidate validate = new UserValidate();
+		validate.setRegisterDate(after30);
+		validate.setValidataCode(validataCode);
+		validate.setUser(user);
+		user.setValidate(validate);
+	    this.registerUser(user);
+	    return user;
+	}
+	
+	
+	private void registerUser(User user){
 		User existing = findUserByEmail(user.getEmail());
 		if(existing!=null){
 			throw new BusinessException(ErrorCode.ACCOUNT_EMAIL_EXISTING, user.getEmail());

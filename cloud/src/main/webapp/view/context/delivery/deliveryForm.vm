@@ -155,16 +155,7 @@
 <!-- /PAGE MAIN CONTENT -->
 <script>
 		jQuery(document).ready(function() {
-			$(".datepicker").datepicker();
-			$('.colorpicker').colorpicker();
-			$(".inlinepicker").datepicker({
-				inline: true,
-				showOtherMonths: true
-			});
-			$(".datepicker-fullscreen").pickadate();
-			$(".timepicker-fullscreen").pickatime();
-			//Color picker
-			$('.colorpicker').colorpicker();
+			$(".datepicker").datepicker({dateFormat:"yy-mm-dd",minDate: new Date()});
 			
 			$('#addTR').click(function() {
 				var tr_id = $("#deliverFormTable>tbody>tr:last").attr("id");
@@ -224,8 +215,27 @@
 				var valid = $("#deliverForm")[0].checkValidity();
 				if(valid){
 				    e.preventDefault();
-					$.post("submitDelivery.htm",$("#deliverForm").serialize(), function(data) {
-					 	$("#sub_content").html(data);
+				    bootbox.dialog({
+						message: "是否保存发货单并确认所有信息输入正确?",
+						title: "保存发货单",
+						buttons: {
+							success: {
+								label: "保存",
+								className: "btn btn-primary",
+								callback: function() {
+									$.post("submitDelivery.htm",$("#deliverForm").serialize(), function(data) {
+									 	$("#sub_content").html(data);
+									});
+								}
+							},
+							cancel: {
+								label: "取消",
+								className: "btn btn-default",
+								callback: function() {
+								
+								}
+							}
+						}
 					});
 				}
 			});

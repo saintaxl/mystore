@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mycloud.entity.Customer;
 import com.mycloud.entity.Role;
 import com.mycloud.entity.User;
 import com.mycloud.entity.UserValidate;
@@ -35,7 +34,6 @@ import com.mycloud.exception.BusinessException;
 import com.mycloud.store.controller.BaseController;
 import com.mycloud.store.exception.ErrorCode;
 import com.mycloud.store.service.CustomUserDetails;
-import com.mycloud.store.service.CustomerService;
 import com.mycloud.store.service.EmailService;
 import com.mycloud.store.service.UserService;
 
@@ -50,9 +48,6 @@ public class RegisterController extends BaseController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private CustomerService customerService;
-
 	
 	@Autowired
 	private EmailService emailService;
@@ -65,33 +60,17 @@ public class RegisterController extends BaseController {
 	        @RequestParam(value = "logonname", required = true) String username, @RequestParam(value = "email", required = true) String email,
 	        @RequestParam(value = "mobile", required = true) String mobile, @RequestParam(value = "newpassword", required = true) String password,Model model) {
 		
-		User user = new User();
-		user.setEmail(email);
-		user.setMobile(mobile);
-		
-		String hashedPassword = passwordEncoder.encode(password);
-		
-		user.setUsername(username);
-		Customer customer = customerService.addCustomer(customername);
-		user.setCustomer(customer);
-		user.setPassword(hashedPassword);
-		user.setState(State.INACTIVE.getState());
 		String validataCode = UUID.randomUUID().toString();
-		Date after30 = DateUtils.addMinutes(new Date(), 30);
-		UserValidate validate = new UserValidate();
-		validate.setRegisterDate(after30);
-		validate.setValidataCode(validataCode);
-		validate.setUser(user);
-		user.setValidate(validate);
+
+		User user = null;
 		try {
-			userService.registerUser(user);
+			user = userService.registerUserAndCustomer(customername, email, mobile, password, username, validataCode);
 		} catch (Exception e) {
 			response.setHeader("errorPage", "logon");
 			response.setHeader("fromPage", "register");
 			throw e;
 		}
-		
-		
+
 		SimpleDateFormat dateformat=new SimpleDateFormat("yyyyMMddHHmm");
 		String formatdate = dateformat.format(user.getValidate().getRegisterDate());
 		
