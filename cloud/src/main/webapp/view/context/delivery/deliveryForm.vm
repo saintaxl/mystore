@@ -53,7 +53,7 @@
 						            <tbody role="alert" aria-live="polite" aria-relevant="all">
 						              <tr class="gradeA odd" id="1">
 						                <td style="vertical-align: middle;" id="seq1" name="seq">1</td>
-						                <td style="vertical-align: middle;" id="barCode1" name="barCode" ></td><input type="hidden" name="barCodeInput" id="barCodeInput1" />
+						                <td style="vertical-align: middle;" id="barCode1" name="barCode1" ></td><input type="hidden" name="barCode" id="barCodeInput1" />
 						                <td style="vertical-align: middle;"><input type="text" class="form-control" name="productName" id="productName1" required></td>
 						                <td style="vertical-align: middle;">
 							                <select class="form-control" name="category" id="category1" onchange="showFirstLetter(this);" required >
@@ -169,7 +169,7 @@
 				
     			str = "<tr class='gradeA odd' id='"+tr_id+"'>" +
     			"<td style='vertical-align: middle;' id='seq"+tr_id+"' name='seq'>"+trLen+"</td>" +
-    			"<td style='vertical-align: middle;' id='barCode"+tr_id+"' name='barCode'></td><input type='hidden' name='barCodeInput' id='barCodeInput"+tr_id+"' />" +
+    			"<td style='vertical-align: middle;' id='barCode"+tr_id+"' name='barCode"+tr_id+"'></td><input type='hidden' name='barCode' id='barCodeInput"+tr_id+"' />" +
     			"<td style='vertical-align: middle;'><input type='text' class='form-control' name='productName' id='productName"+tr_id+"' required></td>" +
     			"<td style='vertical-align: middle;'>" +
 				    "<select class='form-control' name='category' id='category"+tr_id+"' onchange='showFirstLetter(this);' required >" +
@@ -268,8 +268,8 @@
                  $("#barCode"+tr_id).html(data.acronym);
                  $("#barCodeInput"+tr_id).val(data.acronym);
               },
-              error: function (err) {
-                 
+              error: function (e) {
+                 console.log(e.message);
               }
 			});
 		    

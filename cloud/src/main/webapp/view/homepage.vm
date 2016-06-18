@@ -105,7 +105,7 @@
 	<script type="text/javascript" src="resources/js/header.js"></script>
 	
 	<!-- DATA TABLES -->
-	<script type="text/javascript" src="resources/js/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="resources/js/datatables/media/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="resources/js/datatables/media/assets/js/datatables.min.js"></script>
 	<script type="text/javascript" src="resources/js/datatables/extras/TableTools/media/js/TableTools.min.js"></script>
 	<script type="text/javascript" src="resources/js/datatables/extras/TableTools/media/js/ZeroClipboard.min.js"></script>
