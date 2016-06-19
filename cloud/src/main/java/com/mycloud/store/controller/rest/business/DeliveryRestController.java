@@ -7,7 +7,6 @@ import java.util.List;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mycloud.entity.Delivery;
@@ -56,16 +56,16 @@ public class DeliveryRestController extends BaseController {
 
 	@RequestMapping(value = "/showDeliveryList",  method = { RequestMethod.POST })
 	public JQueryDatatablesPage<DeliveryView> showDeliveryList(@ModelAttribute DeliveryListForm deliveryListForm,
-	        @PageableDefault(value = 15, sort = { "id" }, direction = Direction.DESC) Pageable pageable, Model model) {
+	        @PageableDefault(value = 10, sort = { "id" }, direction = Direction.DESC) Pageable pageable,@RequestParam Integer echo, Model model) {
 
 		Page<Delivery> page = deliveryService.searchDelivery(deliveryListForm, pageable);
 
-		JQueryDatatablesPage<DeliveryView> pageview = transform2View(page);
+		JQueryDatatablesPage<DeliveryView> pageview = transform2View(page,echo);
 
 		return pageview;
 	}
 
-	private JQueryDatatablesPage<DeliveryView> transform2View(Page<Delivery> page) {
+	private JQueryDatatablesPage<DeliveryView> transform2View(Page<Delivery> page,Integer echo) {
 		List<Delivery> content = page.getContent();
 		
 		List<DeliveryView> deliveryView = new ArrayList<DeliveryView>();
@@ -92,11 +92,11 @@ public class DeliveryRestController extends BaseController {
 			deliveryView.add(view);
         }
 		
-		JQueryDatatablesPage page_ = new JQueryDatatablesPage();
+		JQueryDatatablesPage<DeliveryView> page_ = new JQueryDatatablesPage<DeliveryView>();
 		page_.setAaData(deliveryView);
-		page_.setiTotalDisplayRecords(page.getSize());
+		page_.setiTotalDisplayRecords(page.getTotalElements());
 		page_.setiTotalRecords(page.getTotalElements());
-		page_.setsEcho("1");
+		page_.setsEcho(echo);
 	    return page_;
     }
 

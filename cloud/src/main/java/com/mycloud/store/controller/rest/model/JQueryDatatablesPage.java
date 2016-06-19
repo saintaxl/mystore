@@ -18,9 +18,9 @@ public class JQueryDatatablesPage<T> implements Serializable{
     
     private Long iTotalRecords;
     
-    private int iTotalDisplayRecords;
+    private Long iTotalDisplayRecords;
     
-    private String sEcho;
+    private Integer sEcho;
     
     private List<T> aaData;
 
@@ -32,19 +32,19 @@ public class JQueryDatatablesPage<T> implements Serializable{
 		this.iTotalRecords = iTotalRecords;
 	}
 
-	public int getiTotalDisplayRecords() {
+	public Long getiTotalDisplayRecords() {
 		return iTotalDisplayRecords;
 	}
 
-	public void setiTotalDisplayRecords(int iTotalDisplayRecords) {
+	public void setiTotalDisplayRecords(Long iTotalDisplayRecords) {
 		this.iTotalDisplayRecords = iTotalDisplayRecords;
 	}
 
-	public String getsEcho() {
+	public Integer getsEcho() {
 		return sEcho;
 	}
 
-	public void setsEcho(String sEcho) {
+	public void setsEcho(Integer sEcho) {
 		this.sEcho = sEcho;
 	}
 

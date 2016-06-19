@@ -163,20 +163,37 @@ jQuery(document).ready(function() {
     
     
 	$('#datatable').dataTable({
-	    bProcessing: true,
+	    bProcessing: false,
 	    bServerSide: true,
-	    iDisplayLength: 10,
-	    iDisplayStart: 0,
+	    bPaginate: true,
+	    bSortClasses: false,
 		sPaginationType: "bs_full",
 		sDom: "<'row'<'dataTables_header clearfix'<'col-md-4'l><'col-md-8'Tf>r>>t<'row'<'dataTables_footer clearfix'<'col-md-6'i><'col-md-6'p>>>",
-        paging: false,
         oTableTools: {
             aButtons: ["copy", "print", "xls", "pdf"],
             sSwfPath: "resources/js/datatables/extras/TableTools/media/swf/copy_csv_xls_pdf.swf"
         },
         sAjaxSource: "showDeliveryList",
         fnServerData: function ( sSource, aoData, fnCallback, oSettings ) {
-            alert("data in fnServerData : "+ aoData);
+			var sData = $("#deliverSearchForm").serializeArray();
+			sData.push( { "name": "page", "value": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength) + 1 } );
+			sData.push( { "name": "size", "value": oSettings._iDisplayLength } );
+			sData.push( { "name": "echo", "value": oSettings.iDraw } );
+			if ( oSettings.oFeatures.bSort !== false ){
+				aaSort = ( oSettings.aaSortingFixed !== null ) ?
+					oSettings.aaSortingFixed.concat( oSettings.aaSorting ) :
+					oSettings.aaSorting.slice();
+				
+				for ( i=0 ; i<aaSort.length ; i++ )	{
+					aDataSort = oSettings.aoColumns[ aaSort[i][0] ].aDataSort;
+					mDataProp = oSettings.aoColumns[ aaSort[i][0] ].mData;
+					
+					for ( j=0 ; j<aDataSort.length ; j++ ){
+						sData.push( { "name": "sort",  "value": mDataProp + "," +aaSort[i][1] } );
+					}
+				}
+			}
+			
             oSettings.jqXHR = $.ajax( {
             	  headers: {
 		            'X-CSRF-TOKEN': $('meta[name="_csrf_token"]').attr('content')
@@ -184,7 +201,7 @@ jQuery(document).ready(function() {
                   "dataType": 'json',
                   "type": "POST",
                   "url": sSource,
-                  "data": aoData,
+                  "data": sData,
                   //JSON.stringify(aoData)
                   success : function(response) { 
 	                  fnCallback(response); 
@@ -194,6 +211,7 @@ jQuery(document).ready(function() {
 	              }
             });
         },
+        aaSorting: [[0,'desc']],
         aoColumns: [
 	        		{"mData": "id", "sClass": "center"}, 
 	        		{"mData": "barCode", "sClass": "center"},
@@ -209,7 +227,7 @@ jQuery(document).ready(function() {
 	        		{"mData": "logisticsNo" ,"sClass": "center"},
 	        		{"mData": "arrivalDate" ,"sClass": "center" } 
         		],
-        "oLanguage": {
+        oLanguage: {
                     "sProcessing": "正在加载中......",
                     "sLengthMenu": "每页显示 _MENU_ 条记录",
                     "sZeroRecords": "对不起，查询不到相关数据！",
