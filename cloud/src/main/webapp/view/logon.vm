@@ -63,7 +63,7 @@
 									<label class="checkbox">
 									<input type="checkbox" class="uniform" id="rememberme" name="remember-me">记住我</label>
 									<input type="hidden" name="$_csrf.parameterName" value="$_csrf.token"/>
-									<button type="submit" class="btn btn-danger">登录</button>
+									<button type="submit" class="btn btn-danger fa fa-sign-in fa-lg"> 登录</button>
 								  </div>
 								</form>
 								<!-- SOCIAL LOGIN -->
@@ -124,7 +124,7 @@
 								  </div>
 								  <div class="form-actions">
 								    <input type="hidden" name="$_csrf.parameterName" value="$_csrf.token"/>
-									<button type="submit" class="btn btn-success">注册</button>
+									<button type="submit" class="btn btn-success fa fa-share fa-lg"> 注册</button>
 								  </div>
 								</form>
 								<!-- SOCIAL REGISTER -->
@@ -159,7 +159,7 @@
 								  </div>
 								  <div class="form-actions">
 								    <input type="hidden" name="$_csrf.parameterName" value="$_csrf.token"/>
-									<button type="submit" class="btn btn-info">发送重置密码邮件</button>
+									<button type="submit" class="btn btn-info fa fa-paper-plane fa-lg"> 发送重置密码邮件</button>
 								  </div>
 								</form>
 								<div class="login-helpers">

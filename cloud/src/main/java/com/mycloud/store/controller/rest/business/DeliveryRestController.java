@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mycloud.entity.Customer;
 import com.mycloud.entity.Delivery;
 import com.mycloud.store.controller.BaseController;
 import com.mycloud.store.controller.form.DeliveryListForm;
@@ -54,25 +55,25 @@ public class DeliveryRestController extends BaseController {
 		return resp;
 	}
 
-	@RequestMapping(value = "/showDeliveryList",  method = { RequestMethod.POST })
+	@RequestMapping(value = "/showDeliveryList", method = { RequestMethod.POST })
 	public JQueryDatatablesPage<DeliveryView> showDeliveryList(@ModelAttribute DeliveryListForm deliveryListForm,
-	        @PageableDefault(value = 10, sort = { "id" }, direction = Direction.DESC) Pageable pageable,@RequestParam Integer echo, Model model) {
+	        @PageableDefault(value = 10, sort = { "id" }, direction = Direction.DESC) Pageable pageable, @RequestParam Integer echo, Model model) {
 
-		Page<Delivery> page = deliveryService.searchDelivery(deliveryListForm, pageable);
+		Customer customer = getCustomer();
+		Page<Delivery> page = deliveryService.searchDelivery(deliveryListForm, customer, pageable);
 
-		JQueryDatatablesPage<DeliveryView> pageview = transform2View(page,echo);
-
+		JQueryDatatablesPage<DeliveryView> pageview = transform2View(page, echo);
 		return pageview;
 	}
 
-	private JQueryDatatablesPage<DeliveryView> transform2View(Page<Delivery> page,Integer echo) {
+	private JQueryDatatablesPage<DeliveryView> transform2View(Page<Delivery> page, Integer echo) {
 		List<Delivery> content = page.getContent();
-		
+
 		List<DeliveryView> deliveryView = new ArrayList<DeliveryView>();
 		for (Delivery delivery : content) {
 			DeliveryView view = new DeliveryView();
-			if(delivery.getLogistics()!=null && delivery.getLogistics().getArrivalDate()!=null){
-				SimpleDateFormat dateformat=new SimpleDateFormat("yyyy-MM-dd");
+			if (delivery.getLogistics() != null && delivery.getLogistics().getArrivalDate() != null) {
+				SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
 				String formatdate = dateformat.format(delivery.getLogistics().getArrivalDate());
 				view.setArrivalDate(formatdate);
 			}
@@ -90,14 +91,14 @@ public class DeliveryRestController extends BaseController {
 			view.setVolume(delivery.getVolume());
 			view.setWeight(delivery.getWeight());
 			deliveryView.add(view);
-        }
-		
+		}
+
 		JQueryDatatablesPage<DeliveryView> page_ = new JQueryDatatablesPage<DeliveryView>();
 		page_.setAaData(deliveryView);
 		page_.setiTotalDisplayRecords(page.getTotalElements());
 		page_.setiTotalRecords(page.getTotalElements());
 		page_.setsEcho(echo);
-	    return page_;
-    }
+		return page_;
+	}
 
 }

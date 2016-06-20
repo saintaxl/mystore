@@ -1,6 +1,7 @@
 package com.mycloud.store.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -94,17 +95,37 @@ public class DeliveryService {
 		return delivery;
 	}
 
-	public Page<Delivery> searchDelivery(final DeliveryListForm deliveryListForm, Pageable pageable) {
+	public Page<Delivery> searchDelivery(final DeliveryListForm deliveryListForm,final Customer customer, Pageable pageable) {
 		
 		Specification<Delivery> spec = new Specification<Delivery>() {
 			public Predicate toPredicate(Root<Delivery> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				List<Predicate> list = new ArrayList<Predicate>();
+				list.add(cb.equal(root.get("customer").get("id").as(Integer.class), customer.getId() ));
+				
 				if (StringUtils.isNotEmpty(deliveryListForm.getBarCode())) {
 					list.add(cb.like(root.get("barCode").as(String.class), "%" + deliveryListForm.getBarCode() + "%"));
 				}
-				/*if (name.length() > 0) {
-					list.add(cb.equal(root.get("uuid").as(Integer.class), name));
-				}*/
+				if (StringUtils.isNotEmpty(deliveryListForm.getDeliveryNo())) {
+					list.add(cb.equal(root.get("deliveryNo").as(String.class),  deliveryListForm.getDeliveryNo() ));
+				}
+				if (StringUtils.isNotEmpty(deliveryListForm.getProductName())) {
+					list.add(cb.like(root.get("productName").as(String.class), "%" + deliveryListForm.getProductName() + "%"));
+				}
+				if (StringUtils.isNotEmpty(deliveryListForm.getLogisticsCompanyName())) {
+					list.add(cb.like(root.get("logistics").get("companyName").as(String.class), "%" + deliveryListForm.getLogisticsCompanyName() + "%"));
+				}
+				if (StringUtils.isNotEmpty(deliveryListForm.getLogisticsNo())) {
+					list.add(cb.equal(root.get("logistics").get("logisticsNo").as(String.class),  deliveryListForm.getLogisticsNo() ));
+				}
+				if (deliveryListForm.getFrom()!=null) {
+					list.add(cb.greaterThanOrEqualTo(root.get("logistics").get("arrivalDate").as(Date.class),  deliveryListForm.getFrom() ));
+				}
+				if (deliveryListForm.getTo()!=null) {
+					list.add(cb.lessThanOrEqualTo(root.get("logistics").get("arrivalDate").as(Date.class),  deliveryListForm.getTo() ));
+				}
+				if (deliveryListForm.getCategory()!=null) {
+					list.add(cb.equal(root.get("category").get("id").as(Integer.class), deliveryListForm.getCategory() ));
+				}
 				Predicate[] p = new Predicate[list.size()];
 				return cb.and(list.toArray(p));
 			}

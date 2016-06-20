@@ -31,7 +31,7 @@
                         <label class="col-sm-1 control-label">货品名:</label>
                         <div class="col-sm-2">
                             <div class="input-group">
-                                <input type="text" class="form-control input-sm" id="productName" name="productName" value="$!productName" ></div>
+                                <input type="text" class="form-control input-sm" id="productName" name="productName" value="$!productName" placeholder="输入产品名称" ></div>
                         </div>
                         <label class="col-sm-1 control-label">发货单日期:</label>
                         <div class="col-sm-2">
@@ -50,17 +50,18 @@
                     	<label class="col-sm-1 control-label">物流公司:</label>
                         <div class="col-sm-2">
                             <div class="input-group">
-                                <input type="text" class="form-control input-sm" id="logisticsCompanyName" name="logisticsCompanyName" value="$!logisticsCompanyName"></div>
+                                <input type="text" class="form-control input-sm" id="logisticsCompanyName" name="logisticsCompanyName" value="$!logisticsCompanyName" placeholder="输入物流公司名称"></div>
                         </div>
                         <label class="col-sm-1 control-label">物流单号:</label>
                         <div class="col-sm-2">
                             <div class="input-group">
-                                <input type="text" class="form-control input-sm" id="logisticsNo" name="logisticsNo" value="$!logisticsNo" ></div>
+                                <input type="text" class="form-control input-sm" id="logisticsNo" name="logisticsNo" value="$!logisticsNo" placeholder="输入物流单号" ></div>
                         </div>
                         <label class="col-sm-1 control-label">类别:</label>
                         <div class="col-sm-2">
                             <div class="input-group">
-                                <select class="form-control" name="category" id="category" onchange="showFirstLetter(this);" required >
+                                <select class="form-control" name="category" id="category" >
+                                	<option value="">所有类别</option>
 					                #foreach($category in $categorys)
 										<option value="$!category.id" id="$!category.id" title="$!category.name" #if($!category.defaultSelected) selected #end >$!category.name</option>
 									#end
@@ -70,13 +71,14 @@
                         <label class="col-sm-1 control-label">条码:</label>
                         <div class="col-sm-2">
                             <div class="input-group">
-                                <input type="text" class="form-control input-sm" id="barCode" name="barCode" value="$!barCode" ></div>
+                                <input type="text" class="form-control input-sm" id="barCode" name="barCode" value="$!barCode" placeholder="输入条码" ></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="text-center">
                         	<input type="hidden" name="$_csrf.parameterName" value="$_csrf.token"/>
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-search">查询</i></button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search" > 查询</i></button>
+                            <button type="reset" class="btn btn-default"><i class="fa fa-undo"> 重置</i></button>
                         </div>
                     </div>
                 </form>
@@ -162,11 +164,12 @@ jQuery(document).ready(function() {
     });
     
     
-	$('#datatable').dataTable({
+	var oTable = $('#datatable').dataTable({
 	    bProcessing: false,
 	    bServerSide: true,
 	    bPaginate: true,
 	    bSortClasses: false,
+	    bFilter: false,
 		sPaginationType: "bs_full",
 		sDom: "<'row'<'dataTables_header clearfix'<'col-md-4'l><'col-md-8'Tf>r>>t<'row'<'dataTables_footer clearfix'<'col-md-6'i><'col-md-6'p>>>",
         oTableTools: {
@@ -231,7 +234,7 @@ jQuery(document).ready(function() {
                     "sProcessing": "正在加载中......",
                     "sLengthMenu": "每页显示 _MENU_ 条记录",
                     "sZeroRecords": "对不起，查询不到相关数据！",
-                    "sEmptyTable": "表中无数据存在！",
+                    "sEmptyTable": "没有查询到相关记录！",
                     "sInfo": "当前显示 _START_ 到 _END_ 条，每页共 _TOTAL_ 条记录",
                     "sInfoFiltered": "总记录共 _MAX_ 条记录",
                     "oPaginate": {
@@ -257,9 +260,7 @@ jQuery(document).ready(function() {
 	
 	$('#deliverSearchForm').submit(function(e) {
 		e.preventDefault();
-	    $.post("showDeliveryList.htm",$("#deliverSearchForm").serialize(), function(data) {
-		 	$("#sub_content").html(data);
-		});
+		oTable.fnClearTable();
 	});
 	
     

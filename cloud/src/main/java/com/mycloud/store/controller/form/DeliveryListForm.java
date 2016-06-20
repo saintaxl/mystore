@@ -28,7 +28,7 @@ public class DeliveryListForm {
 	
 	private String logisticsNo;
 	
-	private String category;
+	private Integer category;
 	
 	private String barCode;
 
@@ -80,11 +80,11 @@ public class DeliveryListForm {
 		this.logisticsNo = logisticsNo;
 	}
 
-	public String getCategory() {
+	public Integer getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(Integer category) {
 		this.category = category;
 	}
 
