@@ -20,8 +20,9 @@ var sidebar = function () {
 		});
 	});
 	
-	$('#internal404').click(function() {
-		$.get("internal_404.htm", function(data) {
+	$('#searchInventory').click(function() {
+		$.get("searchInventory.htm", function(data) {
+			setPageheader('库存管理','库存盘点','库存盘点','库存查询');
 			$("#sub_content").html(data);
 		});
 	});

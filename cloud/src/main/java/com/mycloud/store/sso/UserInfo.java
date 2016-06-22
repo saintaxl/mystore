@@ -13,6 +13,8 @@ import java.util.Set;
  */
 public class UserInfo implements Serializable{
 	
+    private static final long serialVersionUID = 2237462955078339901L;
+
 	private String customerName;
 	
 	private String username;

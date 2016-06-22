@@ -9,15 +9,11 @@ import java.io.Serializable;
  * @author Shawn
  *
  */
-public class DeliveryView implements Serializable{
+public class InventoryView implements Serializable{
 
-    private static final long serialVersionUID = -7326945628610214041L;
+    private static final long serialVersionUID = -312015269599764478L;
 
 	private Integer id;
-    
-    private String deliveryNo;
-    
-    private String quantityName;
     
     private String barCode;
     
@@ -27,19 +23,15 @@ public class DeliveryView implements Serializable{
     
     private Integer number;
     
+    private String quantityName;
+    
+    private String categoryName;
+    
     private Double volume;
     
     private Double weight;
     
-    private String note;
-    
-    private String categoryName;
-    
-    private String logisticsNo;
-    
-    private String logisticsCompanyName;
-    
-    private String arrivalDate;
+    private String shelvesNo;
 
 	public Integer getId() {
 		return id;
@@ -47,22 +39,6 @@ public class DeliveryView implements Serializable{
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getDeliveryNo() {
-		return deliveryNo;
-	}
-
-	public void setDeliveryNo(String deliveryNo) {
-		this.deliveryNo = deliveryNo;
-	}
-
-	public String getQuantityName() {
-		return quantityName;
-	}
-
-	public void setQuantityName(String quantityName) {
-		this.quantityName = quantityName;
 	}
 
 	public String getBarCode() {
@@ -97,6 +73,14 @@ public class DeliveryView implements Serializable{
 		this.number = number;
 	}
 
+	public String getQuantityName() {
+		return quantityName;
+	}
+
+	public void setQuantityName(String quantityName) {
+		this.quantityName = quantityName;
+	}
+
 	public Double getVolume() {
 		return volume;
 	}
@@ -113,12 +97,12 @@ public class DeliveryView implements Serializable{
 		this.weight = weight;
 	}
 
-	public String getNote() {
-		return note;
+	public String getShelvesNo() {
+		return shelvesNo;
 	}
 
-	public void setNote(String note) {
-		this.note = note;
+	public void setShelvesNo(String shelvesNo) {
+		this.shelvesNo = shelvesNo;
 	}
 
 	public String getCategoryName() {
@@ -128,29 +112,6 @@ public class DeliveryView implements Serializable{
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-
-	public String getLogisticsNo() {
-		return logisticsNo;
-	}
-
-	public void setLogisticsNo(String logisticsNo) {
-		this.logisticsNo = logisticsNo;
-	}
-
-	public String getLogisticsCompanyName() {
-		return logisticsCompanyName;
-	}
-
-	public void setLogisticsCompanyName(String logisticsCompanyName) {
-		this.logisticsCompanyName = logisticsCompanyName;
-	}
-
-	public String getArrivalDate() {
-		return arrivalDate;
-	}
-
-	public void setArrivalDate(String arrivalDate) {
-		this.arrivalDate = arrivalDate;
-	}
-
+	
+    
 }

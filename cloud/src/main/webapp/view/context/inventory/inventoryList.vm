@@ -1,0 +1,222 @@
+<div class="row">
+    <!-- MESSENGER -->
+    <div class="col-md-12">
+        <div class="box border blue" id="messenger">
+            <div class="box-title">
+                <h4>
+                    <i class="fa fa-search"></i>查询库存</h4>
+                <div class="tools">
+                    <a href="#box-config" data-toggle="modal" class="config">
+                        <i class="fa fa-cog"></i>
+                    </a>
+                    <a href="javascript:;" class="reload">
+                        <i class="fa fa-refresh"></i>
+                    </a>
+                    <a href="javascript:;" class="collapse">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a href="javascript:;" class="remove">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="box-body">
+                <form class="form-horizontal" role="form" id="inventorySearchForm" name="inventorySearchForm">
+                    <div class="form-group">
+                    	<label class="col-sm-1 control-label">条码:</label>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" id="barCode" name="barCode" value="$!barCode" placeholder="输入条码" ></div>
+                        </div>
+                        <label class="col-sm-1 control-label">货品名:</label>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" id="productName" name="productName" value="$!productName" placeholder="输入产品名称" ></div>
+                        </div>
+                    	<label class="col-sm-1 control-label">货架号:</label>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" id="shelvesNo" name="shelvesNo" value="$!shelvesNo" placeholder="输入货架号"></div>
+                        </div>
+                        <label class="col-sm-1 control-label">类别:</label>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <select class="form-control" name="category" id="category" >
+                                	<option value="">所有类别</option>
+					                #foreach($category in $categorys)
+										<option value="$!category.id" id="$!category.id" title="$!category.name" #if($!category.defaultSelected) selected #end >$!category.name</option>
+									#end
+								</select>
+							</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="text-center">
+                        	<input type="hidden" name="$_csrf.parameterName" value="$_csrf.token"/>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search" > 查询</i></button>
+                            <button type="reset" class="btn btn-default"><i class="fa fa-undo"> 重置</i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <!-- BOX -->
+    <div class="box border green">
+      <div class="box-title">
+        <h4>
+          <i class="fa fa-table"></i>库存列表</h4>
+        <div class="tools hidden-xs">
+          <a href="#box-config" data-toggle="modal" class="config">
+            <i class="fa fa-cog"></i>
+          </a>
+          <a href="javascript:;" class="reload">
+            <i class="fa fa-refresh"></i>
+          </a>
+          <a href="javascript:;" class="collapse">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a href="javascript:;" class="remove">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="box-body">
+        <div id="datatable_wrapper" class="dataTables_wrapper form-inline" role="grid">
+          <table id="datatable" cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered table-hover dataTable" aria-describedby="datatable_info">
+            <thead>
+              <tr role="row">
+                <th class="sorting" role="columnheader" style="width: 5%;">序号</th>
+                <th class="sorting" role="columnheader" style="width: 15%;">条码</th>
+                <th class="sorting" role="columnheader" style="width: 15%;">货品名</th>
+                <th class="sorting" role="columnheader" style="width: 15%;">货架号</th>
+                <th class="sorting" role="columnheader" style="width: 15%;">类别</th>
+                <th class="sorting" role="columnheader" style="width: 7%;">颜色</th>
+                <th class="sorting" role="columnheader" style="width: 7%;">数量</th>
+                <th class="sorting" role="columnheader" style="width: 7%;">单位</th>
+                <th class="sorting" role="columnheader" style="width: 7%;">体积</th>
+                <th class="sorting" role="columnheader" style="width: 7%;">重量</th>
+              </tr>
+            </thead>
+            <tbody role="alert" aria-live="polite" aria-relevant="all">
+              
+            </tbody>
+          </table>
+          
+        </div>
+      </div>
+    </div>
+    <!-- /BOX --></div>
+</div>
+
+
+<script>
+jQuery(document).ready(function() {
+
+    
+	var oTable = $('#datatable').dataTable({
+	    bProcessing: false,
+	    bServerSide: true,
+	    bPaginate: true,
+	    bSortClasses: false,
+	    bFilter: false,
+		sPaginationType: "bs_full",
+		sDom: "<'row'<'dataTables_header clearfix'<'col-md-4'l><'col-md-8'Tf>r>>t<'row'<'dataTables_footer clearfix'<'col-md-6'i><'col-md-6'p>>>",
+        oTableTools: {
+            aButtons: ["copy", "print", "xls", "pdf"],
+            sSwfPath: "resources/js/datatables/extras/TableTools/media/swf/copy_csv_xls_pdf.swf"
+        },
+        sAjaxSource: "showInventoryList",
+        fnServerData: function ( sSource, aoData, fnCallback, oSettings ) {
+			var sData = $("#inventorySearchForm").serializeArray();
+			sData.push( { "name": "page", "value": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength) + 1 } );
+			sData.push( { "name": "size", "value": oSettings._iDisplayLength } );
+			sData.push( { "name": "echo", "value": oSettings.iDraw } );
+			if ( oSettings.oFeatures.bSort !== false ){
+				aaSort = ( oSettings.aaSortingFixed !== null ) ?
+					oSettings.aaSortingFixed.concat( oSettings.aaSorting ) :
+					oSettings.aaSorting.slice();
+				
+				for ( i=0 ; i<aaSort.length ; i++ )	{
+					aDataSort = oSettings.aoColumns[ aaSort[i][0] ].aDataSort;
+					mDataProp = oSettings.aoColumns[ aaSort[i][0] ].mData;
+					
+					for ( j=0 ; j<aDataSort.length ; j++ ){
+						sData.push( { "name": "sort",  "value": mDataProp + "," +aaSort[i][1] } );
+					}
+				}
+			}
+			
+            oSettings.jqXHR = $.ajax( {
+            	  headers: {
+		            'X-CSRF-TOKEN': $('meta[name="_csrf_token"]').attr('content')
+		          },
+                  "dataType": 'json',
+                  "type": "POST",
+                  "url": sSource,
+                  "data": sData,
+                  //JSON.stringify(aoData)
+                  success : function(response) { 
+	                  fnCallback(response); 
+	              },
+	              error: function (e) {
+	                 console.log(e.message);
+	              }
+            });
+        },
+        aaSorting: [[0,'desc']],
+        aoColumns: [
+	        		{"mData": "id", "sClass": "center"}, 
+	        		{"mData": "barCode", "sClass": "center"},
+	        		{"mData": "productName", "sClass": "center"},
+	        		{"mData": "shelvesNo", "sClass": "center"},
+	        		{"mData": "categoryName" ,"sClass": "center"},
+	        		{"mData": "color", "sClass": "center"},
+	        		{"mData": "number", "sClass": "center"},
+	        		{"mData": "quantityName", "sClass": "center"},
+	        		{"mData": "volume" ,"sClass": "center"},
+	        		{"mData": "weight" ,"sClass": "center"},
+        		],
+        oLanguage: {
+                    "sProcessing": "正在加载中......",
+                    "sLengthMenu": "每页显示 _MENU_ 条记录",
+                    "sZeroRecords": "对不起，查询不到相关数据！",
+                    "sEmptyTable": "没有查询到相关记录！",
+                    "sInfo": "当前显示 _START_ 到 _END_ 条，每页共 _TOTAL_ 条记录",
+                    "sInfoFiltered": "总记录共 _MAX_ 条记录",
+                    "oPaginate": {
+                        "sFirst": "首页",
+                        "sPrevious": "上一页",
+                        "sNext": "下一页",
+                        "sLast": "末页"
+                    }
+        }
+	});
+	
+	$('.datatable').each(function(){
+		var datatable = $(this);
+		// SEARCH - Add the placeholder for Search and Turn this into in-line form control
+		var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+		search_input.attr('placeholder', 'Search');
+		search_input.addClass('form-control input-sm');
+		// LENGTH - Inline-Form control
+		var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+		length_sel.addClass('form-control input-sm');
+	});
+	
+	
+	$('#inventorySearchForm').submit(function(e) {
+		e.preventDefault();
+		oTable.fnClearTable();
+	});
+	
+    
+});
+
+</script>
+

@@ -56,8 +56,7 @@
 				<span class="arrow"></span>
 				</a>
 				<ul class="sub">
-					<li><a class="" href="flot_charts.html"><span class="sub-menu-text">产品入库</span></a></li>
-					<li><a class="" href="xcharts.html"><span class="sub-menu-text">库存盘点</span></a></li>
+					<li><a id="searchInventory" class="" href="#"><span class="sub-menu-text">库存盘点</span></a></li>
 				</ul>
 			</li>
 			<li class="has-sub">

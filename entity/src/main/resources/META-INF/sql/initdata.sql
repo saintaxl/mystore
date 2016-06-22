@@ -106,6 +106,26 @@
         VOLUME decimal(10,2) null,
         WEIGHT decimal(10,2) null,
         PRODUCT_NAME varchar(255) NOT null,
+        MD5 varchar(255) NOT null,
+        primary key (ID)
+  );
+  
+  create table INVENTORY (
+        ID int NOT NULL AUTO_INCREMENT ,
+        CREATE_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        LOCK_VERSION BIGINT NOT NULL DEFAULT 1,
+        UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+        BAR_CODE varchar(255) null,
+        SHELVES_NO varchar(255) null,
+        CUSTOMER_ID int not null,
+        PRODUCT_NAME varchar(255) NOT null,
+        COLOR varchar(255) null,
+        NUMBER int null,
+        VOLUME decimal(10,2) null,
+        WEIGHT decimal(10,2) null,
+        QUANTITY_ID int not null,
+        CATEGORY_ID int not null,
+        MD5 varchar(255) NOT null,
         primary key (ID)
   );
   

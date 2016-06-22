@@ -21,8 +21,8 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "DELIVERY")
-public class Delivery extends AbstractEntity implements Serializable {
+@Table(name = "INVENTORY")
+public class Inventory extends AbstractEntity implements Serializable {
 
 	
     private static final long serialVersionUID = -6287120704265264221L;
@@ -31,9 +31,6 @@ public class Delivery extends AbstractEntity implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID")
 	private Integer id;
-    
-    @Column(name="DELIVERY_NO", nullable=false)
-    private String deliveryNo;
     
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="CUSTOMER_ID")
@@ -52,6 +49,9 @@ public class Delivery extends AbstractEntity implements Serializable {
     @Column(name="COLOR")
     private String color;
     
+    @Column(name="SHELVES_NO")
+    private String shelvesNo;
+    
     @Column(name="NUMBER")
     private Integer number;
     
@@ -61,20 +61,21 @@ public class Delivery extends AbstractEntity implements Serializable {
     @Column(name="WEIGHT")
     private Double weight;
     
-    @Column(name="NOTE")
-    private String note;
-    
-    @Column(name="MD5")
-    private String md5;
-    
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="CATEGORY_ID")
     private Category category;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "LOGISTICS_ID", nullable = false)
-    private Logistics logistics;
+    @Column(name="MD5")
+    private String md5;
     
+	public String getShelvesNo() {
+		return shelvesNo;
+	}
+
+	public void setShelvesNo(String shelvesNo) {
+		this.shelvesNo = shelvesNo;
+	}
+
 	public Category getCategory() {
 		return category;
 	}
@@ -89,14 +90,6 @@ public class Delivery extends AbstractEntity implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getDeliveryNo() {
-		return deliveryNo;
-	}
-
-	public void setDeliveryNo(String deliveryNo) {
-		this.deliveryNo = deliveryNo;
 	}
 
 	public Customer getCustomer() {
@@ -163,22 +156,6 @@ public class Delivery extends AbstractEntity implements Serializable {
 		this.weight = weight;
 	}
 
-	public String getNote() {
-		return note;
-	}
-
-	public void setNote(String note) {
-		this.note = note;
-	}
-
-	public Logistics getLogistics() {
-		return logistics;
-	}
-
-	public void setLogistics(Logistics logistics) {
-		this.logistics = logistics;
-	}
-
 	public String getMd5() {
 		return md5;
 	}
@@ -186,5 +163,6 @@ public class Delivery extends AbstractEntity implements Serializable {
 	public void setMd5(String md5) {
 		this.md5 = md5;
 	}
+	
 
 }

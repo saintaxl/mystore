@@ -1,5 +1,6 @@
 package com.mycloud.store.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,18 +18,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.DigestUtils;
 
 import com.mycloud.entity.Category;
 import com.mycloud.entity.Customer;
 import com.mycloud.entity.Delivery;
 import com.mycloud.entity.Logistics;
 import com.mycloud.entity.Quantity;
+import com.mycloud.exception.BusinessException;
 import com.mycloud.repository.CategoryRepository;
 import com.mycloud.repository.CustomerRepository;
 import com.mycloud.repository.DeliveryRepository;
 import com.mycloud.repository.QuantityRepository;
 import com.mycloud.store.controller.form.DeliveryForm;
 import com.mycloud.store.controller.form.DeliveryListForm;
+import com.mycloud.store.exception.ErrorCode;
 
 @Service
 @Transactional
@@ -54,13 +58,13 @@ public class DeliveryService {
 		Logistics logistics = logisticsService.addLogistics(deliveryForm.getLogisticsDate(), companyName, deliveryForm.getLogisticsNo());
 
 		for (int i = 0; i < deliveryForm.getProductName().size(); i++) {
-			String barCodeStr = CollectionUtils.isNotEmpty(deliveryForm.getBarCode()) && deliveryForm.getBarCode().get(i) != null ? deliveryForm.getBarCode().get(i) : "";
+			String barCodeStr = CollectionUtils.isNotEmpty(deliveryForm.getBarCode()) && deliveryForm.getBarCode().get(i) != null ? deliveryForm.getBarCode().get(i).trim() : "";
 			Integer categoryId = deliveryForm.getCategory().get(i);
 			Integer quantityId = deliveryForm.getQuantity().get(i);
-			String colorStr = CollectionUtils.isNotEmpty(deliveryForm.getColor()) && deliveryForm.getColor().get(i) != null ? deliveryForm.getColor().get(i) : "";
-			String noteStr = CollectionUtils.isNotEmpty(deliveryForm.getNote()) && deliveryForm.getNote().get(i) != null ? deliveryForm.getNote().get(i) : "";
+			String colorStr = CollectionUtils.isNotEmpty(deliveryForm.getColor()) && deliveryForm.getColor().get(i) != null ? deliveryForm.getColor().get(i).trim() : "";
+			String noteStr = CollectionUtils.isNotEmpty(deliveryForm.getNote()) && deliveryForm.getNote().get(i) != null ? deliveryForm.getNote().get(i).trim() : "";
 			Integer numberParm = CollectionUtils.isNotEmpty(deliveryForm.getNumber()) && deliveryForm.getNumber().get(i) != null ? deliveryForm.getNumber().get(i) : 0;
-			String productNameStr = CollectionUtils.isNotEmpty(deliveryForm.getProductName()) && deliveryForm.getProductName().get(i) != null ? deliveryForm.getProductName().get(i) : "";
+			String productNameStr = CollectionUtils.isNotEmpty(deliveryForm.getProductName()) && deliveryForm.getProductName().get(i) != null ? deliveryForm.getProductName().get(i).trim() : "";
 			Double volumeParm = CollectionUtils.isNotEmpty(deliveryForm.getVolume()) && deliveryForm.getVolume().get(i) != null ? deliveryForm.getVolume().get(i) : 0;
 			Double weightParm = CollectionUtils.isNotEmpty(deliveryForm.getWeight()) && deliveryForm.getWeight().get(i) != null ? deliveryForm.getWeight().get(i) : 0;
 			addDelivery(barCodeStr, categoryId, quantityId, colorStr, customer, deliveryForm.getDeliveryNo(), noteStr, numberParm, productNameStr, volumeParm, weightParm,logistics);
@@ -90,6 +94,13 @@ public class DeliveryService {
 		delivery.setQuantity(quantity);
 		delivery.setVolume(volume);
 		delivery.setWeight(weight);
+		String md5 = customer.getCustomerNo() + productName + category.getId();
+		try {
+	        String md5DigestAsHex = DigestUtils.md5DigestAsHex(md5.getBytes("UTF-8"));
+	        delivery.setMd5(md5DigestAsHex);
+        } catch (UnsupportedEncodingException e) {
+	        throw new BusinessException(ErrorCode.MD5_DIGEST_ASHEX_ERROR);
+        }
 
 		deliveryRepository.save(delivery);
 		return delivery;
