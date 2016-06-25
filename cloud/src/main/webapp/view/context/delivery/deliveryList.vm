@@ -146,7 +146,7 @@
 jQuery(document).ready(function() {
 
 	$("#from").datepicker({
-      defaultDate: "+1w",
+      defaultDate: new Date(),
       changeMonth: true,
       numberOfMonths: 2,
       onClose: function( selectedDate ) {
@@ -155,7 +155,7 @@ jQuery(document).ready(function() {
     });
     
     $("#to").datepicker({
-      defaultDate: "+1w",
+      defaultDate: new Date(),
       changeMonth: true,
       numberOfMonths: 2,
       onClose: function( selectedDate ) {
@@ -218,17 +218,17 @@ jQuery(document).ready(function() {
         aoColumns: [
 	        		{"mData": "id", "sClass": "center"}, 
 	        		{"mData": "barCode", "sClass": "center"},
-	        		{"mData": "deliveryNo", "sClass": "center"},
+	        		{"mData": "delivery.deliveryNo", "sClass": "center"},
 	        		{"mData": "productName", "sClass": "center"},
-	        		{"mData": "categoryName", "sClass": "center"},
+	        		{"mData": "category.name", "sClass": "center"},
 	        		{"mData": "color", "sClass": "center"},
 	        		{"mData": "number", "sClass": "center"},
-	        		{"mData": "quantityName", "sClass": "center"},
+	        		{"mData": "quantity.name", "sClass": "center"},
 	        		{"mData": "volume" ,"sClass": "center"},
 	        		{"mData": "weight" ,"sClass": "center"},
-	        		{"mData": "logisticsCompanyName" ,"sClass": "center"},
-	        		{"mData": "logisticsNo" ,"sClass": "center"},
-	        		{"mData": "arrivalDate" ,"sClass": "center" } 
+	        		{"mData": "delivery.logistics.companyName" ,"sClass": "center"},
+	        		{"mData": "delivery.logistics.logisticsNo" ,"sClass": "center"},
+	        		{"mData": "delivery.logistics.arrivalDate" ,"sClass": "center" } 
         		],
         oLanguage: {
                     "sProcessing": "正在加载中......",

@@ -89,15 +89,28 @@
         primary key (ID)
   );
   
+  
   create table DELIVERY (
         ID int NOT NULL AUTO_INCREMENT ,
         CREATE_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         LOCK_VERSION BIGINT NOT NULL DEFAULT 1,
         UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
         DELIVERY_NO varchar(255) not null,
+		CUSTOMER_ID int not null,
+		STATUS varchar(255) not null,
+		LOGISTICS_ID int not null,
+		primary key (ID)
+  );
+  
+  
+  create table DELIVERY_DETAILS (
+        ID int NOT NULL AUTO_INCREMENT ,
+        CREATE_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        LOCK_VERSION BIGINT NOT NULL DEFAULT 1,
+        UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+		DELIVERY_ID int not null,
         CUSTOMER_ID int not null,
         QUANTITY_ID int not null,
-        LOGISTICS_ID int not null,
         CATEGORY_ID int not null,
         BAR_CODE varchar(255) null,
         COLOR varchar(255) null,

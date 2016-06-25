@@ -70,7 +70,7 @@ public class DeliveryController extends BaseController {
 		}
 
 		Customer customer = getCustomer();
-		deliveryService.addsingleDelibery(customer, companyName, deliveryForm);
+		deliveryService.addDelibery(customer, companyName, deliveryForm);
 
 		return "forward:createDelivery.htm";
 	}
@@ -79,27 +79,6 @@ public class DeliveryController extends BaseController {
 	public String searchDelivery(Model model) {
 		List<Category> categorys = categoryRepository.findAll();
 		model.addAttribute("categorys", categorys);
-		/*
-		Map<String, Object> asMap = model.asMap();
-		boolean hasContainsKey = asMap.containsKey("deliveryListForm");
-		if(hasContainsKey){
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			
-			DeliveryListForm form = (DeliveryListForm)asMap.get("deliveryListForm");
-			model.addAttribute("barCode", form.getBarCode());
-			model.addAttribute("category", form.getCategory());
-			model.addAttribute("deliveryNo", form.getDeliveryNo());
-			if(form.getFrom() !=null){
-				model.addAttribute("from", formatter.format(form.getFrom()));
-			}
-			model.addAttribute("logisticsCompanyName", form.getLogisticsCompanyName());
-			model.addAttribute("logisticsNo", form.getLogisticsNo());
-			model.addAttribute("productName", form.getProductName());
-			if(form.getTo() !=null){
-				model.addAttribute("to", formatter.format(form.getTo()));
-			}
-		}*/
-
 		return "/context/delivery/deliveryList";
 	}
 

@@ -4,16 +4,22 @@
 package com.mycloud.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.mycloud.constant.DeliveryStatus;
 
 /**
  * @author Shawn
@@ -32,6 +38,9 @@ public class Delivery extends AbstractEntity implements Serializable {
 	@Column(name="ID")
 	private Integer id;
     
+    @OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)
+    private List<DeliveryDetails> details;
+    
     @Column(name="DELIVERY_NO", nullable=false)
     private String deliveryNo;
     
@@ -39,49 +48,13 @@ public class Delivery extends AbstractEntity implements Serializable {
     @JoinColumn(name="CUSTOMER_ID")
     private Customer customer;
     
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="QUANTITY_ID")
-    private Quantity quantity;
-    
-    @Column(name="BAR_CODE")
-    private String barCode;
-    
-    @Column(name="PRODUCT_NAME")
-    private String productName;
-    
-    @Column(name="COLOR")
-    private String color;
-    
-    @Column(name="NUMBER")
-    private Integer number;
-    
-    @Column(name="VOLUME")
-    private Double volume;
-    
-    @Column(name="WEIGHT")
-    private Double weight;
-    
-    @Column(name="NOTE")
-    private String note;
-    
-    @Column(name="MD5")
-    private String md5;
-    
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="CATEGORY_ID")
-    private Category category;
-    
+    @Column(name="STATUS")
+    @Enumerated(EnumType.STRING)
+    private DeliveryStatus status = DeliveryStatus.SHIPPED;
+   
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LOGISTICS_ID", nullable = false)
     private Logistics logistics;
-    
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
 
 	public Integer getId() {
 		return id;
@@ -89,6 +62,14 @@ public class Delivery extends AbstractEntity implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public List<DeliveryDetails> getDetails() {
+		return details;
+	}
+
+	public void setDetails(List<DeliveryDetails> details) {
+		this.details = details;
 	}
 
 	public String getDeliveryNo() {
@@ -107,68 +88,12 @@ public class Delivery extends AbstractEntity implements Serializable {
 		this.customer = customer;
 	}
 
-	public Quantity getQuantity() {
-		return quantity;
+	public DeliveryStatus getStatus() {
+		return status;
 	}
 
-	public void setQuantity(Quantity quantity) {
-		this.quantity = quantity;
-	}
-
-	public String getBarCode() {
-		return barCode;
-	}
-
-	public void setBarCode(String barCode) {
-		this.barCode = barCode;
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-	public Integer getNumber() {
-		return number;
-	}
-
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
-
-	public Double getVolume() {
-		return volume;
-	}
-
-	public void setVolume(Double volume) {
-		this.volume = volume;
-	}
-
-	public Double getWeight() {
-		return weight;
-	}
-
-	public void setWeight(Double weight) {
-		this.weight = weight;
-	}
-
-	public String getNote() {
-		return note;
-	}
-
-	public void setNote(String note) {
-		this.note = note;
+	public void setStatus(DeliveryStatus status) {
+		this.status = status;
 	}
 
 	public Logistics getLogistics() {
@@ -178,13 +103,6 @@ public class Delivery extends AbstractEntity implements Serializable {
 	public void setLogistics(Logistics logistics) {
 		this.logistics = logistics;
 	}
-
-	public String getMd5() {
-		return md5;
-	}
-
-	public void setMd5(String md5) {
-		this.md5 = md5;
-	}
+    
 
 }

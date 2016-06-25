@@ -4,6 +4,9 @@
 package com.mycloud.store.controller.rest.model;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.mycloud.constant.DeliveryStatus;
 
 /**
  * @author Shawn
@@ -17,29 +20,13 @@ public class DeliveryView implements Serializable{
     
     private String deliveryNo;
     
-    private String quantityName;
+    private List<DeliveryDetailView> details;
     
-    private String barCode;
+    private DeliveryStatus status ;    
     
-    private String productName;
+    private CustomerView customer;
     
-    private String color;
-    
-    private Integer number;
-    
-    private Double volume;
-    
-    private Double weight;
-    
-    private String note;
-    
-    private String categoryName;
-    
-    private String logisticsNo;
-    
-    private String logisticsCompanyName;
-    
-    private String arrivalDate;
+    private LogisticsView logistics;
 
 	public Integer getId() {
 		return id;
@@ -57,100 +44,37 @@ public class DeliveryView implements Serializable{
 		this.deliveryNo = deliveryNo;
 	}
 
-	public String getQuantityName() {
-		return quantityName;
+	public List<DeliveryDetailView> getDetails() {
+		return details;
 	}
 
-	public void setQuantityName(String quantityName) {
-		this.quantityName = quantityName;
+	public void setDetails(List<DeliveryDetailView> details) {
+		this.details = details;
 	}
 
-	public String getBarCode() {
-		return barCode;
+	public DeliveryStatus getStatus() {
+		return status;
 	}
 
-	public void setBarCode(String barCode) {
-		this.barCode = barCode;
+	public void setStatus(DeliveryStatus status) {
+		this.status = status;
 	}
 
-	public String getProductName() {
-		return productName;
+	public CustomerView getCustomer() {
+		return customer;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setCustomer(CustomerView customer) {
+		this.customer = customer;
 	}
 
-	public String getColor() {
-		return color;
+	public LogisticsView getLogistics() {
+		return logistics;
 	}
 
-	public void setColor(String color) {
-		this.color = color;
+	public void setLogistics(LogisticsView logistics) {
+		this.logistics = logistics;
 	}
-
-	public Integer getNumber() {
-		return number;
-	}
-
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
-
-	public Double getVolume() {
-		return volume;
-	}
-
-	public void setVolume(Double volume) {
-		this.volume = volume;
-	}
-
-	public Double getWeight() {
-		return weight;
-	}
-
-	public void setWeight(Double weight) {
-		this.weight = weight;
-	}
-
-	public String getNote() {
-		return note;
-	}
-
-	public void setNote(String note) {
-		this.note = note;
-	}
-
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-
-	public String getLogisticsNo() {
-		return logisticsNo;
-	}
-
-	public void setLogisticsNo(String logisticsNo) {
-		this.logisticsNo = logisticsNo;
-	}
-
-	public String getLogisticsCompanyName() {
-		return logisticsCompanyName;
-	}
-
-	public void setLogisticsCompanyName(String logisticsCompanyName) {
-		this.logisticsCompanyName = logisticsCompanyName;
-	}
-
-	public String getArrivalDate() {
-		return arrivalDate;
-	}
-
-	public void setArrivalDate(String arrivalDate) {
-		this.arrivalDate = arrivalDate;
-	}
-
+    
+	
 }
