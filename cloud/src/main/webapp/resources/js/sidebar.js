@@ -8,14 +8,28 @@ var sidebar = function () {
 
 	$('#createDelivery').click(function() {
 		$.get("createDelivery.htm", function(data) {
-			setPageheader('发货单管理','创建发货单','创建发货单','表单填写');
+			setPageheader('入库单管理','创建入库单','创建入库单','表单填写');
 			$("#sub_content").html(data);
 		});
 	});
 	
-	$('#searchDelibery').click(function() {
+	$('#searchDelivery').click(function() {
 		$.get("searchDelivery.htm", function(data) {
-			setPageheader('发货单管理','查询发货单','查询发货单','发货单查询');
+			setPageheader('入库单管理','查询入库单','查询入库单','入库单查询');
+			$("#sub_content").html(data);
+		});
+	});
+	
+	$('#createExpress').click(function() {
+		$.get("createExpress.htm", function(data) {
+			setPageheader('物流管理','创建发货单','创建发货单','表单填写');
+			$("#sub_content").html(data);
+		});
+	});
+	
+	$('#searchExpress').click(function() {
+		$.get("searchExpress.htm", function(data) {
+			setPageheader('物流管理','查询发货单','查询发货单','发货单查询');
 			$("#sub_content").html(data);
 		});
 	});

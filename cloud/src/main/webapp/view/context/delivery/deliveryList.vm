@@ -4,7 +4,7 @@
         <div class="box border blue" id="messenger">
             <div class="box-title">
                 <h4>
-                    <i class="fa fa-search"></i>查询发货单</h4>
+                    <i class="fa fa-search"></i>查询入库单</h4>
                 <div class="tools">
                     <a href="#box-config" data-toggle="modal" class="config">
                         <i class="fa fa-cog"></i>
@@ -23,17 +23,17 @@
             <div class="box-body">
                 <form class="form-horizontal" role="form" id="deliverSearchForm" name="deliverSearchForm">
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">发货单号:</label>
+                        <label class="col-sm-1 control-label">入库单号:</label>
                         <div class="col-sm-2">
                             <div class="input-group">
-                                <input type="text" class="form-control input-sm" placeholder="输入发货单号" id="deliveryNo" name="deliveryNo"  value="$!deliveryNo"  ></div>
+                                <input type="text" class="form-control input-sm" placeholder="输入入库单号" id="deliveryNo" name="deliveryNo"  value="$!deliveryNo"  ></div>
                         </div>
                         <label class="col-sm-1 control-label">货品名:</label>
                         <div class="col-sm-2">
                             <div class="input-group">
                                 <input type="text" class="form-control input-sm" id="productName" name="productName" value="$!productName" placeholder="输入产品名称" ></div>
                         </div>
-                        <label class="col-sm-1 control-label">发货单日期:</label>
+                        <label class="col-sm-1 control-label">入库单日期:</label>
                         <div class="col-sm-2">
 	                        <div class="input-group">
 	                                	<input class="form-control input-sm datepicker" type="text" name="from" id="from" placeholder="开始日期" value="$!from" >
@@ -94,7 +94,7 @@
     <div class="box border green">
       <div class="box-title">
         <h4>
-          <i class="fa fa-table"></i>发货单列表</h4>
+          <i class="fa fa-table"></i>入库单列表</h4>
         <div class="tools hidden-xs">
           <a href="#box-config" data-toggle="modal" class="config">
             <i class="fa fa-cog"></i>
@@ -117,7 +117,7 @@
               <tr role="row">
                 <th class="sorting" role="columnheader" style="width: 5%;">序号</th>
                 <th class="sorting" role="columnheader" style="width: 9%;">条码</th>
-                <th class="sorting" role="columnheader" style="width: 7%;">发货单号</th>
+                <th class="sorting" role="columnheader" style="width: 7%;">入库单号</th>
                 <th class="sorting" role="columnheader" style="width: 9%;">货品名</th>
                 <th class="sorting" role="columnheader" style="width: 7%;">类别</th>
                 <th class="sorting" role="columnheader" style="width: 5%;">颜色</th>
