@@ -131,19 +131,19 @@
 					  <div class="form-group">
 							<label class="col-sm-3 control-label">总体积:</label>
 							<div class="col-sm-9">
-							 	<input type="text" class="form-control input-sm" id="mobile" name="mobile" placeholder="请输入联系电话" required>
+							 	<label class="control-label" id="totalVolume" name="totalVolume" >0.00</label>
 							</div>
 					  </div>
 					  <div class="form-group">
 							<label class="col-sm-3 control-label">总总量:</label>
 							<div class="col-sm-9">
-							 	<input type="text" class="form-control input-sm" id="mobile" name="mobile" placeholder="请输入联系电话" required>
+							 	<label class="control-label" id="totalWeight" name="totalWeight" >0.00</label>
 							</div>
 					  </div>
 					  <div class="form-group">
 							<label class="col-sm-3 control-label">总数量:</label>
 							<div class="col-sm-9">
-							 	<input type="text" class="form-control input-sm" id="mobile" name="mobile" placeholder="请输入联系电话" required>
+							 	<label class="control-label" id="totalNumber" name="totalNumber" >0</label>
 							</div>
 					  </div>
 					  <div class="form-group">
@@ -197,8 +197,10 @@ jQuery(document).ready(function() {
 		var oTable = $('#datatable').dataTable({
 		    bProcessing: false,
 		    bServerSide: true,
-		    bPaginate: true,
+		    bPaginate: false,
 		    bSortClasses: false,
+		    bLengthChange: false,
+		    "iDisplayLength": 1000,
 		    bFilter: false,
 			sPaginationType: "bs_full",
 	        sAjaxSource: "showInventoryList",
@@ -256,8 +258,30 @@ jQuery(document).ready(function() {
 	       	aoColumnDefs:[
 						   { 
 				                "aTargets": [0],
-				                "mRender": function (data, type, full) {
-					               	return "<input type='checkbox' value='" + data + "'>";
+				                "sClass": "center",
+				                "mRender": function (data, type, row) {
+					               	return "<input type='checkbox' id='id"+ row.id +"' name='id"+ row.id +"' value='" + data + "'>";
+								 }
+						   },
+						   { 
+				                "aTargets": [6],
+				                "sClass": "center",
+				                "mRender": function (data, type, row) {
+					               	return "<input type='number' max='" + data + "' min='0' step='1' id='number"+ row.id +"' name='number' value='0' >";
+								 }
+						   },
+						   { 
+				                "aTargets": [7],
+				                "sClass": "center",
+				                "mRender": function (data, type, row) {
+					               	return 0.00 + "<input type='hidden' name='volume"+ row.id +"' id='volume"+ row.id +"' value='"+ (data / row.number).toFixed(2) +"'/>";
+								 }
+						   },
+						   { 
+				                "aTargets": [8],
+				                "sClass": "center",
+				                "mRender": function (data, type, row) {
+					               	return 0.00 + "<input type='hidden' name='weight"+ row.id +"' id='weight"+ row.id +"' value='"+ (data / row.number).toFixed(2) +"'/>";
 								 }
 						   },
 						 
@@ -278,7 +302,52 @@ jQuery(document).ready(function() {
 	        }
 		});
 		
-		// Handle click on "Select all" control
+		$('#datatable tbody').on( 'change', 'input[id^=number]', function () {
+		    var value = $(this).val();
+			var tr = $(this).parent('td').parent('tr');
+			var td_volume = tr.find("input[id^=volume]");
+			var td_weight = tr.find("input[id^=weight]");
+			var tr_id = tr.find("input[id^=id]");
+			var volume = td_volume.val();
+			var weight = td_weight.val();
+			
+			td_volume.parent('td').html((value * volume).toFixed(2) + "<input type='hidden' name='volume"+ tr_id.val() +"' id='volume"+ tr_id.val() +"' value='"+ volume +"'/>" ); 
+			td_weight.parent('td').html((value * weight).toFixed(2) + "<input type='hidden' name='weight"+ tr_id.val() +"' id='weight"+ tr_id.val() +"' value='"+ weight +"'/>" ); 
+			
+			
+			calculateTotal();
+    	} );
+    	
+    	
+    	var calculateTotal = function () {
+    		var totalVolume=0.00; 
+			var totalWeight=0.00; 
+			var totalNumber=0; 
+			$('#datatable tbody').find('input[type="checkbox"]:checked').each(function () {
+				   var tr = $(this).parent('td').parent('tr');
+				   var number = tr.find("input[id^=number]").val();
+				   var volume = tr.find('td:eq(7)').text();
+				   var weight = tr.find('td:eq(8)').text();
+			       if($.isNumeric(volume) == false){
+			       		volume = 0.00;
+			       }
+			       if($.isNumeric(weight) == false){
+			       		weight = 0.00;
+			       }
+				   if($.isNumeric(number) == false){
+			       		number = 0;
+			       }
+	       		   totalVolume+=parseFloat(volume);
+	       		   totalWeight+=parseFloat(weight);
+	       		   totalNumber+=parseInt(number);
+			       
+			});
+			$("#totalVolume").html(parseFloat(totalVolume).toFixed(2)); 
+			$("#totalWeight").html(parseFloat(totalWeight).toFixed(2)); 
+			$("#totalNumber").html(totalNumber); 
+    	}
+    	
+	   // Handle click on "Select all" control
 	   $('#example-select-all').on('click', function(){
 	      // Check/uncheck all checkboxes in the table
 	      var rows = oTable.$('tr');
@@ -288,6 +357,7 @@ jQuery(document).ready(function() {
 	   // Handle click on checkbox to set state of "Select all" control
 	   $('#datatable tbody').on('change', 'input[type="checkbox"]', function(){
 	      // If checkbox is not checked
+	      calculateTotal();
 	      if(!this.checked){
 	         var el = $('#example-select-all').get(0);
 	         // If "Select all" control is checked and has 'indeterminate' property
@@ -309,9 +379,6 @@ jQuery(document).ready(function() {
 			var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
 			length_sel.addClass('form-control input-sm');
 		});
-		
-		
-		
 		
 		
 });			
