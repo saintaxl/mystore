@@ -13,8 +13,8 @@
 			        </div>
 		      </div>
 	  
+	  		  <form  class="form-horizontal" role="form" id="expressTableForm" name="expressTableForm" method="POST" action="#" >
 	          <div class="box-body">
-    				<form role="form" id="expressForm" name="expressForm" method="POST" action="#" >
   				    <div id="datatable1_wrapper" class="dataTables_wrapper form-inline" role="grid">
 						  <div class="row">
 					            <div class="col-sm-12">
@@ -60,8 +60,9 @@
 						   </div>
 						 
              		</div>
-   				    </form>
              </div>
+             </form>
+             
              
    </div>
    <!-- /BOX -->
@@ -82,12 +83,12 @@
 				</div>
 			</div>
 			<div class="box-body big">
-				<div class="form-horizontal" role="form">
+				<form  class="form-horizontal" role="form" id="expressForm" name="expressForm" method="POST" action="#" >
 					  <div class="form-group">
 							<label class="col-sm-3 control-label">物流公司:</label>
 							<div class="col-sm-9">
 							    <select id="logisticsCompanyName" name="logisticsCompanyName" class="form-control input-sm" required>
-								   <option value="">选择物流公司</option>
+								   <option value="">请选择</option>
 								   <option value="申通快递">申通快递</option>
 								   <option value="中通快递">中通快递</option>
 								   <option value="韵达快递">韵达快递</option>
@@ -121,11 +122,10 @@
 					  </div>
 					  <div class="form-group">
 							<label class="col-sm-3 control-label">收货区域:</label>
-							<div class="col-sm-9">
-							 	<select id="area" name="area" class="form-control input-sm" required>
-									<option value="">选择区域</option>
-									<option value="江浙沪">江浙沪</option>
-								</select>
+							<div id="city">
+							 	<div class="col-sm-2"><select name="province" class="prov form-control input-sm" required ></select></div>
+								<div class="col-sm-2"><select name="city" class="city form-control input-sm" disabled="disabled" required></select></div>
+								<div class="col-sm-2"><select name="district" class="dist form-control input-sm" disabled="disabled" required></select></div>
 							</div>
 					  </div>
 					  <div class="form-group">
@@ -150,10 +150,10 @@
 							<label class="col-sm-3 control-label">外包装:</label>
 							<div class="col-sm-9">
 								<label class="radio-inline">
-								  <input type="radio" name="optionsRadios2" id="inlineCheckbox1" value="option1"> 需要
+								  <input type="radio" name="needPackage" id="package1" value="1" required checked > 需要
 								</label>
 								<label class="radio-inline">
-								  <input type="radio" name="optionsRadios2" id="inlineCheckbox2" value="option2"> 不需要
+								  <input type="radio" name="needPackage" id="package2" value="0" required> 不需要
 								</label>
 							</div>
 					  </div>
@@ -161,17 +161,17 @@
 							<label class="col-sm-3 control-label">保险:</label>
 							<div class="col-sm-9">
 								<label class="radio-inline">
-								  <input type="radio" name="optionsRadios2" id="inlineCheckbox1" value="option1"> 需要
+								  <input type="radio" name="insurance" id="insurance1" value="1" required checked> 需要
 								</label>
 								<label class="radio-inline">
-								  <input type="radio" name="optionsRadios2" id="inlineCheckbox2" value="option2"> 不需要
+								  <input type="radio" name="insurance" id="insurance2" value="0" required> 不需要
 								</label>
 							</div>
 					  </div>
 					  <div class="form-group">
 							<label class="col-sm-3 control-label">价格:</label>
 							<div class="col-sm-9">
-							 	<input type="text" class="form-control input-sm" id="mobile" name="mobile" placeholder="请输入联系电话" required>
+							 	<input type="number" class="form-control input-sm" id="price" name="price" placeholder="请输入价格" min="0" step="0.01" pattern="\d+.\d{0,2}"  required>
 							</div>
 					  </div>
 					  <div class="form-group">
@@ -181,9 +181,8 @@
 	                            <button type="reset" class="btn btn-default"><i class="fa fa-undo"> 重置</i></button>
 	                        </div>
                       </div>
-				</div>
+				</form>
 			</div>
-			
 		</div>
    </div>
 </div>
@@ -193,6 +192,13 @@
 <!-- /PAGE MAIN CONTENT -->
 <script>
 jQuery(document).ready(function() {
+	
+		$("#city").citySelect({
+			nodata:"none",
+			required:false
+		});
+		
+
 
 		var oTable = $('#datatable').dataTable({
 		    bProcessing: false,
@@ -200,7 +206,7 @@ jQuery(document).ready(function() {
 		    bPaginate: false,
 		    bSortClasses: false,
 		    bLengthChange: false,
-		    "iDisplayLength": 1000,
+		    //"iDisplayLength": 1000,
 		    bFilter: false,
 			sPaginationType: "bs_full",
 	        sAjaxSource: "showInventoryList",
@@ -260,7 +266,7 @@ jQuery(document).ready(function() {
 				                "aTargets": [0],
 				                "sClass": "center",
 				                "mRender": function (data, type, row) {
-					               	return "<input type='checkbox' id='id"+ row.id +"' name='id"+ row.id +"' value='" + data + "'>";
+					               	return "<input type='checkbox' id='id"+ row.id +"' name='inventoryId' value='" + data + "' >";
 								 }
 						   },
 						   { 
@@ -320,6 +326,9 @@ jQuery(document).ready(function() {
     	
     	
     	var calculateTotal = function () {
+    		$("#totalVolume").removeClass("text-danger");
+    		$("#totalWeight").removeClass("text-danger");
+    		$("#totalNumber").removeClass("text-danger");
     		var totalVolume=0.00; 
 			var totalWeight=0.00; 
 			var totalNumber=0; 
@@ -378,6 +387,50 @@ jQuery(document).ready(function() {
 			// LENGTH - Inline-Form control
 			var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
 			length_sel.addClass('form-control input-sm');
+		});
+		
+		$('#expressForm').submit(function(e) {
+			e.preventDefault();
+			var validnumber = false;
+			if( $("#totalNumber").html() <= 0 || $.isNumeric($("#totalNumber").html()) == false){
+				$("#totalNumber").text('请至少选择一件货品,并填写数量').addClass("text-danger");
+			}else{
+				validnumber = true;
+			}
+			
+			var valid = $("#expressForm")[0].checkValidity();
+			if(valid && validnumber){
+			    var formdata = $("#expressForm").serializeArray();
+				$.each($('#datatable tbody').find('input[type="checkbox"]:checked').parents("tr"), function() {
+				    formdata.push({ 'name':'inventoryId',  'value':$(this).find("input[name^=inventoryId]").val()  });
+				    formdata.push({ 'name':'number',  'value':$(this).find("input[name^=number]").val()  });
+	            });
+	            //$('#expressForm,#expressTableForm').serialize();
+	            
+			    bootbox.dialog({
+					message: "是否保存发货单并确认所有信息输入正确?",
+					title: "保存发货单",
+					buttons: {
+						success: {
+							label: "保存",
+							className: "btn btn-primary",
+							callback: function() {
+								$.post("submitExpress.htm", formdata, function(data) {
+								 	$("#sub_content").html(data);
+								});
+							}
+						},
+						cancel: {
+							label: "取消",
+							className: "btn btn-default",
+							callback: function() {
+							
+							}
+						}
+					}
+				});
+			}
+			
 		});
 		
 		

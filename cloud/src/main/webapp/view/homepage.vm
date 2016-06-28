@@ -110,6 +110,9 @@
 	<script type="text/javascript" src="resources/js/datatables/extras/TableTools/media/js/TableTools.min.js"></script>
 	<script type="text/javascript" src="resources/js/datatables/extras/TableTools/media/js/ZeroClipboard.min.js"></script>
 	
+	
+	<script type="text/javascript" src="resources/js/city/jquery.cityselect.js"></script>
+	
 	<!-- CUSTOM SCRIPT -->
 	<script src="resources/js/script.js"></script>
 	<script>
