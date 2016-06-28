@@ -27,6 +27,8 @@ public class ExpressForm {
 	
 	private String province;
 	
+	private String expressNo;
+	
 	private String city;
 	
 	private String district;
@@ -36,6 +38,14 @@ public class ExpressForm {
 	private Boolean insurance;
 	
 	private Double price;
+
+	public String getExpressNo() {
+		return expressNo;
+	}
+
+	public void setExpressNo(String expressNo) {
+		this.expressNo = expressNo;
+	}
 
 	public List<Integer> getInventoryId() {
 		return inventoryId;

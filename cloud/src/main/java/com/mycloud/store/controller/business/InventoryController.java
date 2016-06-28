@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycloud.entity.Category;
 import com.mycloud.entity.Customer;
-import com.mycloud.entity.Quantity;
 import com.mycloud.repository.CategoryRepository;
 import com.mycloud.store.controller.BaseController;
 

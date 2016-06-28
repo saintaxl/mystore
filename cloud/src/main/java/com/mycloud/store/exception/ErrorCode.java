@@ -19,6 +19,7 @@ public class ErrorCode {
     public static final String DIGITAL_SIGNATURE_NOT_CORRECT = "digitalSignatureNotCorrect";
     public static final String EMAIL_IS_EMPTY = "emailIsEmpty";
     public static final String MD5_DIGEST_ASHEX_ERROR = "md5DigestAsHex";
+	public static final String NOT_ENOUGH_INVENTORY = "notEnoughInventory";
     
 
 }

@@ -6,6 +6,7 @@ package com.mycloud.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -32,7 +33,7 @@ public class PrimaryGenerater {
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 		String format = formatter.format(date);
-		String substring = StringUtils.substring(format, 0, 14);
+		String substring = StringUtils.substring(format, 0, 14)+ RandomStringUtils.randomNumeric(5);
 		return substring;
 	}
 	

@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import com.mycloud.constant.DeliveryStatus;
+import com.mycloud.constant.LogisticsType;
 import com.mycloud.entity.Category;
 import com.mycloud.entity.Customer;
 import com.mycloud.entity.Delivery;
@@ -61,7 +62,13 @@ public class DeliveryService {
 
 	public void addDelibery(Customer customer, String companyName, DeliveryForm deliveryForm){
 		
-		Logistics logistics = logisticsService.addLogistics(deliveryForm.getLogisticsDate(), companyName, deliveryForm.getLogisticsNo());
+		Logistics logistics = new Logistics();
+		logistics.setArrivalDate(deliveryForm.getLogisticsDate());
+		logistics.setCompanyName(companyName);
+		logistics.setLogisticsNo(deliveryForm.getLogisticsNo());
+		logistics.setLogisticsType(LogisticsType.DELIVERY);
+		
+		logisticsService.saveLogistics(logistics);
 		
 		Delivery delivery = new Delivery();
 		delivery.setCustomer(customer);
@@ -118,6 +125,7 @@ public class DeliveryService {
 			public Predicate toPredicate(Root<DeliveryDetails> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				List<Predicate> list = new ArrayList<Predicate>();
 				list.add(cb.equal(root.get("customer").get("id").as(Integer.class), customer.getId() ));
+				list.add(cb.equal(root.get("delivery").get("logistics").get("logisticsType").as(LogisticsType.class), LogisticsType.DELIVERY ));
 				
 				if (StringUtils.isNotEmpty(deliveryListForm.getBarCode())) {
 					list.add(cb.like(root.get("barCode").as(String.class), "%" + deliveryListForm.getBarCode() + "%"));

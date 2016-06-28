@@ -75,8 +75,18 @@
         UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
         COMPANY_NAME varchar(255) not null,
         LOGISTICS_NO varchar(255) not null,
+        PRICE decimal(10,2) null,
+        ADDRESS varchar(255) null,
+        NAME varchar(255) null,
+        MOBILE varchar(255) null,
+        PROVINCE varchar(255) null,
+        CITY varchar(255) null,
+        DISTRICT varchar(255) null,
         NOTE varchar(255) null,
-        ARRIVAL_DATE TIMESTAMP not NULL DEFAULT CURRENT_TIMESTAMP,
+        PACKAGE BIT(1) not null,
+        INSURANCE BIT(1) not null,
+        LOGISTICS_TYPE varchar(255) not null,
+        ARRIVAL_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
         primary key (ID)
   );
   
@@ -139,6 +149,30 @@
         QUANTITY_ID int not null,
         CATEGORY_ID int not null,
         MD5 varchar(255) NOT null,
+        primary key (ID)
+  );
+  
+  create table EXPRESS (
+        ID int NOT NULL AUTO_INCREMENT ,
+        CREATE_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        LOCK_VERSION BIGINT NOT NULL DEFAULT 1,
+        UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+        CUSTOMER_ID int not null,
+        EXPRESS_NO varchar(255) not null,
+        LOGISTICS_ID int not null,
+        STATUS varchar(255) not null,
+        primary key (ID)
+  );
+  
+  create table EXPRESS_DETAILS (
+        ID int NOT NULL AUTO_INCREMENT ,
+        CREATE_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        LOCK_VERSION BIGINT NOT NULL DEFAULT 1,
+        UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+		EXPRESS_ID int not null,
+        CUSTOMER_ID int not null,
+        INVENTORY_ID int not null,
+        NUMBER int not null,
         primary key (ID)
   );
   

@@ -8,13 +8,16 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mycloud.entity.Customer;
 import com.mycloud.store.controller.BaseController;
 import com.mycloud.store.controller.form.ExpressForm;
+import com.mycloud.store.service.ExpressService;
 import com.mycloud.util.PrimaryGenerater;
 
 /**
@@ -25,6 +28,9 @@ import com.mycloud.util.PrimaryGenerater;
 public class ExpressController extends BaseController {
 
 	private Logger logger = LoggerFactory.getLogger(ExpressController.class);
+	
+	@Autowired
+	private ExpressService expressService;
 
 	@RequestMapping("/createExpress.htm")
 	public String createDelivery(Model model) {
@@ -40,10 +46,10 @@ public class ExpressController extends BaseController {
 	
 	
 	@RequestMapping("/submitExpress.htm")
-	public String submitDelivery(@ModelAttribute ExpressForm deliveryForm, Model model) {
+	public String submitDelivery(@ModelAttribute ExpressForm expressForm, Model model) {
 
-		System.out.println("adsd");
-
+		Customer customer = getCustomer();
+		expressService.saveExpress(customer, expressForm);
 		return "forward:createExpress.htm";
 	}
 
