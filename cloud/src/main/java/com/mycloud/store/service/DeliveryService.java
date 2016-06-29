@@ -60,7 +60,7 @@ public class DeliveryService {
 	@Autowired
 	private LogisticsService logisticsService;
 
-	public void addDelibery(Customer customer, String companyName, DeliveryForm deliveryForm){
+	public void addDelibery(Integer customerId, String companyName, DeliveryForm deliveryForm){
 		
 		Logistics logistics = new Logistics();
 		logistics.setArrivalDate(deliveryForm.getLogisticsDate());
@@ -69,6 +69,8 @@ public class DeliveryService {
 		logistics.setLogisticsType(LogisticsType.DELIVERY);
 		
 		logisticsService.saveLogistics(logistics);
+		
+		Customer customer = customerRepository.findOne(customerId);
 		
 		Delivery delivery = new Delivery();
 		delivery.setCustomer(customer);

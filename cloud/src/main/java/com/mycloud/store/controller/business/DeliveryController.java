@@ -70,7 +70,7 @@ public class DeliveryController extends BaseController {
 		}
 
 		Customer customer = getCustomer();
-		deliveryService.addDelibery(customer, companyName, deliveryForm);
+		deliveryService.addDelibery(customer.getId(), companyName, deliveryForm);
 
 		return "forward:createDelivery.htm";
 	}

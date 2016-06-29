@@ -39,7 +39,7 @@ public class ExpressController extends BaseController {
 	private CategoryRepository categoryRepository;
 
 	@RequestMapping("/createExpress.htm")
-	public String createDelivery(Model model) {
+	public String createExpress(Model model) {
 		String expressNo = PrimaryGenerater.getInstance().generaterNextNumber();
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -52,15 +52,14 @@ public class ExpressController extends BaseController {
 	
 	
 	@RequestMapping("/submitExpress.htm")
-	public String submitDelivery(@ModelAttribute ExpressForm expressForm, Model model) {
-
+	public String submitExpress(@ModelAttribute ExpressForm expressForm, Model model) {
 		Customer customer = getCustomer();
-		expressService.saveExpress(customer, expressForm);
+		expressService.saveExpress(customer.getId(), expressForm);
 		return "forward:createExpress.htm";
 	}
 	
 	@RequestMapping("/searchExpress.htm")
-	public String searchDelivery(Model model) {
+	public String searchExpress(Model model) {
 		List<Category> categorys = categoryRepository.findAll();
 		model.addAttribute("categorys", categorys);
 		return "/context/express/expressList";

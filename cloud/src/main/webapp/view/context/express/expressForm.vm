@@ -258,8 +258,8 @@ jQuery(document).ready(function() {
 		        		{"mData": "number", "sClass": "center"},
 		        		{"mData": "volume" ,"sClass": "center"},
 		        		{"mData": "weight" ,"sClass": "center"},
-		        		{"mData": "quantityName", "sClass": "center"},
-		        		{"mData": "categoryName" ,"sClass": "center"},
+		        		{"mData": "quantity.name", "sClass": "center"},
+		        		{"mData": "category.name" ,"sClass": "center"},
 	        		   ],
 	       	aoColumnDefs:[
 						   { 

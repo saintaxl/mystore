@@ -27,6 +27,7 @@ import com.mycloud.entity.ExpressDetails;
 import com.mycloud.entity.Inventory;
 import com.mycloud.entity.Logistics;
 import com.mycloud.exception.BusinessException;
+import com.mycloud.repository.CustomerRepository;
 import com.mycloud.repository.ExpressDetailsRepository;
 import com.mycloud.repository.ExpressRepository;
 import com.mycloud.repository.InventoryRepository;
@@ -45,6 +46,9 @@ public class ExpressService {
 
 	@Autowired
 	private ExpressDetailsRepository expressDetailsRepository;
+	
+	@Autowired
+	private CustomerRepository customerRepository;
 
 	@Autowired
 	private InventoryRepository inventoryRepository;
@@ -52,7 +56,7 @@ public class ExpressService {
 	@Autowired
 	private LogisticsService logisticsService;
 
-	public void saveExpress(Customer customer, ExpressForm expressForm){
+	public void saveExpress(Integer customerId, ExpressForm expressForm){
 		
 		Logistics logistics = new Logistics();
 		logistics.setCompanyName(expressForm.getLogisticsCompanyName());
@@ -69,6 +73,8 @@ public class ExpressService {
 		logistics.setPrice(expressForm.getPrice());
 		logisticsService.saveLogistics(logistics);
 		
+		Customer customer = customerRepository.findOne(customerId);
+
 		Express express = new Express();
 		express.setCustomer(customer);
 		express.setExpressNo(expressForm.getExpressNo());
