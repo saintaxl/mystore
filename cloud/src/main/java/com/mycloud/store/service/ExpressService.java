@@ -1,9 +1,21 @@
 package com.mycloud.store.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +31,7 @@ import com.mycloud.repository.ExpressDetailsRepository;
 import com.mycloud.repository.ExpressRepository;
 import com.mycloud.repository.InventoryRepository;
 import com.mycloud.store.controller.form.ExpressForm;
+import com.mycloud.store.controller.form.ExpressListForm;
 import com.mycloud.store.exception.ErrorCode;
 
 @Service
@@ -89,6 +102,49 @@ public class ExpressService {
 		
 		
 	}
+
+	public Page<ExpressDetails> searchDetails(final ExpressListForm expressListForm, final Customer customer, Pageable pageable) {
+
+		Specification<ExpressDetails> spec = new Specification<ExpressDetails>() {
+			public Predicate toPredicate(Root<ExpressDetails> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				List<Predicate> list = new ArrayList<Predicate>();
+				list.add(cb.equal(root.get("customer").get("id").as(Integer.class), customer.getId() ));
+				list.add(cb.equal(root.get("express").get("logistics").get("logisticsType").as(LogisticsType.class), LogisticsType.Express ));
+				
+				if (StringUtils.isNotEmpty(expressListForm.getBarCode())) {
+					list.add(cb.like(root.get("inventory").get("barCode").as(String.class), "%" + expressListForm.getBarCode() + "%"));
+				}
+				if (StringUtils.isNotEmpty(expressListForm.getExpressNo())) {
+					list.add(cb.equal(root.get("express").get("expressNo").as(String.class),  expressListForm.getExpressNo() ));
+				}
+				if (StringUtils.isNotEmpty(expressListForm.getProductName())) {
+					list.add(cb.like(root.get("inventory").get("productName").as(String.class), "%" + expressListForm.getProductName() + "%"));
+				}
+				if (StringUtils.isNotEmpty(expressListForm.getLogisticsCompanyName())) {
+					list.add(cb.like(root.get("express").get("logistics").get("companyName").as(String.class), "%" + expressListForm.getLogisticsCompanyName() + "%"));
+				}
+				if (StringUtils.isNotEmpty(expressListForm.getLogisticsNo())) {
+					list.add(cb.equal(root.get("express").get("logistics").get("logisticsNo").as(String.class),  expressListForm.getLogisticsNo() ));
+				}
+				if (expressListForm.getCategory()!=null) {
+					list.add(cb.equal(root.get("inventory").get("category").get("id").as(Integer.class), expressListForm.getCategory() ));
+				}
+				if(StringUtils.isNotEmpty(expressListForm.getMobile())){
+					list.add(cb.equal(root.get("express").get("logistics").get("mobile").as(String.class), expressListForm.getMobile() ));
+				}
+				if(StringUtils.isNotEmpty(expressListForm.getName())){
+					list.add(cb.equal(root.get("express").get("logistics").get("name").as(String.class), expressListForm.getName() ));
+				}
+				
+			
+				Predicate[] p = new Predicate[list.size()];
+				return cb.and(list.toArray(p));
+			}
+		};
+		
+		Page<ExpressDetails> findAll = expressDetailsRepository.findAll(spec, pageable);
+		return findAll;
+    }
 
 	
 

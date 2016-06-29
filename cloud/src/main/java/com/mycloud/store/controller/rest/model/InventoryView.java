@@ -23,9 +23,9 @@ public class InventoryView implements Serializable{
     
     private Integer number;
     
-    private String quantityName;
+    private QuantityView quantity;
     
-    private String categoryName;
+    private CategoryView category;
     
     private Double volume;
     
@@ -73,13 +73,6 @@ public class InventoryView implements Serializable{
 		this.number = number;
 	}
 
-	public String getQuantityName() {
-		return quantityName;
-	}
-
-	public void setQuantityName(String quantityName) {
-		this.quantityName = quantityName;
-	}
 
 	public Double getVolume() {
 		return volume;
@@ -105,13 +98,20 @@ public class InventoryView implements Serializable{
 		this.shelvesNo = shelvesNo;
 	}
 
-	public String getCategoryName() {
-		return categoryName;
+	public QuantityView getQuantity() {
+		return quantity;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setQuantity(QuantityView quantity) {
+		this.quantity = quantity;
 	}
-	
-    
+
+	public CategoryView getCategory() {
+		return category;
+	}
+
+	public void setCategory(CategoryView category) {
+		this.category = category;
+	}
+
 }

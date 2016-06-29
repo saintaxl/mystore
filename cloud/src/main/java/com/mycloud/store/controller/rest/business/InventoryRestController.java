@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mycloud.entity.Category;
 import com.mycloud.entity.Customer;
 import com.mycloud.entity.Inventory;
+import com.mycloud.entity.Quantity;
 import com.mycloud.store.controller.BaseController;
 import com.mycloud.store.controller.form.InventoryListForm;
+import com.mycloud.store.controller.rest.model.CategoryView;
 import com.mycloud.store.controller.rest.model.InventoryView;
 import com.mycloud.store.controller.rest.model.JQueryDatatablesPage;
+import com.mycloud.store.controller.rest.model.QuantityView;
 import com.mycloud.store.service.InventoryService;
 
 @RestController
@@ -44,19 +48,19 @@ public class InventoryRestController extends BaseController {
 		List<Inventory> content = page.getContent();
 
 		List<InventoryView> InventoryView = new ArrayList<InventoryView>();
-		for (Inventory Inventory : content) {
-			InventoryView view = new InventoryView();
-			view.setId(Inventory.getId());
-			view.setBarCode(Inventory.getBarCode());
-			view.setShelvesNo(Inventory.getShelvesNo());
-			view.setProductName(Inventory.getProductName());
-			view.setColor(Inventory.getColor());
-			view.setNumber(Inventory.getNumber());
-			view.setQuantityName(Inventory.getQuantity().getName());
-			view.setVolume(Inventory.getVolume());
-			view.setWeight(Inventory.getWeight());
-			view.setCategoryName(Inventory.getCategory().getName());
-			InventoryView.add(view);
+		for (Inventory inventory : content) {
+			InventoryView inventoryView = new InventoryView();
+			inventoryView.setId(inventory.getId());
+			inventoryView.setBarCode(inventory.getBarCode());
+			inventoryView.setShelvesNo(inventory.getShelvesNo());
+			inventoryView.setProductName(inventory.getProductName());
+			inventoryView.setColor(inventory.getColor());
+			inventoryView.setNumber(inventory.getNumber());
+			buildQuantityView(inventory, inventoryView);
+			inventoryView.setVolume(inventory.getVolume());
+			inventoryView.setWeight(inventory.getWeight());
+			buildCategoryView(inventory, inventoryView);
+			InventoryView.add(inventoryView);
 		}
 
 		JQueryDatatablesPage<InventoryView> page_ = new JQueryDatatablesPage<InventoryView>();
@@ -66,5 +70,25 @@ public class InventoryRestController extends BaseController {
 		page_.setsEcho(echo);
 		return page_;
 	}
+	
+	private void buildQuantityView(Inventory inventory, InventoryView inventoryView) {
+	    QuantityView  quantityView = new QuantityView();
+	    if(inventory.getQuantity()!=null){
+	    	Quantity quantity = inventory.getQuantity();
+	    	quantityView.setName(quantity.getName());
+	    	quantityView.setId(quantity.getId());
+	    }
+	    inventoryView.setQuantity(quantityView);
+    }
+
+	private void buildCategoryView(Inventory inventory, InventoryView inventoryView) {
+	    CategoryView categoryView = new CategoryView();
+	    if(inventory.getCategory()!=null){
+	    	Category category =inventory.getCategory();
+	    	categoryView.setId(category.getId());
+	    	categoryView.setName(category.getName());
+	    }
+	    inventoryView.setCategory(categoryView);
+    }
 
 }

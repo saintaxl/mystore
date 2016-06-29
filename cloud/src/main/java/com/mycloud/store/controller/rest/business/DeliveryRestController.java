@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mycloud.entity.Category;
 import com.mycloud.entity.Customer;
+import com.mycloud.entity.Delivery;
 import com.mycloud.entity.DeliveryDetails;
+import com.mycloud.entity.Logistics;
+import com.mycloud.entity.Quantity;
 import com.mycloud.store.controller.BaseController;
 import com.mycloud.store.controller.form.DeliveryListForm;
 import com.mycloud.store.controller.rest.model.CategoryView;
@@ -75,55 +79,21 @@ public class DeliveryRestController extends BaseController {
 		
 		
 		List<DeliveryDetailView> deliveryDetailViewList = new ArrayList<DeliveryDetailView>();
-		for (DeliveryDetails deliveryDetail : content) {
-			DeliveryDetailView deliveryDetailView = new DeliveryDetailView();
-			deliveryDetailView.setBarCode(deliveryDetail.getBarCode());
+		for (DeliveryDetails detail : content) {
+			DeliveryDetailView detailView = new DeliveryDetailView();
+			detailView.setBarCode(detail.getBarCode());
+			detailView.setColor(detail.getColor());
+			detailView.setId(detail.getId());
+			detailView.setNote(detail.getNote());
+			detailView.setNumber(detail.getNumber());
+			detailView.setProductName(detail.getProductName());
+			detailView.setVolume(detail.getVolume());
+			detailView.setWeight(detail.getWeight());
 			
-			CategoryView category = new CategoryView();
-			category.setId(deliveryDetail.getCategory().getId());
-			category.setName(deliveryDetail.getCategory().getName());
-			deliveryDetailView.setCategory(category);
-			
-			deliveryDetailView.setColor(deliveryDetail.getColor());
-			deliveryDetailView.setId(deliveryDetail.getId());
-			deliveryDetailView.setNote(deliveryDetail.getNote());
-			deliveryDetailView.setNumber(deliveryDetail.getNumber());
-			deliveryDetailView.setProductName(deliveryDetail.getProductName());
-			
-			QuantityView  quantity = new QuantityView();
-			quantity.setName(deliveryDetail.getQuantity().getName());
-			quantity.setId(deliveryDetail.getQuantity().getId());
-			deliveryDetailView.setQuantity(quantity);
-			
-			deliveryDetailView.setVolume(deliveryDetail.getVolume());
-			deliveryDetailView.setWeight(deliveryDetail.getWeight());
-			
-			
-			DeliveryView deliveryView =  new DeliveryView();
-			deliveryView.setDeliveryNo(deliveryDetail.getDelivery().getDeliveryNo());
-			
-			LogisticsView logistics = new LogisticsView();
-			logistics.setId(deliveryDetail.getDelivery().getLogistics().getId());
-			logistics.setCompanyName(deliveryDetail.getDelivery().getLogistics().getCompanyName());
-			logistics.setLogisticsNo(deliveryDetail.getDelivery().getLogistics().getLogisticsNo());
-			if (deliveryDetail.getDelivery().getLogistics() != null && deliveryDetail.getDelivery().getLogistics().getArrivalDate() != null) {
-				SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-				String formatdate = dateformat.format(deliveryDetail.getDelivery().getLogistics().getArrivalDate());
-				logistics.setArrivalDate(formatdate);
-			}
-			deliveryView.setLogistics(logistics);
-			deliveryView.setStatus(deliveryDetail.getDelivery().getStatus());
-			
-			CustomerView customer = new CustomerView();
-			customer.setAcronym(deliveryDetail.getCustomer().getAcronym());
-			customer.setCustomerName(deliveryDetail.getCustomer().getCustomerName());
-			customer.setCustomerNo(deliveryDetail.getCustomer().getCustomerNo());
-			customer.setId(deliveryDetail.getCustomer().getId());
-			deliveryView.setCustomer(customer);
-			
-			deliveryDetailView.setDelivery(deliveryView);
-			
-			deliveryDetailViewList.add(deliveryDetailView);
+			buildCategoryView(detail, detailView);
+			buildQuantityView(detail, detailView);
+			buildDeliveryView(detail,detailView);
+			deliveryDetailViewList.add(detailView);
         }
 
 		JQueryDatatablesPage<DeliveryDetailView> page_ = new JQueryDatatablesPage<DeliveryDetailView>();
@@ -133,5 +103,73 @@ public class DeliveryRestController extends BaseController {
 		page_.setsEcho(echo);
 		return page_;
 	}
+
+	private void buildDeliveryView(DeliveryDetails detail, DeliveryDetailView detailView) {
+	    DeliveryView deliveryView =  new DeliveryView();
+	    if(detail.getDelivery()!=null){
+	    	Delivery delivery = detail.getDelivery();
+	    	deliveryView.setDeliveryNo(delivery.getDeliveryNo());
+	    	deliveryView.setStatus(delivery.getStatus());
+	    }
+	    buildLogistics(detail, deliveryView);
+		buildCustomer(detail, deliveryView);
+		detailView.setDelivery(deliveryView);
+    }
+
+	private void buildCustomer(DeliveryDetails detail, DeliveryView deliveryView) {
+	    CustomerView customerView = new CustomerView();
+	    if(detail.getCustomer()!=null){
+	    	Customer customer = detail.getCustomer();
+	    	customerView.setAcronym(customer.getAcronym());
+	    	customerView.setCustomerName(customer.getCustomerName());
+	    	customerView.setCustomerNo(customer.getCustomerNo());
+	    	customerView.setId(customer.getId());
+	    }
+		deliveryView.setCustomer(customerView);
+    }
+
+	private void buildLogistics(DeliveryDetails detail, DeliveryView deliveryView) {
+	    LogisticsView logisticsView = new LogisticsView();
+	    if(detail.getDelivery()!=null && detail.getDelivery().getLogistics()!=null){
+	    	Logistics logistics = detail.getDelivery().getLogistics();
+	    	logisticsView.setId(logistics.getId());
+	    	logisticsView.setCompanyName(logistics.getCompanyName());
+	    	logisticsView.setLogisticsNo(logistics.getLogisticsNo());
+	    	logisticsView.setName(logistics.getName());
+			logisticsView.setMobile(logistics.getMobile());
+			logisticsView.setAddress(logistics.getAddress());
+			logisticsView.setProvince(logistics.getProvince());
+			logisticsView.setCity(logistics.getCity());
+			logisticsView.setDistrict(logistics.getDistrict());
+			logisticsView.setMobile(logistics.getMobile());
+			logisticsView.setPrice(logistics.getPrice());
+	    	if (logistics.getArrivalDate() != null) {
+	    		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+	    		String formatdate = dateformat.format(logistics.getArrivalDate());
+	    		logisticsView.setArrivalDate(formatdate);
+	    	}
+	    }
+		deliveryView.setLogistics(logisticsView);
+    }
+
+	private void buildQuantityView(DeliveryDetails detail, DeliveryDetailView detailView) {
+	    QuantityView  quantityView = new QuantityView();
+	    if(detail.getQuantity()!=null){
+	    	Quantity quantity = detail.getQuantity();
+	    	quantityView.setName(quantity.getName());
+	    	quantityView.setId(quantity.getId());
+	    }
+	    detailView.setQuantity(quantityView);
+    }
+
+	private void buildCategoryView(DeliveryDetails deliveryDetail, DeliveryDetailView deliveryDetailView) {
+	    CategoryView categoryView = new CategoryView();
+	    if(deliveryDetail.getCategory()!=null){
+	    	Category category =deliveryDetail.getCategory();
+	    	categoryView.setId(category.getId());
+	    	categoryView.setName(category.getName());
+	    }
+	    deliveryDetailView.setCategory(categoryView);
+    }
 
 }
