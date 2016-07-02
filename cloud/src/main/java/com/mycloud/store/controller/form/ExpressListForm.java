@@ -3,6 +3,8 @@
  */
 package com.mycloud.store.controller.form;
 
+import com.mycloud.constant.ExpressStatus;
+
 
 /**
  * @author Shawn
@@ -26,6 +28,16 @@ public class ExpressListForm {
 	private String name;
 	
 	private String mobile;
+	
+	private ExpressStatus status ;
+	
+	public ExpressStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ExpressStatus status) {
+		this.status = status;
+	}
 
 	public String getExpressNo() {
 		return expressNo;

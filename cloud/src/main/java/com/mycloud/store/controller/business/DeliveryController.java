@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycloud.entity.Category;
 import com.mycloud.entity.Customer;
+import com.mycloud.entity.LogisticsCompany;
 import com.mycloud.entity.Quantity;
 import com.mycloud.repository.CategoryRepository;
+import com.mycloud.repository.LogisticsCompanyRepository;
 import com.mycloud.repository.QuantityRepository;
 import com.mycloud.store.controller.BaseController;
 import com.mycloud.store.controller.form.DeliveryForm;
@@ -40,6 +42,9 @@ public class DeliveryController extends BaseController {
 
 	@Autowired
 	private QuantityRepository quantityRepository;
+	
+	@Autowired
+	private LogisticsCompanyRepository logisticsCompanyRepository;
 
 	@Autowired
 	private DeliveryService deliveryService;
@@ -53,10 +58,12 @@ public class DeliveryController extends BaseController {
 
 		List<Category> categorys = categoryRepository.findAll();
 		List<Quantity> quantitys = quantityRepository.findAll();
+		List<LogisticsCompany> logisticsCompanys = logisticsCompanyRepository.findAll();
 
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("quantitys", quantitys);
 		model.addAttribute("deliveryNo", deliveryNo);
+		model.addAttribute("logisticsCompanys", logisticsCompanys);
 		model.addAttribute("today", today);
 		return "/context/delivery/deliveryForm";
 	}
@@ -64,13 +71,18 @@ public class DeliveryController extends BaseController {
 	@RequestMapping("/submitDelivery.htm")
 	public String submitDelivery(@ModelAttribute DeliveryForm deliveryForm, Model model) {
 
-		String companyName = deliveryForm.getLogisticsCompanyName();
-		if (StringUtils.isNotEmpty(deliveryForm.getLogisticsCompanyNameText())) {
-			companyName = deliveryForm.getLogisticsCompanyNameText();
+		Integer logisticsCompanyId = deliveryForm.getLogisticsCompany();
+		LogisticsCompany logisticsCompany = new LogisticsCompany() ;
+		if(logisticsCompanyId!=null && logisticsCompanyId!=0){
+			logisticsCompany = logisticsCompanyRepository.findOne(logisticsCompanyId);
+		}
+		
+		if (StringUtils.isNotEmpty(deliveryForm.getLogisticsCompanyName())) {
+			logisticsCompany.setCompanyName(deliveryForm.getLogisticsCompanyName());
 		}
 
 		Customer customer = getCustomer();
-		deliveryService.addDelibery(customer.getId(), companyName, deliveryForm);
+		deliveryService.addDelibery(customer.getId(), logisticsCompany, deliveryForm);
 
 		return "forward:createDelivery.htm";
 	}

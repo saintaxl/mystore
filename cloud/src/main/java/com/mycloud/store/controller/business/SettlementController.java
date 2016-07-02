@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycloud.entity.Category;
 import com.mycloud.entity.Customer;
-import com.mycloud.entity.LogisticsCompany;
 import com.mycloud.repository.CategoryRepository;
-import com.mycloud.repository.LogisticsCompanyRepository;
 import com.mycloud.store.controller.BaseController;
 import com.mycloud.store.controller.form.ExpressForm;
 import com.mycloud.store.service.ExpressService;
@@ -30,47 +28,41 @@ import com.mycloud.util.PrimaryGenerater;
  *
  */
 @Controller
-public class ExpressController extends BaseController {
+public class SettlementController extends BaseController {
 
-	private Logger logger = LoggerFactory.getLogger(ExpressController.class);
+	private Logger logger = LoggerFactory.getLogger(SettlementController.class);
 	
 	@Autowired
 	private ExpressService expressService;
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
-	@Autowired
-	private LogisticsCompanyRepository logisticsCompanyRepository;
 
-	@RequestMapping("/createExpress.htm")
-	public String createExpress(Model model) {
-		String expressNo = PrimaryGenerater.getInstance().generaterNextNumber();
+	@RequestMapping("/createSettlement.htm")
+	public String createSettlement(Model model) {
+		String settlementNo = PrimaryGenerater.getInstance().generaterNextNumber();
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String today = formatter.format(date);
-		
-		List<LogisticsCompany> logisticsCompanys = logisticsCompanyRepository.findAll();
 
-		model.addAttribute("logisticsCompanys", logisticsCompanys);
-		model.addAttribute("expressNo", expressNo);
+		model.addAttribute("settlementNo", settlementNo);
 		model.addAttribute("today", today);
-		return "/context/express/expressForm";
+		return "/context/settlement/settlementForm";
 	}
 	
 	
-	@RequestMapping("/submitExpress.htm")
-	public String submitExpress(@ModelAttribute ExpressForm expressForm, Model model) {
+	@RequestMapping("/submitSettlement.htm")
+	public String submitSettlement(@ModelAttribute ExpressForm expressForm, Model model) {
 		Customer customer = getCustomer();
 		expressService.saveExpress(customer.getId(), expressForm);
-		return "forward:createExpress.htm";
+		return "forward:createSettlement.htm";
 	}
 	
-	@RequestMapping("/searchExpress.htm")
+	@RequestMapping("/searchSettlement.htm")
 	public String searchExpress(Model model) {
 		List<Category> categorys = categoryRepository.findAll();
 		model.addAttribute("categorys", categorys);
-		return "/context/express/expressList";
+		return "/context/settlement/settlementList";
 	}
 
 	

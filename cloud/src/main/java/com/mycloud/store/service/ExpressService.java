@@ -1,5 +1,7 @@
 package com.mycloud.store.service;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,13 +28,17 @@ import com.mycloud.entity.Express;
 import com.mycloud.entity.ExpressDetails;
 import com.mycloud.entity.Inventory;
 import com.mycloud.entity.Logistics;
+import com.mycloud.entity.LogisticsCompany;
 import com.mycloud.exception.BusinessException;
 import com.mycloud.repository.CustomerRepository;
 import com.mycloud.repository.ExpressDetailsRepository;
 import com.mycloud.repository.ExpressRepository;
 import com.mycloud.repository.InventoryRepository;
+import com.mycloud.repository.LogisticsCompanyRepository;
 import com.mycloud.store.controller.form.ExpressForm;
 import com.mycloud.store.controller.form.ExpressListForm;
+import com.mycloud.store.controller.rest.model.ExpressDetailRequest;
+import com.mycloud.store.controller.rest.model.ExpressRequest;
 import com.mycloud.store.exception.ErrorCode;
 
 @Service
@@ -54,12 +60,17 @@ public class ExpressService {
 	private InventoryRepository inventoryRepository;
 	
 	@Autowired
+	private LogisticsCompanyRepository logisticsCompanyRepository;
+	
+	@Autowired
 	private LogisticsService logisticsService;
 
 	public void saveExpress(Integer customerId, ExpressForm expressForm){
 		
 		Logistics logistics = new Logistics();
-		logistics.setCompanyName(expressForm.getLogisticsCompanyName());
+		LogisticsCompany logisticsCompany = logisticsCompanyRepository.findOne(expressForm.getLogisticsCompany());
+		logistics.setCompanyName(logisticsCompany.getCompanyName());
+		logistics.setLogisticsCompany(logisticsCompany);
 		logistics.setLogisticsNo(expressForm.getLogisticsNo());
 		logistics.setLogisticsType(LogisticsType.Express);
 		logistics.setAddress(expressForm.getAddress());
@@ -151,8 +162,50 @@ public class ExpressService {
 		Page<ExpressDetails> findAll = expressDetailsRepository.findAll(spec, pageable);
 		return findAll;
     }
-
 	
+
+	public Page<Express> searchExpress(final ExpressListForm expressListForm, final Customer customer, Pageable pageable) {
+		Specification<Express> spec = new Specification<Express>() {
+			public Predicate toPredicate(Root<Express> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				List<Predicate> list = new ArrayList<Predicate>();
+				list.add(cb.equal(root.get("customer").get("id").as(Integer.class), customer.getId() ));
+				
+				if(expressListForm.getStatus()!=null){
+					list.add(cb.equal(root.get("status").as(ExpressStatus.class), expressListForm.getStatus() ));
+				}
+				
+			
+				Predicate[] p = new Predicate[list.size()];
+				return cb.and(list.toArray(p));
+			}
+		};
+		
+		Page<Express> findAll = expressRepository.findAll(spec, pageable);
+		return findAll;
+    }
+
+	public BigDecimal calculatePrice(ExpressRequest expressRequest) {
+		List<ExpressDetailRequest> details = expressRequest.getDetails();
+		Integer logisticsCompanyId = expressRequest.getLogisticsCompanyId();
+		LogisticsCompany logisticsCompany = logisticsCompanyRepository.findOne(logisticsCompanyId);
+		BigDecimal unitPrice = logisticsCompany.getUnitPrice();
+		
+		BigDecimal totalPrice = new BigDecimal(0);
+		for (ExpressDetailRequest expressDetailRequest : details) {
+			Inventory inventory = inventoryRepository.findOne(expressDetailRequest.getId());
+			Double weight = inventory.getWeight();
+			Integer number = expressDetailRequest.getNumber();
+			DecimalFormat df = new DecimalFormat("#.##");  
+			Double totalWeight = weight*number;
+			totalWeight =  Double.parseDouble(df.format(totalWeight));  
+			
+			BigDecimal singleaprice = unitPrice.multiply(new BigDecimal(totalWeight)) ;
+			singleaprice = singleaprice.setScale(2, BigDecimal.ROUND_HALF_UP);
+			totalPrice = totalPrice.add(singleaprice);
+        }
+		
+		return totalPrice;
+    }
 
 
 

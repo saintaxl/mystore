@@ -3,6 +3,7 @@
  */
 package com.mycloud.store.controller.form;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class ExpressForm {
 	
 	private List<Integer> number;
 	
-	private String logisticsCompanyName;
+	private Integer logisticsCompany;
 	
 	private String logisticsNo;
 	
@@ -37,7 +38,7 @@ public class ExpressForm {
 	
 	private Boolean insurance;
 	
-	private Double price;
+	private BigDecimal price;
 
 	public String getExpressNo() {
 		return expressNo;
@@ -63,12 +64,12 @@ public class ExpressForm {
 		this.number = number;
 	}
 
-	public String getLogisticsCompanyName() {
-		return logisticsCompanyName;
+	public Integer getLogisticsCompany() {
+		return logisticsCompany;
 	}
 
-	public void setLogisticsCompanyName(String logisticsCompanyName) {
-		this.logisticsCompanyName = logisticsCompanyName;
+	public void setLogisticsCompany(Integer logisticsCompany) {
+		this.logisticsCompany = logisticsCompany;
 	}
 
 	public String getLogisticsNo() {
@@ -143,11 +144,11 @@ public class ExpressForm {
 		this.insurance = insurance;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 	

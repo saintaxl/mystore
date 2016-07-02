@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mycloud.entity.Category;
 import com.mycloud.entity.Customer;
 import com.mycloud.entity.Inventory;
-import com.mycloud.entity.Quantity;
 import com.mycloud.store.controller.BaseController;
 import com.mycloud.store.controller.form.InventoryListForm;
 import com.mycloud.store.controller.rest.model.CategoryView;
@@ -56,10 +54,17 @@ public class InventoryRestController extends BaseController {
 			inventoryView.setProductName(inventory.getProductName());
 			inventoryView.setColor(inventory.getColor());
 			inventoryView.setNumber(inventory.getNumber());
-			buildQuantityView(inventory, inventoryView);
+			if(inventory.getQuantity()!=null){
+				QuantityView quantityView = buildQuantityView(inventory.getQuantity());
+				inventoryView.setQuantity(quantityView);
+			}
+			
 			inventoryView.setVolume(inventory.getVolume());
 			inventoryView.setWeight(inventory.getWeight());
-			buildCategoryView(inventory, inventoryView);
+			if(inventory.getCategory()!=null){
+				CategoryView categoryView = buildCategoryView(inventory.getCategory());
+				inventoryView.setCategory(categoryView);
+			}
 			InventoryView.add(inventoryView);
 		}
 
@@ -71,24 +76,5 @@ public class InventoryRestController extends BaseController {
 		return page_;
 	}
 	
-	private void buildQuantityView(Inventory inventory, InventoryView inventoryView) {
-	    QuantityView  quantityView = new QuantityView();
-	    if(inventory.getQuantity()!=null){
-	    	Quantity quantity = inventory.getQuantity();
-	    	quantityView.setName(quantity.getName());
-	    	quantityView.setId(quantity.getId());
-	    }
-	    inventoryView.setQuantity(quantityView);
-    }
-
-	private void buildCategoryView(Inventory inventory, InventoryView inventoryView) {
-	    CategoryView categoryView = new CategoryView();
-	    if(inventory.getCategory()!=null){
-	    	Category category =inventory.getCategory();
-	    	categoryView.setId(category.getId());
-	    	categoryView.setName(category.getName());
-	    }
-	    inventoryView.setCategory(categoryView);
-    }
-
+	
 }

@@ -4,6 +4,7 @@
 package com.mycloud.store.controller.rest.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @author Shawn
@@ -35,7 +36,7 @@ public class LogisticsView implements Serializable{
     
     private String address;
     
-    private Double price;
+    private BigDecimal price;
     
 	public String getProvince() {
 		return province;
@@ -69,11 +70,11 @@ public class LogisticsView implements Serializable{
 		this.address = address;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 

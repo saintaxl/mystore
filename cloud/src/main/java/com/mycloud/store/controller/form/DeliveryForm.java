@@ -36,9 +36,9 @@ public class DeliveryForm {
 	
 	private List<String> note;
 	
-	private String logisticsCompanyName;
+	private Integer logisticsCompany;
 	
-	private String logisticsCompanyNameText;
+	private String logisticsCompanyName;
 	
 	private String logisticsNo;
 	
@@ -125,20 +125,20 @@ public class DeliveryForm {
 		this.note = note;
 	}
 
+	public Integer getLogisticsCompany() {
+		return logisticsCompany;
+	}
+
+	public void setLogisticsCompany(Integer logisticsCompany) {
+		this.logisticsCompany = logisticsCompany;
+	}
+
 	public String getLogisticsCompanyName() {
 		return logisticsCompanyName;
 	}
 
 	public void setLogisticsCompanyName(String logisticsCompanyName) {
 		this.logisticsCompanyName = logisticsCompanyName;
-	}
-
-	public String getLogisticsCompanyNameText() {
-		return logisticsCompanyNameText;
-	}
-
-	public void setLogisticsCompanyNameText(String logisticsCompanyNameText) {
-		this.logisticsCompanyNameText = logisticsCompanyNameText;
 	}
 
 	public String getLogisticsNo() {

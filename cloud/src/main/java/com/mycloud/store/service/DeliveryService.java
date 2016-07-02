@@ -27,12 +27,14 @@ import com.mycloud.entity.Customer;
 import com.mycloud.entity.Delivery;
 import com.mycloud.entity.DeliveryDetails;
 import com.mycloud.entity.Logistics;
+import com.mycloud.entity.LogisticsCompany;
 import com.mycloud.entity.Quantity;
 import com.mycloud.exception.BusinessException;
 import com.mycloud.repository.CategoryRepository;
 import com.mycloud.repository.CustomerRepository;
 import com.mycloud.repository.DeliveryDetailsRepository;
 import com.mycloud.repository.DeliveryRepository;
+import com.mycloud.repository.LogisticsCompanyRepository;
 import com.mycloud.repository.QuantityRepository;
 import com.mycloud.store.controller.form.DeliveryForm;
 import com.mycloud.store.controller.form.DeliveryListForm;
@@ -59,14 +61,21 @@ public class DeliveryService {
 
 	@Autowired
 	private LogisticsService logisticsService;
+	
+	@Autowired
+	private LogisticsCompanyRepository logisticsCompanyRepository;
 
-	public void addDelibery(Integer customerId, String companyName, DeliveryForm deliveryForm){
+	public void addDelibery(Integer customerId, LogisticsCompany logisticsCompany, DeliveryForm deliveryForm){
 		
 		Logistics logistics = new Logistics();
 		logistics.setArrivalDate(deliveryForm.getLogisticsDate());
-		logistics.setCompanyName(companyName);
+		logistics.setCompanyName(logisticsCompany.getCompanyName());
 		logistics.setLogisticsNo(deliveryForm.getLogisticsNo());
 		logistics.setLogisticsType(LogisticsType.DELIVERY);
+		if(logisticsCompany.getId()!=null){
+			logistics.setLogisticsCompany(logisticsCompany);
+		}
+		
 		
 		logisticsService.saveLogistics(logistics);
 		

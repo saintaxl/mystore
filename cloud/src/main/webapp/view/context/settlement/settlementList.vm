@@ -157,7 +157,7 @@ jQuery(document).ready(function() {
             aButtons: ["copy", "print", "xls", "pdf"],
             sSwfPath: "resources/js/datatables/extras/TableTools/media/swf/copy_csv_xls_pdf.swf"
         },
-        sAjaxSource: "showExpressDetailList",
+        sAjaxSource: "showExpressList",
         fnServerData: function ( sSource, aoData, fnCallback, oSettings ) {
 			var sData = $("#expressSearchForm").serializeArray();
 			sData.push( { "name": "page", "value": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength) + 1 } );

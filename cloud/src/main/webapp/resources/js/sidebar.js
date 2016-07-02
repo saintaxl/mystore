@@ -34,6 +34,22 @@ var sidebar = function () {
 		});
 	});
 	
+	$('#createSettlement').click(function() {
+		$.get("createSettlement.htm", function(data) {
+			setPageheader('资金结算','发货单结算','发货单结算','结算发货单');
+			$("#sub_content").html(data);
+		});
+	});
+	
+	
+	$('#searchSettlement').click(function() {
+		$.get("searchSettlement.htm", function(data) {
+			setPageheader('资金结算','查询付款单','查询付款单','付款单查询');
+			$("#sub_content").html(data);
+		});
+	});
+	
+	
 	$('#searchInventory').click(function() {
 		$.get("searchInventory.htm", function(data) {
 			setPageheader('库存管理','库存盘点','库存盘点','库存查询');

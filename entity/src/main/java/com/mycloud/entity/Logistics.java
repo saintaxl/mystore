@@ -4,15 +4,19 @@
 package com.mycloud.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,9 +38,13 @@ public class Logistics extends AbstractEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Integer id;
-
+	
 	@Column(name = "COMPANY_NAME")
 	private String companyName;
+
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LOGISTICS_COMPANY_ID", nullable = true)
+    private LogisticsCompany logisticsCompany;
 
 	@Column(name = "LOGISTICS_NO")
 	private String logisticsNo;
@@ -73,7 +81,7 @@ public class Logistics extends AbstractEntity implements Serializable {
 	private LogisticsType logisticsType;
 	
 	@Column(name="PRICE")
-	private Double price;
+	private BigDecimal price;
 	
     @Temporal(TemporalType.TIMESTAMP)
 	@Column(name="ARRIVAL_DATE",insertable=true, updatable = false, columnDefinition="TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ")
@@ -151,12 +159,12 @@ public class Logistics extends AbstractEntity implements Serializable {
 		this.id = id;
 	}
 
-	public String getCompanyName() {
-		return companyName;
+	public LogisticsCompany getLogisticsCompany() {
+		return logisticsCompany;
 	}
 
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
+	public void setLogisticsCompany(LogisticsCompany logisticsCompany) {
+		this.logisticsCompany = logisticsCompany;
 	}
 
 	public String getLogisticsNo() {
@@ -191,12 +199,20 @@ public class Logistics extends AbstractEntity implements Serializable {
 		this.logisticsType = logisticsType;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 	
 	

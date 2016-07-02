@@ -91,15 +91,15 @@
 										              <div class="form-group">
 										                    <label class="col-sm-5 control-label">物流公司:</label>
 										                    <div class="col-sm-9">
-										                    		<select id="logisticsCompanyName" name="logisticsCompanyName" class="form-control input-sm" required>
+										                    		<select id="logisticsCompany" name="logisticsCompany" class="form-control input-sm" required>
 																	   <option value="">选择物流公司</option>
-																	   <option value="佳吉物流">佳吉物流</option>
-																	   <option value="德邦物流">德邦物流</option>
-																	   <option value="天地华宇">天地华宇</option>
-																	   <option value="其他">其他</option>
+																	   #foreach($logisticsCompany in $logisticsCompanys)
+																			<option value="$!logisticsCompany.id" id="$!logisticsCompany.id" title="$!logisticsCompany.companyName" >$!logisticsCompany.companyName</option>
+																	   #end
+																	   <option value="0">其他</option>
 																	</select>
 																	<div class="divide-10"></div>
-											                    	<input type="text" class="form-control input-sm" id="logisticsCompanyNameText" name="logisticsCompanyNameText" placeholder="请输入物流公司名称" >
+											                    	<input type="text" class="form-control input-sm" id="logisticsCompanyName" name="logisticsCompanyName" placeholder="请输入物流公司名称" >
 										                    </div>
 											           </div>
 													   <div class="divide-10"></div>
@@ -198,14 +198,14 @@
 				
 			});
 			
-			$("#logisticsCompanyNameText").hide();
-			$('#logisticsCompanyName').change(function(){ 
-				if($(this).children('option:selected').val() == '其他'){
-					$("#logisticsCompanyNameText").show();
-					$('#logisticsCompanyNameText').prop('required',true);
+			$("#logisticsCompanyName").hide();
+			$('#logisticsCompany').change(function(){ 
+				if($(this).children('option:selected').val() == '0'){
+					$("#logisticsCompanyName").show();
+					$('#logisticsCompanyName').prop('required',true);
 				}else{
-					$("#logisticsCompanyNameText").hide();
-					$('#logisticsCompanyNameText').prop('required',false);
+					$("#logisticsCompanyName").hide();
+					$('#logisticsCompanyName').prop('required',false);
 				}
 				
 			});
