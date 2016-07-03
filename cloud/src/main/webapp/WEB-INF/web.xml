@@ -13,6 +13,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 		     classpath:/META-INF/spring/spring-beans.xml,
+		     classpath:/META-INF/spring/spring-tasks.xml,
         </param-value>
 	</context-param>
 	<servlet>

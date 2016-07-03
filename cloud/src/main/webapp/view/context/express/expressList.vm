@@ -122,12 +122,12 @@
                 <th class="sorting" role="columnheader" style="width: 7%;">类别</th>
                 <th class="sorting" role="columnheader" style="width: 5%;">颜色</th>
                 <th class="sorting" role="columnheader" style="width: 5%;">数量</th>
-                <th class="sorting" role="columnheader" style="width: 7%;">单位</th>
                 <th class="sorting" role="columnheader" style="width: 5%;">体积</th>
                 <th class="sorting" role="columnheader" style="width: 5%;">重量</th>
                 <th class="sorting" role="columnheader" style="width: 9%;">物流公司</th>
                 <th class="sorting" role="columnheader" style="width: 10%;">物流单号</th>
                 <th class="sorting" role="columnheader" style="width: 7%;">姓名</th>
+                <th class="sorting" role="columnheader" style="width: 7%;">状态</th>
               </tr>
             </thead>
             <tbody role="alert" aria-live="polite" aria-relevant="all">
@@ -204,13 +204,32 @@ jQuery(document).ready(function() {
 	        		{"mData": "inventory.category.name", "sClass": "center"},
 	        		{"mData": "inventory.color", "sClass": "center"},
 	        		{"mData": "number", "sClass": "center"},
-	        		{"mData": "inventory.quantity.name", "sClass": "center"},
 	        		{"mData": "inventory.volume" ,"sClass": "center"},
 	        		{"mData": "inventory.weight" ,"sClass": "center"},
 	        		{"mData": "express.logistics.companyName" ,"sClass": "center"},
 	        		{"mData": "express.logistics.logisticsNo" ,"sClass": "center"},
-	        		{"mData": "express.logistics.name" ,"sClass": "center" } 
+	        		{"mData": "express.logistics.name" ,"sClass": "center" },
+	        		{"mData": "express.status", "sClass": "center"},
         		],
+        aoColumnDefs:[
+					   { 
+			                "aTargets": [12],
+			                "sClass": "center",
+			                "mRender": function (data, type, row) {
+			                	console.log(row);
+			                	if(row.express.status == 'UNSHIPPED'){
+			                		return "未发货";
+			                	}else if(row.express.status == 'SHIPPED'){
+			                		return "已发货";
+			                	}else if(row.express.status == 'RECEIVED'){
+			                		return "已收货";
+			                	}else if(row.express.status == 'PREPARING'){
+			                		return "备货中";
+			                	}
+							 }
+					   },
+						 
+					  ],
         oLanguage: {
                     "sProcessing": "正在加载中......",
                     "sLengthMenu": "每页显示 _MENU_ 条记录",

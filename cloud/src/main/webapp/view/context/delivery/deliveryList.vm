@@ -122,12 +122,12 @@
                 <th class="sorting" role="columnheader" style="width: 7%;">类别</th>
                 <th class="sorting" role="columnheader" style="width: 5%;">颜色</th>
                 <th class="sorting" role="columnheader" style="width: 5%;">数量</th>
-                <th class="sorting" role="columnheader" style="width: 7%;">单位</th>
                 <th class="sorting" role="columnheader" style="width: 5%;">体积</th>
                 <th class="sorting" role="columnheader" style="width: 5%;">重量</th>
                 <th class="sorting" role="columnheader" style="width: 9%;">物流公司</th>
                 <th class="sorting" role="columnheader" style="width: 10%;">物流单号</th>
                 <th class="sorting" role="columnheader" style="width: 7%;">预计日期</th>
+                <th class="sorting" role="columnheader" style="width: 7%;">状态</th>
               </tr>
             </thead>
             <tbody role="alert" aria-live="polite" aria-relevant="all">
@@ -223,13 +223,32 @@ jQuery(document).ready(function() {
 	        		{"mData": "category.name", "sClass": "center"},
 	        		{"mData": "color", "sClass": "center"},
 	        		{"mData": "number", "sClass": "center"},
-	        		{"mData": "quantity.name", "sClass": "center"},
 	        		{"mData": "volume" ,"sClass": "center"},
 	        		{"mData": "weight" ,"sClass": "center"},
 	        		{"mData": "delivery.logistics.companyName" ,"sClass": "center"},
 	        		{"mData": "delivery.logistics.logisticsNo" ,"sClass": "center"},
-	        		{"mData": "delivery.logistics.arrivalDate" ,"sClass": "center" } 
+	        		{"mData": "delivery.logistics.arrivalDate" ,"sClass": "center" },
+	        		{"mData": "delivery.status" ,"sClass": "center" } 
         		],
+        aoColumnDefs:[
+					   { 
+			                "aTargets": [12],
+			                "sClass": "center",
+			                "mRender": function (data, type, row) {
+			                	console.log(row);
+			                	if(row.delivery.status == 'UNSHIPPED'){
+			                		return "未发货";
+			                	}else if(row.delivery.status == 'SHIPPED'){
+			                		return "已发货";
+			                	}else if(row.delivery.status == 'RECEIVED'){
+			                		return "已收货";
+			                	}else if(row.delivery.status == 'PREPARING'){
+			                		return "备货中";
+			                	}
+							 }
+					   },
+						 
+					  ],
         oLanguage: {
                     "sProcessing": "正在加载中......",
                     "sLengthMenu": "每页显示 _MENU_ 条记录",
