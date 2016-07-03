@@ -21,7 +21,7 @@
 	</appender>
 
 	<logger name="com.mycloud.store" additivity="false">
-		<level value="debug" />
+		<level value="info" />
 		<appender-ref ref="log.console" />
 		<appender-ref ref="log.file.mystore" />
 	</logger>
@@ -35,9 +35,14 @@
 		<level value="ERROR" />
 		<appender-ref ref="log.console" />
 	</logger>
+	
+	<logger name="org.hibernate.type">
+		<level value="ERROR" />
+		<appender-ref ref="log.console" />
+	</logger>
 
 	<logger name="org.springframework" additivity="false">
-		<level value="debug" />
+		<level value="ERROR" />
 		<appender-ref ref="log.console" />
 	</logger>
 

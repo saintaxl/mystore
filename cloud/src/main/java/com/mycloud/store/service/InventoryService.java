@@ -27,7 +27,7 @@ public class InventoryService {
 
 	@Autowired
 	private InventoryRepository inventoryRepository;
-
+	
 	public Page<Inventory> searchInventory(final InventoryListForm inventoryListForm,final Customer customer, Pageable pageable) {
 		
 		Specification<Inventory> spec = new Specification<Inventory>() {
@@ -55,5 +55,34 @@ public class InventoryService {
 		Page<Inventory> findAll = inventoryRepository.findAll(spec, pageable);
 		return findAll;
     }
+	
+	
+	public void dailySettlement(){
+		/*
+		Specification<Inventory> spec = new Specification<Inventory>() {
+			public Predicate toPredicate(Root<Inventory> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				
+				Expression<Double> sumWeight = cb.sum(root.<Double>get("weight"));
+				Expression<Double> sumVolume = cb.sum(root.<Double>get("weight"));
+                query.multiselect(
+                		          sumWeight, 
+                		          sumVolume,
+                		          root.get("customer").get("id")
+                		         );
+                query.groupBy(root.get("customer").get("id"));
+                
+                
+                List<Predicate> list = new ArrayList<Predicate>();
+                list.add(cb.greaterThan(root.<Integer>get("number"), 0));
+                
+                Predicate[] p = new Predicate[list.size()];
+                query.where(list.toArray(p));
+                
+				return query.getRestriction();  
+			}
+		};*/
+		
+		//List<Inventory> inventoryList = inventoryRepository..findAll(spec);
+	}
 
 }

@@ -189,6 +189,21 @@
         primary key (ID)
   );
   
+  create table DAILY_SETTLEMENT (
+        ID int NOT NULL AUTO_INCREMENT ,
+        CREATE_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        LOCK_VERSION BIGINT NOT NULL DEFAULT 1,
+        UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+        TOTAL_WEIGHT decimal(10,2) not null,
+        TOTAL_VOLUME decimal(10,2) not null,
+        TOTAL_NUMBER int not null,
+        CUSTOMER_ID int not null,
+        PRICE decimal(10,2) not null,
+        SETTLEMENT_DATE DATE NULL,
+        STATUS varchar(255) not null,
+        primary key (ID)
+  );
+  
   
   
   
