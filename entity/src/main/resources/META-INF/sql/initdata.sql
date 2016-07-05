@@ -198,9 +198,42 @@
         TOTAL_VOLUME decimal(10,2) not null,
         TOTAL_NUMBER int not null,
         CUSTOMER_ID int not null,
+        MONTHLY_STATEMENT_ID int null,
         PRICE decimal(10,2) not null,
         SETTLEMENT_DATE DATE NULL,
         STATUS varchar(255) not null,
+        primary key (ID)
+  );
+  
+  create table DAILY_SETTLEMENT_DETAILS (
+        ID int NOT NULL AUTO_INCREMENT ,
+        CREATE_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        LOCK_VERSION BIGINT NOT NULL DEFAULT 1,
+        UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+        DAILY_SETTLEMENT_ID int not null,
+        BAR_CODE varchar(255) null,
+        SHELVES_NO varchar(255) null,
+        CUSTOMER_ID int not null,
+        PRODUCT_NAME varchar(255) NOT null,
+        COLOR varchar(255) null,
+        NUMBER int null,
+        VOLUME decimal(10,2) null,
+        WEIGHT decimal(10,2) null,
+        QUANTITY_ID int not null,
+        CATEGORY_ID int not null,
+        SETTLEMENT_DATE DATE NULL,
+        primary key (ID)
+  );
+  
+  create table MONTHLY_STATEMENT (
+        ID int NOT NULL AUTO_INCREMENT ,
+        CREATE_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        LOCK_VERSION BIGINT NOT NULL DEFAULT 1,
+        UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+        STATUS varchar(255) not null,
+        MONTH varchar(255) not null,
+        AMOUNT decimal(10,2) not null,
+        CUSTOMER_ID int not null,
         primary key (ID)
   );
   

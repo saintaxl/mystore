@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -61,7 +62,11 @@ public class DailySettlement extends AbstractEntity implements Serializable {
     
     @Column(name="STATUS")
     @Enumerated(EnumType.STRING)
-    private SettlementStatus status = SettlementStatus.UNPAYED;
+    private SettlementStatus status = SettlementStatus.PENDING;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MONTHLY_STATEMENT_ID", nullable = true)
+    private MonthlyStatement monthlyStatement;
     
 	public Date getSettlementDate() {
 		return settlementDate;
@@ -125,6 +130,14 @@ public class DailySettlement extends AbstractEntity implements Serializable {
 
 	public void setStatus(SettlementStatus status) {
 		this.status = status;
+	}
+
+	public MonthlyStatement getMonthlyStatement() {
+		return monthlyStatement;
+	}
+
+	public void setMonthlyStatement(MonthlyStatement monthlyStatement) {
+		this.monthlyStatement = monthlyStatement;
 	}
    
 

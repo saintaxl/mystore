@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.mycloud.constant.SettlementStatus;
 import com.mycloud.entity.Customer;
 import com.mycloud.entity.DailySettlement;
 
@@ -20,6 +21,8 @@ import com.mycloud.entity.DailySettlement;
 public interface DailySettlementRepository extends BaseRepository<DailySettlement, Serializable> {
 
 	public List<DailySettlement> findBySettlementDateAndCustomer(Date date,Customer customer);
+
+	public List<DailySettlement> findBySettlementDateAfterAndSettlementDateBeforeAndStatusAndCustomer(Date thisMonthsFirstDay, Date thisMonthsLastDay, SettlementStatus pending,Customer customer);
 
 	
 }

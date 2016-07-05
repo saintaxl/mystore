@@ -9,13 +9,13 @@ package com.mycloud.constant;
  */
 public enum SettlementStatus {
 	// 未付款
-	UNPAYED("UNPAYED"), 
+	PENDING("PENDING"), 
 	
 	// 付款中
-	PAYING("PAYING"), 
+	PROCESSING("PROCESSING"), 
 	
 	// 已付款
-	PAYED("PAYED"), 
+	COMPLETION("COMPLETION"), 
 	
 	;
 
