@@ -4,8 +4,8 @@
 package com.mycloud.store.controller.rest.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Shawn
@@ -22,7 +22,17 @@ public class JQueryDatatablesPage<T> implements Serializable{
     
     private Integer sEcho;
     
+    private Map<String,Object> extension;
+    
     private List<T> aaData;
+    
+	public Map<String, Object> getExtension() {
+		return extension;
+	}
+
+	public void setExtension(Map<String, Object> extension) {
+		this.extension = extension;
+	}
 
 	public Long getiTotalRecords() {
 		return iTotalRecords;

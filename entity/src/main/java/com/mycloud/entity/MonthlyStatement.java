@@ -48,12 +48,23 @@ public class MonthlyStatement extends AbstractEntity implements Serializable {
 	@Column(name="MONTH")
 	private String month;
 	
+	@Column(name="SETTLEMENT_NO")
+	private String settlementNo;
+	
 	@Column(name="AMOUNT")
 	private BigDecimal amount;
 	
 	@OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="CUSTOMER_ID")
     private Customer customer;
+	
+	public String getSettlementNo() {
+		return settlementNo;
+	}
+
+	public void setSettlementNo(String settlementNo) {
+		this.settlementNo = settlementNo;
+	}
 
 	public Integer getId() {
 		return id;

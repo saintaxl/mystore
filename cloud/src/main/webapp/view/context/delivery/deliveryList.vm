@@ -235,7 +235,6 @@ jQuery(document).ready(function() {
 			                "aTargets": [12],
 			                "sClass": "center",
 			                "mRender": function (data, type, row) {
-			                	console.log(row);
 			                	if(row.delivery.status == 'UNSHIPPED'){
 			                		return "未发货";
 			                	}else if(row.delivery.status == 'SHIPPED'){

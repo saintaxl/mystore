@@ -2,15 +2,25 @@ package com.mycloud.store.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +35,9 @@ import com.mycloud.repository.DailySettlementDetailsRepository;
 import com.mycloud.repository.DailySettlementRepository;
 import com.mycloud.repository.InventoryRepository;
 import com.mycloud.repository.MonthlyStatementRepository;
+import com.mycloud.store.controller.form.SettlementForm;
+import com.mycloud.store.controller.form.SettlementListForm;
+import com.mycloud.util.PrimaryGenerater;
 
 @Service
 @Transactional
@@ -115,8 +128,8 @@ public class SettlementService {
 		
 		List<Customer> customer = customerRepository.findAll();
 		for (Customer cust : customer) {
-			List<MonthlyStatement> monthlyStatements = monthlyStatementRepository.findByMonthAndCustomerAndStatus(thisMonthsStr,cust,SettlementStatus.PENDING);
-			if (CollectionUtils.isNotEmpty(monthlyStatements)) {
+			MonthlyStatement monthlyStatements = monthlyStatementRepository.findByMonthAndCustomerAndStatus(thisMonthsStr,cust,SettlementStatus.PENDING);
+			if (monthlyStatements!=null) {
 				continue;
 			}
 			
@@ -130,6 +143,7 @@ public class SettlementService {
 			monthlyStatement.setCustomer(cust);
 			monthlyStatement.setMonth(thisMonthsStr);
 			monthlyStatement.setStatus(SettlementStatus.PENDING);
+			monthlyStatement.setSettlementNo(PrimaryGenerater.getInstance().generaterNextNumber());
 			
 			MonthlyStatement afterMonthlyStatement = monthlyStatementRepository.save(monthlyStatement);
 			BigDecimal totalAmount = new BigDecimal(0);
@@ -161,5 +175,43 @@ public class SettlementService {
 		System.out.println(month);
 		
 	}
+
+	public Page<DailySettlement> searchDailySettlement(final SettlementListForm settlementListForm, Customer customer, Pageable pageable) {
+		
+		Specification<DailySettlement> spec = new Specification<DailySettlement>() {
+			public Predicate toPredicate(Root<DailySettlement> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				List<Predicate> list = new ArrayList<Predicate>();
+				list.add(cb.equal(root.get("customer").get("id").as(Integer.class), customer.getId() ));
+				
+				if (StringUtils.isNotEmpty(settlementListForm.getMonth())) {
+					list.add(cb.equal(root.get("monthlyStatement").get("month").as(String.class), settlementListForm.getMonth() ));
+				}
+				
+				if (settlementListForm.getStatus()!=null) {
+					list.add(cb.equal(root.get("status").as(SettlementStatus.class), settlementListForm.getStatus() ));
+				}
+				
+				Predicate[] p = new Predicate[list.size()];
+				return cb.and(list.toArray(p));
+			}
+		};
+		
+		Page<DailySettlement> findAll = dailySettlementRepository.findAll(spec, pageable);
+		return findAll;
+    }
+
+	public void updateMonthlyStatement(Integer customerId, SettlementForm settlementForm) {
+		Customer customer = customerRepository.findOne(customerId);
+		MonthlyStatement monthlyStatement = monthlyStatementRepository.findBySettlementNo(settlementForm.getSettlementNo());
+		
+		dailySettlementRepository.updateSettlementByMonth(customer, monthlyStatement, SettlementStatus.PROCESSING );
+		monthlyStatement.setStatus(SettlementStatus.PROCESSING);
+		monthlyStatementRepository.save(monthlyStatement);
+    }
+
+	public MonthlyStatement getMonthlyStatementByMonth(Integer customerId, String month, SettlementStatus status) {
+		Customer customer = customerRepository.findOne(customerId);
+		return monthlyStatementRepository.findByMonthAndCustomerAndStatus(month, customer,status);
+    }
 
 }

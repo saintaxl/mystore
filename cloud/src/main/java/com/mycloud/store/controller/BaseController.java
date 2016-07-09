@@ -22,6 +22,7 @@ import com.mycloud.entity.Delivery;
 import com.mycloud.entity.Express;
 import com.mycloud.entity.Inventory;
 import com.mycloud.entity.Logistics;
+import com.mycloud.entity.MonthlyStatement;
 import com.mycloud.entity.Quantity;
 import com.mycloud.exception.BusinessException;
 import com.mycloud.store.controller.rest.model.CategoryView;
@@ -30,6 +31,7 @@ import com.mycloud.store.controller.rest.model.DeliveryView;
 import com.mycloud.store.controller.rest.model.ExpressView;
 import com.mycloud.store.controller.rest.model.InventoryView;
 import com.mycloud.store.controller.rest.model.LogisticsView;
+import com.mycloud.store.controller.rest.model.MonthlyStatementView;
 import com.mycloud.store.controller.rest.model.QuantityView;
 import com.mycloud.store.exception.ErrorCode;
 import com.mycloud.store.service.CustomUserDetails;
@@ -172,6 +174,19 @@ public class BaseController {
 
 		return logisticsView;
 	}
+	
+	protected MonthlyStatementView buildMonthlyStatementView(MonthlyStatement monthlyStatement) {
+		MonthlyStatementView monthlyStatementView = new MonthlyStatementView();
+		monthlyStatementView.setAmount(monthlyStatement.getAmount());
+		if (monthlyStatement.getCustomer() != null) {
+			CustomerView customerView = buildCustomerView(monthlyStatement.getCustomer());
+			monthlyStatementView.setCustomer(customerView);
+		}
+		monthlyStatementView.setId(monthlyStatement.getId());
+		monthlyStatementView.setSettlementNo(monthlyStatement.getSettlementNo());
+		monthlyStatementView.setStatus(monthlyStatement.getStatus());
+	    return monthlyStatementView;
+    }
 
 	protected CustomerView buildCustomerView(Customer customer) {
 		CustomerView customerView = new CustomerView();

@@ -231,6 +231,7 @@
         LOCK_VERSION BIGINT NOT NULL DEFAULT 1,
         UPDATE_DATE TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
         STATUS varchar(255) not null,
+        SETTLEMENT_NO varchar(255) not null,
         MONTH varchar(255) not null,
         AMOUNT decimal(10,2) not null,
         CUSTOMER_ID int not null,
