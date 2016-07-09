@@ -162,7 +162,6 @@ jQuery(document).ready(function() {
                   "data": sData,
                   //JSON.stringify(aoData)
                   success : function(response) {
-                  	  console.log(response);
                   	  $("#settlementNoSpan").html(response.extension.settlementNo);
                   	  $("#settlementNo").val(response.extension.settlementNo);
 	                  fnCallback(response); 
