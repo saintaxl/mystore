@@ -96,8 +96,8 @@ public class DeliveryService {
 			String noteStr = CollectionUtils.isNotEmpty(deliveryForm.getNote()) && deliveryForm.getNote().get(i) != null ? deliveryForm.getNote().get(i).trim() : "";
 			Integer numberParm = CollectionUtils.isNotEmpty(deliveryForm.getNumber()) && deliveryForm.getNumber().get(i) != null ? deliveryForm.getNumber().get(i) : 0;
 			String productNameStr = CollectionUtils.isNotEmpty(deliveryForm.getProductName()) && deliveryForm.getProductName().get(i) != null ? deliveryForm.getProductName().get(i).trim() : "";
-			Double volumeParm = CollectionUtils.isNotEmpty(deliveryForm.getVolume()) && deliveryForm.getVolume().get(i) != null ? deliveryForm.getVolume().get(i) : 0;
-			Double weightParm = CollectionUtils.isNotEmpty(deliveryForm.getWeight()) && deliveryForm.getWeight().get(i) != null ? deliveryForm.getWeight().get(i) : 0;
+			Double volumeParm = CollectionUtils.isNotEmpty(deliveryForm.getVolume()) && deliveryForm.getVolume().get(i) != null ? deliveryForm.getVolume().get(i) : 0.0;
+			Double weightParm = CollectionUtils.isNotEmpty(deliveryForm.getWeight()) && deliveryForm.getWeight().get(i) != null ? deliveryForm.getWeight().get(i) : 0.0;
 			addDeliveryDetails(barCodeStr, categoryId, quantityId, colorStr, customer, delivery, noteStr, numberParm, productNameStr, volumeParm, weightParm);
 		}
 	}
