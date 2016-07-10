@@ -36,7 +36,7 @@ var sidebar = function () {
 	
 	$('#createSettlement').click(function() {
 		$.get("createSettlement.htm", function(data) {
-			setPageheader('资金结算','发货单结算','发货单结算','结算发货单');
+			setPageheader('资金结算','每月账单','每月账单','结算当月账单');
 			$("#sub_content").html(data);
 		});
 	});
@@ -44,7 +44,7 @@ var sidebar = function () {
 	
 	$('#searchSettlement').click(function() {
 		$.get("searchSettlement.htm", function(data) {
-			setPageheader('资金结算','查询付款单','查询付款单','付款单查询');
+			setPageheader('资金结算','历史账单','历史账单','历史账单查询');
 			$("#sub_content").html(data);
 		});
 	});

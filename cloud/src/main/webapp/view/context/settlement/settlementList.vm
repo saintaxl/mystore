@@ -4,7 +4,7 @@
         <div class="box border blue" id="messenger">
             <div class="box-title">
                 <h4>
-                    <i class="fa fa-search"></i>查询发货单</h4>
+                    <i class="fa fa-search"></i>历史账单</h4>
                 <div class="tools">
                     <a href="#box-config" data-toggle="modal" class="config">
                         <i class="fa fa-cog"></i>
@@ -21,57 +21,34 @@
                 </div>
             </div>
             <div class="box-body">
-                <form class="form-horizontal" role="form" id="expressSearchForm" name="expressSearchForm">
+                <form class="form-horizontal" role="form" id="settlementSearchForm" name="settlementSearchForm">
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">发货单号:</label>
+                        <label class="col-sm-1 control-label">付款单号:</label>
                         <div class="col-sm-2">
                             <div class="input-group">
-                                <input type="text" class="form-control input-sm" placeholder="输入发货单号" id="deliveryNo" name="expressNo"  value="$!expressNo"  ></div>
+                                <input type="text" class="form-control input-sm" placeholder="输入付款单号" id="settlementNo" name="settlementNo"  value="$!settlementNo"  ></div>
                         </div>
-                        <label class="col-sm-1 control-label">货品名:</label>
+                        <label class="col-sm-1 control-label">月份:</label>
                         <div class="col-sm-2">
                             <div class="input-group">
-                                <input type="text" class="form-control input-sm" id="productName" name="productName" value="$!productName" placeholder="输入产品名称" ></div>
-                        </div>
-                        <label class="col-sm-1 control-label">收货人:</label>
-                        <div class="col-sm-2">
-	                        <div class="input-group">
-	                                	<input class="form-control input-sm datepicker" type="text" name="name" id="name" placeholder="输入收货人" value="$!name" >
-	                        </div>
-                        </div>
-                        <label class="col-sm-1 control-label">联系方式:</label>
-                        <div class="col-sm-2">
-	                        <div class="input-group">
-	                                	<input class="form-control input-sm datepicker" type="text" name="mobile" id="mobile" placeholder="输入联系方式" value="$!mobile" >
-	                        </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                    	<label class="col-sm-1 control-label">物流公司:</label>
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                <input type="text" class="form-control input-sm" id="logisticsCompanyName" name="logisticsCompanyName" value="$!logisticsCompanyName" placeholder="输入物流公司名称"></div>
-                        </div>
-                        <label class="col-sm-1 control-label">物流单号:</label>
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                <input type="text" class="form-control input-sm" id="logisticsNo" name="logisticsNo" value="$!logisticsNo" placeholder="输入物流单号" ></div>
-                        </div>
-                        <label class="col-sm-1 control-label">类别:</label>
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                <select class="form-control" name="category" id="category" >
-                                	<option value="">所有类别</option>
-					                #foreach($category in $categorys)
-										<option value="$!category.id" id="$!category.id" title="$!category.name" #if($!category.defaultSelected) selected #end >$!category.name</option>
-									#end
-								</select>
+                                #set ( $arr = [1..$rightMonth] ) 
+								  	<select class="form-control" name="month" id="month" >
+								  		 <option value="" title="全部" >全部</option>
+								  		 #foreach ( $i in $arr ) 
+											<option value="$i" id="month$i" title="$i月份" #if("$i" == $rightMonth) selected #end >$i 月份</option>
+										 #end
+									</select>
 							</div>
                         </div>
-                        <label class="col-sm-1 control-label">条码:</label>
+                        <label class="col-sm-1 control-label">状态:</label>
                         <div class="col-sm-2">
-                            <div class="input-group">
-                                <input type="text" class="form-control input-sm" id="barCode" name="barCode" value="$!barCode" placeholder="输入条码" ></div>
+	                        <div class="input-group">
+	                        	<select class="form-control" name="status" id="status" >
+								    <option value="PENDING" id="PENDING" title="未付款" >未付款</option>
+								    <option value="PROCESSING" id="PROCESSING" title="付款中" >付款中</option>
+								    <option value="COMPLETION" id="COMPLETION" title="已付款" >已付款</option>
+								</select>
+	                        </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -94,7 +71,7 @@
     <div class="box border green">
       <div class="box-title">
         <h4>
-          <i class="fa fa-table"></i>发货单列表</h4>
+          <i class="fa fa-table"></i>账单列表</h4>
         <div class="tools hidden-xs">
           <a href="#box-config" data-toggle="modal" class="config">
             <i class="fa fa-cog"></i>
@@ -116,18 +93,10 @@
             <thead>
               <tr role="row">
                 <th class="sorting" role="columnheader" style="width: 5%;">序号</th>
-                <th class="sorting" role="columnheader" style="width: 9%;">条码</th>
-                <th class="sorting" role="columnheader" style="width: 7%;">发货单号</th>
-                <th class="sorting" role="columnheader" style="width: 9%;">货品名</th>
-                <th class="sorting" role="columnheader" style="width: 7%;">类别</th>
-                <th class="sorting" role="columnheader" style="width: 5%;">颜色</th>
-                <th class="sorting" role="columnheader" style="width: 5%;">数量</th>
-                <th class="sorting" role="columnheader" style="width: 7%;">单位</th>
-                <th class="sorting" role="columnheader" style="width: 5%;">体积</th>
-                <th class="sorting" role="columnheader" style="width: 5%;">重量</th>
-                <th class="sorting" role="columnheader" style="width: 9%;">物流公司</th>
-                <th class="sorting" role="columnheader" style="width: 10%;">物流单号</th>
-                <th class="sorting" role="columnheader" style="width: 7%;">姓名</th>
+                <th class="sorting" role="columnheader" style="width: 9%;">付款单号</th>
+                <th class="sorting" role="columnheader" style="width: 7%;">月份</th>
+                <th class="sorting" role="columnheader" style="width: 7%;">金额</th>
+                <th class="sorting" role="columnheader" style="width: 9%;">状态</th>
               </tr>
             </thead>
             <tbody role="alert" aria-live="polite" aria-relevant="all">
@@ -157,9 +126,9 @@ jQuery(document).ready(function() {
             aButtons: ["copy", "print", "xls", "pdf"],
             sSwfPath: "resources/js/datatables/extras/TableTools/media/swf/copy_csv_xls_pdf.swf"
         },
-        sAjaxSource: "showExpressList",
+        sAjaxSource: "showMonthlyStatementList",
         fnServerData: function ( sSource, aoData, fnCallback, oSettings ) {
-			var sData = $("#expressSearchForm").serializeArray();
+			var sData = $("#settlementSearchForm").serializeArray();
 			sData.push( { "name": "page", "value": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength) + 1 } );
 			sData.push( { "name": "size", "value": oSettings._iDisplayLength } );
 			sData.push( { "name": "echo", "value": oSettings.iDraw } );
@@ -198,19 +167,27 @@ jQuery(document).ready(function() {
         aaSorting: [[0,'desc']],
         aoColumns: [
 	        		{"mData": "id", "sClass": "center"}, 
-	        		{"mData": "inventory.barCode", "sClass": "center"},
-	        		{"mData": "express.expressNo", "sClass": "center"},
-	        		{"mData": "inventory.productName", "sClass": "center"},
-	        		{"mData": "inventory.category.name", "sClass": "center"},
-	        		{"mData": "inventory.color", "sClass": "center"},
-	        		{"mData": "number", "sClass": "center"},
-	        		{"mData": "inventory.quantity.name", "sClass": "center"},
-	        		{"mData": "inventory.volume" ,"sClass": "center"},
-	        		{"mData": "inventory.weight" ,"sClass": "center"},
-	        		{"mData": "express.logistics.companyName" ,"sClass": "center"},
-	        		{"mData": "express.logistics.logisticsNo" ,"sClass": "center"},
-	        		{"mData": "express.logistics.name" ,"sClass": "center" } 
+	        		{"mData": "settlementNo", "sClass": "center"},
+	        		{"mData": "month", "sClass": "center"},
+	        		{"mData": "amount", "sClass": "center"},
+	        		{"mData": "status", "sClass": "center"},
         		],
+        aoColumnDefs:[
+					   { 
+			                "aTargets": [4],
+			                "sClass": "center",
+			                "mRender": function (data, type, row) {
+			                	if(row.status == 'PENDING'){
+			                		return "未付款";
+			                	}else if(row.status == 'PROCESSING'){
+			                		return "付款中";
+			                	}else if(row.status == 'COMPLETION'){
+			                		return "已付款";
+			                	}
+							 }
+					   },
+						 
+					  ],
         oLanguage: {
                     "sProcessing": "正在加载中......",
                     "sLengthMenu": "每页显示 _MENU_ 条记录",
@@ -239,7 +216,7 @@ jQuery(document).ready(function() {
 	});
 	
 	
-	$('#expressSearchForm').submit(function(e) {
+	$('#settlementSearchForm').submit(function(e) {
 		e.preventDefault();
 		oTable.fnClearTable();
 	});

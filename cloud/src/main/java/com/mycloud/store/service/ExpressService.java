@@ -3,6 +3,7 @@ package com.mycloud.store.service;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -205,6 +206,12 @@ public class ExpressService {
         }
 		
 		return totalPrice;
+    }
+
+	public List<Express> getExpressList(Integer customerId, Date lastMonths25th, Date thisMonths25th, ExpressStatus status) {
+		Customer customer = customerRepository.findOne(customerId);
+		List<Express> expressList = expressRepository.findByCreateDateAfterAndCreateDateBeforeAndStatusAndCustomer(lastMonths25th,thisMonths25th,status,customer);
+	    return expressList;
     }
 
 

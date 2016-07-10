@@ -46,8 +46,8 @@
 				<span class="arrow"></span>
 				</a>
 				<ul class="sub">
-					<li><a href="#" id="createSettlement"><span class="sub-menu-text">发货单结算</span></a></li>
-					<li><a href="# "id="searchSettlement"><span class="sub-menu-text">查询付款单</span></a></li>
+					<li><a href="#" id="createSettlement"><span class="sub-menu-text">账单结算</span></a></li>
+					<li><a href="# "id="searchSettlement"><span class="sub-menu-text">历史账单</span></a></li>
 				</ul>
 			</li>
 			<li class="has-sub">

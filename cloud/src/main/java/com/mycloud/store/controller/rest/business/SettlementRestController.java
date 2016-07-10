@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mycloud.entity.Customer;
 import com.mycloud.entity.DailySettlement;
+import com.mycloud.entity.MonthlyStatement;
 import com.mycloud.store.controller.BaseController;
+import com.mycloud.store.controller.form.MonthlyStatementListForm;
 import com.mycloud.store.controller.form.SettlementListForm;
 import com.mycloud.store.controller.rest.model.CustomerView;
 import com.mycloud.store.controller.rest.model.DailySettlementView;
@@ -92,10 +94,43 @@ public class SettlementRestController extends BaseController {
 		return page_;
 	}
 
-
-
-
 	
-	
+	@RequestMapping(value = "/showMonthlyStatementList", method = { RequestMethod.POST })
+	public JQueryDatatablesPage<MonthlyStatementView> showExpressList(@ModelAttribute MonthlyStatementListForm expressListForm,
+	        @PageableDefault(value = 10, sort = { "id" }, direction = Direction.DESC) Pageable pageable, @RequestParam Integer echo, Model model) {
+
+		Customer customer = getCustomer();
+		Page<MonthlyStatement> page = settlementService.searchMonthlyStatement(expressListForm, customer, pageable);
+
+		JQueryDatatablesPage<MonthlyStatementView> pageview = transform2MonthlyStatementView(page, echo);
+		return pageview;
+	}
+
+	private JQueryDatatablesPage<MonthlyStatementView> transform2MonthlyStatementView(Page<MonthlyStatement> page, Integer echo) {
+		List<MonthlyStatement> content = page.getContent();
+		
+		List<MonthlyStatementView> monthlyStatementList = new ArrayList<MonthlyStatementView>();
+		for (MonthlyStatement monthlyStatement : content) {
+			MonthlyStatementView view = new MonthlyStatementView();
+			view.setAmount(monthlyStatement.getAmount());
+			if(monthlyStatement.getCustomer()!=null){
+				CustomerView customer = buildCustomerView(monthlyStatement.getCustomer());
+				view.setCustomer(customer);
+			}
+			view.setId(monthlyStatement.getId());
+			view.setMonth(monthlyStatement.getMonth());
+			view.setSettlementNo(monthlyStatement.getSettlementNo());
+			view.setStatus(monthlyStatement.getStatus());
+			monthlyStatementList.add(view);
+        }
+		
+		JQueryDatatablesPage<MonthlyStatementView> page_ = new JQueryDatatablesPage<MonthlyStatementView>();
+		page_.setAaData(monthlyStatementList);
+		page_.setiTotalDisplayRecords(page.getTotalElements());
+		page_.setiTotalRecords(page.getTotalElements());
+		page_.setsEcho(echo);
+		return page_;
+    }
+
 
 }

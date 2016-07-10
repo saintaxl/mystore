@@ -106,8 +106,20 @@
 				  <div class="panel-body">
 					  <div class="row">
 						<div class="col-sm-12">
+						  <div class="text-right">
+							<h4 class="amount" id="totalLogisticsAmount" name="totalLogisticsAmount">总快递费: ¥ $!totalLogisticsPrice</h4>
+							<input type="hidden" type="number" name="totalLogisticsPrice" id="totalLogisticsPrice" value="$!totalLogisticsPrice" />
+						  <br>
 						  <div class="text-right font-400 font-14">
-							<h2 class="amount" id="totalAmount" name="totalAmount">总计: ¥ 0.0</h2>
+							<h4 class="amount" id="totalInventoryAmount" name="totalInventoryAmount">总仓储费: ¥ 0.00</h4>
+							<input type="hidden" type="number" name="totalInventoryPrice" id="totalInventoryPrice" />
+						  <br>
+						  <div class="text-right font-400 font-14">
+							<h4 class="amount" id="totalBarCodeAmount" name="totalBarCodeAmount">条码费: ¥ 0.00</h4>
+							<input type="hidden" type="number" name="totalBarCodePrice" id="totalBarCodePrice" value="0" />
+						  <br>
+						  <div class="text-right font-400 font-14">
+							<h2 class="amount" id="totalAmount" name="totalAmount">总计: ¥ 0.00</h2>
 							<input type="hidden" type="number" name="totalPrice" id="totalPrice" />
 						  <br>
 						  <div class="btn-group hidden-xs pull-right invoice-btn-group">
@@ -218,11 +230,21 @@ jQuery(document).ready(function() {
 		        }
 		        totalPrice+=parseFloat(price);
 		   	});
-		   	$("#totalAmount").html('总计: ¥ ' + parseFloat(totalPrice).toFixed(2) ); 
-		   	$("#totalPrice").val(parseFloat(totalPrice).toFixed(2) ); 
+		   	$("#totalInventoryAmount").html('总仓储费: ¥ ' + parseFloat(totalPrice).toFixed(2) ); 
+		   	$("#totalInventoryPrice").val(parseFloat(totalPrice).toFixed(2)); 
+		   	
+		   	var totalInventoryAmount = parseFloat(totalPrice).toFixed(2);
+		   	var totalLogisticsAmount = parseFloat($("#totalLogisticsPrice").val()).toFixed(2);
+		   	var totalBarCodeAmount = parseFloat($("#totalBarCodePrice").val()).toFixed(2);
+		   	
+		   	var finalPrice = Number(totalInventoryAmount) + Number(totalLogisticsAmount) + Number(totalBarCodeAmount) ;
+		   	
+		   	$("#totalAmount").html('总存储费: ¥ ' + finalPrice ); 
+		   	$("#totalPrice").val(finalPrice); 
+		   	
+		   	
 		},
 	});
-	
 	
 	$('#month').change(function(){ 
 		oTable.fnClearTable();
